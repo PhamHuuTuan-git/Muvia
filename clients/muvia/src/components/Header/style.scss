@@ -1,0 +1,37 @@
+
+.header-container {
+    display: flex;
+    align-items: center;
+    background-color: var(--primary-color);
+    padding: 20px 30px;
+    justify-content: space-between;
+    height: var(--header-height);
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 100;
+    transition: all ease-in 0.2s;
+}
+
+.header-container.on {
+    width: calc(100% - var(--sidebar-width-on));
+    
+}
+.header-container.off {
+    width: calc(100% - var(--sidbar-width-off));
+
+}
+
+.header-rigth-part {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.back-button--container {
+    padding: 8px;
+    background-color:transparent; 
+    border:solid 1.5px #fff;
+    border-radius: 6px; 
+    cursor: pointer
+}

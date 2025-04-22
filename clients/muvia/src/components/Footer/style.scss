@@ -1,0 +1,18 @@
+.footer--container {
+    display: flex;
+    justify-content: space-around;
+    padding: 16px;
+    gap:32px
+}
+
+.logo-footer--container {
+    width: 120px;
+   
+}
+
+.footer-logo--container {
+    width: 25px;
+    display: block;
+    cursor: pointer;
+    margin-top: 12px;
+}

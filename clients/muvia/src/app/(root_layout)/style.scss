@@ -1,0 +1,36 @@
+$sidebar-width-on: var(--sidebar-width-on);
+$sidebar-width-off: var(--sidbar-width-off);
+.sidebar--container {
+    background-color: var(--primary-color);
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    transition: width ease-in 0.2s;
+    border-right: solid 0.2px #808080;
+    overflow-x: hidden;
+}
+
+.fake-sidebar {
+    transition: width ease-in 0.2s;
+}
+
+.sidebar--container.on,
+.fake-sidebar.on {
+    width: $sidebar-width-on;
+}
+
+.sidebar--container.off,
+.fake-sidebar.off {
+    width: $sidebar-width-off;
+}
+
+
+
+.divided--container {
+    display: flex;
+}
+
+.content--container {
+    margin-top: var(--header-height);
+}

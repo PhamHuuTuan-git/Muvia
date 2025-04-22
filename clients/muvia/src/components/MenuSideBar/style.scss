@@ -1,0 +1,46 @@
+.menu--container {
+    color: #fff;
+    padding: 20px;
+    font-weight: bold;
+}
+
+.list-item {
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 12px;
+    min-width: 100%;
+    width: 100%;
+}
+
+.list-item:hover {
+    background-color: #ad3f3f;
+}
+
+.list-item:not(:first-child) {
+    margin-top: 20px
+}
+
+.list-item.active {
+    background-color: #ac1a1a;
+}
+
+.item--container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 30px
+}
+
+.text-item {
+    white-space: nowrap;
+    /* Không cho xuống dòng */
+    overflow: hidden;
+    /* Ẩn phần bị tràn */
+}
+
+.icon-item {
+    color: #fff;
+    width: 28px;
+    height: 28px;
+    min-width: 28px;
+}

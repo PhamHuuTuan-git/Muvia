@@ -1,0 +1,48 @@
+/* @import "tailwindcss"; */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+:root {
+  --background: #0a0a0a;
+  --foreground: #000;
+  --primary-color: #0f0f11;
+  --core-color: #ac1a1a;
+  --header-height: 80px;
+  --sidebar-width-on: 250px;
+  --sidbar-width-off: 110px;
+}
+
+@font-face {
+  font-family: 'Oswald';
+  src: url('/fonts/static/Oswald-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.dark body {
+  @apply bg-black text-white;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+    
+  }
+}
+
+body {
+  /* background: var(--background); */
+  color: var(--foreground);
+  font-family:  'Inter', sans-serif;
+  box-sizing: border-box;
+  background-color: var(--background);
+  font-family: 'Oswald', sans-serif;
+}

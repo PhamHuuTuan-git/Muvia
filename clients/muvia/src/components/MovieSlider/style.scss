@@ -1,0 +1,20 @@
+.list--cards {
+    display: flex;
+    overflow-X: auto;
+    max-width: 100%;
+}
+
+.list--cards::-webkit-scrollbar {
+    height: 8px;
+}
+
+/* Nền track thanh cuộn */
+.list--cards::-webkit-scrollbar-track {
+    background: transparent; /* Có thể đổi màu nền */
+  }
+
+.list--cards::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+}
+

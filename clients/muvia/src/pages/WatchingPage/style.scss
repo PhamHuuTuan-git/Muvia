@@ -1,0 +1,23 @@
+.watching--container {
+    padding: 0 20px;
+    background-color: #181b24;
+}
+
+.name-watching {
+    color: #fed875;
+    font-size: 1.6rem;
+    font-weight: bold;
+}
+.watching-image--container {
+    width: 150px;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.watching-left-part {
+    flex: 3;
+}
+
+.watching-right-part {
+    flex:1;
+}

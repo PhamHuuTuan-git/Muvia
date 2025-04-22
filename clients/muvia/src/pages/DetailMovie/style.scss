@@ -1,0 +1,124 @@
+.poster--container {
+    width: 100%;
+    aspect-ratio: 3/1;
+    position: relative;
+}
+
+.poster {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.poster--container::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background: linear-gradient(to right, rgba(0,0,0,0.9), rgba(0,0,0,0.3), rgba(0,0,0,0.6));
+}
+
+.detail-movie-content--container {
+    display: flex;
+    padding: 10px 20px;
+    background-color: #181b24;
+}
+
+.thumbnail-detail-movie--container {
+    width: 200px;
+    aspect-ratio: 2/3;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.thumbmail-detail-movie--img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.detail-movie-context--container {
+    color: #fff;
+}
+
+.detail-movie--vietname {
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 1.2rem;
+    margin-top: 8px;
+    font-weight: bold;
+}
+
+.detail-movie--originname {
+    text-align: center;
+    color: #c0a46b;
+    margin-top: 4px;
+}
+
+.detail-movie-content-left {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.detail-movie-content-right {
+    flex:5
+}
+
+.imdb-detail-movie--container {
+    display: flex;
+    padding: 6px;
+    background-color: transparent;
+    border: solid 1px #c0a46b;
+    border-radius: 4px;
+}
+
+.year-detail-movie--container {
+    display: flex;
+    padding: 6px;
+    background-color: transparent;
+    border: solid 1px #fff;
+    border-radius: 4px;
+}
+
+.type-detail-movie--container {
+    display: flex;
+    padding: 6px;
+    background-color: #262932;
+    border-radius: 4px;
+}
+
+.detail-movie-introduce--content {
+    color: #bdbdbd;
+}
+
+.detail-movie-another--content {
+    color: #bdbdbd;
+    font-weight: 100;
+}
+
+.watch-now--button {
+    color: #000;
+    background: linear-gradient(to right, #fed875, #ffedbc);
+    padding: 16px;
+}
+
+.movie-like {
+    color: #fff;
+}
+
+.movie-liked {
+    color: var(--core-color);
+}
+
+.tabs--container {
+    margin-top: 60px;
+}
+
+.movie-tab-body--container {
+    background-color: #181b24;
+    color: #fff;
+}

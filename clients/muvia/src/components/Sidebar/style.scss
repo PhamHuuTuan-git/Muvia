@@ -1,0 +1,11 @@
+.logo--container {
+    display: flex;
+    justify-content: space-around;
+    gap:12px;
+    align-items: center;
+}
+
+.image-logo--container {
+    width: 100px;
+    aspect-ratio: 1/1;
+}
