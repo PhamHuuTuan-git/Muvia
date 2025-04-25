@@ -2,6 +2,7 @@
 import Link from "next/link";
 import "./style.scss";
 import { useState } from "react";
+import routing from "@/utils/routing";
 
 function Login() {
     const [isShowPass, setIsShowPass] = useState(false);
@@ -66,7 +67,11 @@ function Login() {
 
                     <div style={{ display: "flex", alignItems: "center", gap: 12, marginTop: "20px" }}>
                         <p className="text-white">Don't have account?</p>
-                        <Link style={{ color: "#ac1a1a", fontStyle:"italic", textDecoration:"underline" }} href={"/register"}>Sign up</Link>
+                        <Link style={{ color: "#ac1a1a", fontStyle:"italic", textDecoration:"underline" }} href={`${routing.register}`}>Sign up</Link>
+                    </div>
+
+                    <div style={{ display: "flex", alignItems: "center", gap: 12, marginTop: "20px" }}>
+                        <Link style={{ color: "#ac1a1a", fontStyle:"italic", textDecoration:"underline" }} href={`${routing.activation}`}>Activate your account</Link>
                     </div>
                 </div>
             </div>

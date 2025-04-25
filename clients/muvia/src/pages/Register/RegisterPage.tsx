@@ -2,23 +2,96 @@
 import Link from "next/link";
 import "./style.scss";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import RegisterSchema from "@/validator/register.schema";
+import { useMutation } from '@apollo/client'
+import { REGISTER_USER } from "@/graphql/actions/authenActions/register.action";
+import { Spinner, addToast } from "@heroui/react";
+import { useRouter } from "next/navigation"
+import routing from "@/utils/routing";
+
+type FormData = z.infer<typeof RegisterSchema>;
 
 function RegisterPage() {
   const [isShowPass, setIsShowPass] = useState(false);
   const [isShowRePass, setisShowRePass] = useState(false);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [pass, setPass] = useState("");
+  const [rePass, setRePass] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>({
+    resolver: zodResolver(RegisterSchema),
+  });
+  const [regiserUserMutation, { loading, error, data }] = useMutation(REGISTER_USER);
+
+  const onSubmit = async (dataUser: FormData) => {
+    try {
+      setIsLoading(true);
+      const response = await regiserUserMutation({
+        variables: dataUser
+      })
+      setIsLoading(false)
+      console.log("data: ", response.data);
+      addToast({
+        title: "Success",
+        description: `Sign up successfully, you need check your email to get code`,
+        color: "success",
+        radius: "sm",
+      })
+      const activation_token = response.data.register.activation_token;
+      // console.log("activation token: ", activation_token);
+      localStorage.setItem("activation_token", activation_token);
+      router.push(`${routing.activation}`);
+    } catch (err: any) {
+      setIsLoading(false)
+       if (err.networkError) {
+        addToast({
+          title: "Error",
+          description: `${err.networkError.message}`,
+          color: "danger",
+          radius: "sm",
+        })
+      } else {
+        addToast({
+          title: "Error",
+          description: `${err.message}`,
+          color: "danger",
+          radius: "sm",
+        })
+      }
+
+    }
+  };
+
   return (
     <div className="register--container">
-      <div className="register-form">
-        <p style={{ fontWeight: "bold", fontSize: "2rem", marginTop: "40px", color: "#fff" }}>Sign up <span className="register--logoname">TnN Movie</span></p>
+      <form className="register-form" onSubmit={handleSubmit(onSubmit)}>
+        <p style={{ fontWeight: "bold", fontSize: "2rem", marginTop: "30px", color: "#fff" }}>Sign up <span className="register--logoname">TnN Movie</span></p>
         <div style={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "center", marginTop: "30px", gap: "12px" }}>
           <div style={{ width: "100%", paddingLeft: "20px", paddingRight: "20px", maxWidth: "300px" }}>
-            <input className="input-signup" placeholder="Enter your email" />
+            <input
+              {...register("email")}
+              value={email} onChange={(e) => setEmail(e.target.value)} className="input-signup" placeholder="Enter your email" aria-label="Email" />
+            {errors.email && <p className="error-register--text">{errors.email.message}</p>}
           </div>
           <div style={{ width: "100%", paddingLeft: "20px", paddingRight: "20px", maxWidth: "300px" }}>
-            <input className="input-signup" placeholder="Enter your user name" />
+            <input
+              {...register("name")}
+              value={name} onChange={(e) => setName(e.target.value)} className="input-signup" placeholder="Enter your user name" aria-label="Name" />
+            {errors.name && <p className="error-register--text">{errors.name.message}</p>}
           </div>
           <div style={{ width: "100%", paddingLeft: "20px", paddingRight: "20px", maxWidth: "300px", position: "relative" }}>
-            <input className="input-signup" placeholder="Enter your password" type={isShowPass ? "text" : "password"} />
+            <input
+              {...register("password")}
+              value={pass} onChange={(e) => setPass(e.target.value)} className="input-signup" placeholder="Enter your password" type={isShowPass ? "text" : "password"} aria-label="Password" />
             {
               !isShowPass ? (
                 <svg
@@ -38,9 +111,13 @@ function RegisterPage() {
 
               )
             }
+            {errors.password && <p className="error-register--text">{errors.password.message}</p>}
           </div>
+
           <div style={{ width: "100%", paddingLeft: "20px", paddingRight: "20px", maxWidth: "300px", position: "relative" }}>
-            <input className="input-signup" placeholder="Re-enter password" type={isShowRePass ? "text" : "password"} />
+            <input
+              {...register("rePassword")}
+              value={rePass} onChange={(e) => setRePass(e.target.value)} className="input-signup" placeholder="Re-enter password" type={isShowRePass ? "text" : "password"} aria-label="Re-Password" />
             {
               !isShowRePass ? (
                 <svg
@@ -60,9 +137,10 @@ function RegisterPage() {
 
               )
             }
+            {errors.rePassword && <p className="error-register--text">{errors.rePassword.message}</p>}
           </div>
           <div style={{ width: "100%", paddingLeft: "20px", paddingRight: "20px", maxWidth: "300px" }}>
-            <button className="signup--button">Sign up</button>
+            <button type="submit" className="signup--button">Sign up</button>
           </div>
         </div>
         {/* Divider */}
@@ -78,10 +156,17 @@ function RegisterPage() {
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 12, marginTop: "10px" }}>
           <p className="text-white">Already have account?</p>
-          <Link style={{ color: "#000", fontStyle:"italic", textDecoration:"underline" }} href={"/login"}>Log in</Link>
+          <Link style={{ color: "#000", fontStyle: "italic", textDecoration: "underline" }} href={"/login"}>Log in</Link>
         </div>
 
-      </div>
+      </form >
+      {
+        isLoading && (
+          <div className="loading--register">
+            <Spinner variant="gradient" />
+          </div>
+        )
+      }
     </div>
   )
 }

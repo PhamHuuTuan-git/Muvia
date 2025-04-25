@@ -7,6 +7,7 @@ import { ApolloProvider } from "@apollo/client";
 import { graphqlClient } from "@/graphql/gql.setup";
 import { Provider } from "react-redux";
 import store from "@/redux-toolkit/store";
+import {ToastProvider} from "@heroui/toast";
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
     <ApolloProvider client={graphqlClient}>
@@ -14,6 +15,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
         {/* <StrictMode> */}
         <HeroUIProvider>
           <NextThemesProvider attribute="class" defaultTheme="dark" enableSystem={false}>
+            <ToastProvider />
             {children}
           </NextThemesProvider>
         </HeroUIProvider>

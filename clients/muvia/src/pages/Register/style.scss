@@ -21,7 +21,7 @@
 
 .register-form {
     width: 500px;
-    height: 550px;
+    height: 600px;
     background: rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(6px);
     z-index: 1;
@@ -62,4 +62,25 @@
 
 .signup--button:active {
     background-color: #ab1010;
+}
+
+.error-register--text {
+    color: red;
+    font-weight: bold;
+    font-size: 0.7rem;
+}
+
+.loading--register {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    background: rgba(0, 0, 0, 0.4);
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 1;
 }
