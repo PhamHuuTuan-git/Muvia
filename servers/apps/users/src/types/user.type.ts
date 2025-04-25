@@ -1,0 +1,30 @@
+import { ObjectType, Field } from "@nestjs/graphql";
+import { User } from "../entities/user.entity";
+
+@ObjectType()
+export class ErrorType {
+    @Field()
+    message: string;
+
+    @Field({ nullable: true })
+    // kiểu dữ liệu là string, nếu ko có thì là undefined
+    code?: string;
+
+}
+
+@ObjectType()
+export class RegisterReponse {
+    @Field()
+    activation_token: string;
+
+    @Field(() => ErrorType, { nullable: true })
+    error?: ErrorType;
+}
+
+@ObjectType()
+export class ActivationResponse {
+    @Field(() => User)
+    user: User | any;
+    @Field(() => ErrorType, { nullable: true })
+    error?: ErrorType;
+}

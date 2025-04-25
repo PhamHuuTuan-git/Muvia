@@ -19,6 +19,15 @@
         "tsConfigPath": "apps/gateway/tsconfig.app.json"
       }
     },
+    "movies": {
+      "type": "application",
+      "root": "apps/movies",
+      "entryFile": "main",
+      "sourceRoot": "apps/movies/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/movies/tsconfig.app.json"
+      }
+    },
     "users": {
       "type": "application",
       "root": "apps/users",
