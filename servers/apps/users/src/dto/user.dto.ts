@@ -10,12 +10,12 @@ export class RegisterDto {
     name: string;
 
     @Field()
-    @IsNotEmpty({message: 'Password is required.'})
-    @MinLength(8, {message:"Password is required at least 8 characters"})
+    @IsNotEmpty({ message: 'Password is required.' })
+    @MinLength(8, { message: "Password is required at least 8 characters" })
     password: string;
 
     @Field()
-    @IsNotEmpty({message: 'Re-password is required.'})
+    @IsNotEmpty({ message: 'Re-password is required.' })
     @Match('password', { message: 'Confirm password do not match.' })
     rePassword: string;
 
@@ -25,16 +25,31 @@ export class RegisterDto {
     email: string;
 
     @Field()
-    role: string = "user";   
+    role: string = "user";
 }
 
 @InputType()
 export class ActivationDto {
     @Field()
-    @IsNotEmpty({message: 'Activation Token is required'})
+    @IsNotEmpty({ message: 'Activation Token is required' })
     activationToken: string;
 
     @Field()
-    @IsNotEmpty({message: 'Activation Code is required'})
+    @IsNotEmpty({ message: 'Activation Code is required' })
     activationCode: string;
+}
+
+@InputType()
+export class LoginDto {
+
+    @Field()
+    @IsNotEmpty({ message: 'Email is required.' })
+    @IsEmail({}, { message: 'Email is invalid.' })
+    email: string;
+   
+    @Field()
+    @IsNotEmpty({ message: 'Password is required.' })
+    @MinLength(8, { message: "Password is required at least 8 characters" })
+    password: string;
+
 }

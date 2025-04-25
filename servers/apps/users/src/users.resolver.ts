@@ -1,15 +1,16 @@
 import { Args, Mutation, Resolver, Query, Context } from "@nestjs/graphql";
 import { UsersService } from "./users.service";
-import { RegisterReponse, ActivationResponse } from "./types/user.type";
-import { RegisterDto, ActivationDto } from "./dto/user.dto";
+import { RegisterReponse, ActivationResponse, LoginResponse } from "./types/user.type";
+import { RegisterDto, ActivationDto, LoginDto } from "./dto/user.dto";
 import { BadRequestException, UseGuards } from "@nestjs/common";
-
+import { Response  } from 'express'; // 👈 import từ express
 @Resolver()
 export class UserResolver {
   constructor(
     private readonly usersService: UsersService
   ) { }
 
+  // Register user
   @Mutation(() => RegisterReponse)
   async register(
     @Args('registerInput', { type: () => RegisterDto }) registerDto: RegisterDto,
@@ -23,6 +24,7 @@ export class UserResolver {
     return { activation_token };
   }
 
+  // Activate account
   @Mutation(() => ActivationResponse)
   async activateUser(
     @Args('activationInput') activationDto: ActivationDto,
@@ -30,6 +32,21 @@ export class UserResolver {
 
   ): Promise<ActivationResponse> {
     return await this.usersService.activateUser(activationDto, context.res);
+  }
+
+  // Login user
+  @Mutation(() => LoginResponse)
+  async login(
+    @Args("loginInput") loginDto: LoginDto,
+    @Context() context: { res: Response }
+  ): Promise<LoginResponse> {
+    const result = await this.usersService.login(loginDto, context.res);
+    context.res.cookie('refresh_token', result.refreshToken, {
+      httpOnly: true,
+      sameSite: 'strict',
+      maxAge: 24 * 60 * 60 * 1000
+    });
+    return result;
   }
 
   @Query(() => String)

@@ -1,6 +1,7 @@
 import { BadRequestException, Injectable } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { JwtService } from "@nestjs/jwt";
+
 interface UserData {
     name: string;
     email: string;
@@ -44,5 +45,29 @@ export class MyJwtService {
             throw new BadRequestException(err);
         }
         
+    }
+
+    // create accessToken
+    generateAccessToken(data: object) {
+        const accessToken = this.jwtService.sign(
+            data,
+            {
+                secret: this.configService.get('ACCESS_TOKEN_SECRET'),
+                expiresIn: '15m'
+            }
+        )
+        return accessToken;
+    }
+
+    // create refreshToken
+    generateRefreshToken(data: object) {
+        const reFreshToken = this.jwtService.sign(
+            data,
+            {
+                secret: this.configService.get('REFRESS_TOKEN_SECRET'),
+                expiresIn: '365d'
+            }
+        )
+        return reFreshToken;
     }
 }

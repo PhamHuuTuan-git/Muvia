@@ -3,9 +3,9 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloGatewayDriver, ApolloGatewayDriverConfig } from '@nestjs/apollo';
-import { IntrospectAndCompose } from '@apollo/gateway';
+import { IntrospectAndCompose, RemoteGraphQLDataSource } from '@apollo/gateway';
 import { ConfigService, ConfigModule } from '@nestjs/config';
-
+import { GraphQLDataSource } from './graphql-data-source';
 // Chúng ta dùng Federation, Apollo Federation là một kiến trúc cho phép bạn chia nhỏ GraphQL 
 // thành nhiều service con (subgraphs), rồi kết hợp chúng lại thành một schema duy nhất ở Gateway.
 // Vì nếu bạn làm project lớn, việc gom hết schema, logic, resolver... vào một GraphQL server to đùng (monolith) 
@@ -30,7 +30,8 @@ import { ConfigService, ConfigModule } from '@nestjs/config';
             { name: 'user', url: 'http://localhost:4001/graphql' }
           ], // Nơi khai báo các subgraph (service con) cần được gom lại thành supergraph
 
-        })
+        }),
+        buildService: (args) => new GraphQLDataSource(args),
       }
     })
   ],

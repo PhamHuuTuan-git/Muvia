@@ -3,9 +3,63 @@ import Link from "next/link";
 import "./style.scss";
 import { useState } from "react";
 import routing from "@/utils/routing";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import LoginSchema from "@/validator/login.schema";
+import { useMutation } from "@apollo/client";
+import { LOGIN_USER } from "@/graphql/actions/authenActions/login.action";
+import { Spinner, addToast } from "@heroui/react";
+type FormData = z.infer<typeof LoginSchema>;
 
 function Login() {
     const [isShowPass, setIsShowPass] = useState(false);
+    const [loginUserMutation, { loading, error, data }] = useMutation(LOGIN_USER);
+    const [isLoading, setIsLoading] = useState(false);
+
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm<FormData>({
+        resolver: zodResolver(LoginSchema),
+    });
+
+    const onSubmit = async (loginData: FormData) => {
+        try {
+            setIsLoading(true);
+            const response = await loginUserMutation({
+                variables: loginData
+            })
+            setIsLoading(false); 
+            addToast({
+                title: "Success",
+                description: `Login successfully`,
+                color: "success",
+                radius: "sm",
+              })
+              const accessToken = response.data.login.accessToken;
+              localStorage.setItem("access_token", accessToken);
+        } catch (err: any) {
+            setIsLoading(false)
+            if (err.networkError) {
+                addToast({
+                    title: "Error",
+                    description: `${err.networkError.message}`,
+                    color: "danger",
+                    radius: "sm",
+                })
+            } else {
+                addToast({
+                    title: "Error",
+                    description: `${err.message}`,
+                    color: "danger",
+                    radius: "sm",
+                })
+            }
+        }
+    }
+
     return (
         <div className="login--container">
             <div className="main-login--container">
@@ -19,12 +73,15 @@ function Login() {
                     <div>
                         <p className="welcome-login--text">Log in</p>
                     </div>
-                    <div className="mt-[40px] w-full">
+                    <form className="mt-[40px] w-full" onSubmit={handleSubmit(onSubmit)}>
                         <div style={{ width: "100%", paddingLeft: "20px", paddingRight: "20px" }}>
-                            <input className="input-login" placeholder="Enter your email" />
+                            <input {...register("email")} className="input-login" placeholder="Enter your email" />
+                            {errors.email && <p className="error-login--text">{errors.email.message}</p>}
                         </div>
                         <div style={{ width: "100%", paddingLeft: "20px", paddingRight: "20px", marginTop: "10px", position: "relative" }}>
-                            <input className="input-login" placeholder="Enter your password" type={isShowPass ? "text" : "password"}/>
+                            <input {...register("password")} className="input-login" placeholder="Enter your password" type={isShowPass ? "text" : "password"} />
+
+                            {errors.password && <p className="error-login--text">{errors.password.message}</p>}
                             {
                                 !isShowPass ? (
                                     <svg
@@ -47,9 +104,15 @@ function Login() {
 
                         </div>
                         <div style={{ width: "100%", paddingLeft: "20px", paddingRight: "20px", marginTop: "15px" }}>
-                            <button className="login--button">Log in</button>
+                            <button
+                                disabled={isLoading}
+                                className="login--button" type="submit">
+                                {
+                                    isLoading ? <Spinner size="sm" /> : "Log in"
+                                }
+                            </button>
                         </div>
-                    </div>
+                    </form>
                     {/* Divider */}
                     <div style={{ display: "flex", alignItems: "center", width: "100%", position: "relative", marginTop: "40px", padding: "0 20px" }}>
                         <hr style={{ flex: 1, width: "100%" }} />
@@ -58,20 +121,25 @@ function Login() {
 
                     <div className="mt-[40px] w-full px-[20px]">
                         <div className="w-full">
-                            <button style={{ display: "flex", padding: "10px", gap: 4, alignItems: "center", backgroundColor: "#fff", borderRadius: "8px", width: "100%" }} >
+                            <button
+                                disabled={isLoading}
+                                style={{ display: "flex", padding: "10px", gap: 4,justifyContent:"center", alignItems: "center", backgroundColor: "#fff", borderRadius: "8px", width: "100%" }} >
                                 <img style={{ width: "20px" }} src="/google_logo.png" />
-                                Continue with Google
+                                {
+                                    isLoading ? <Spinner size="sm" /> : "Continue with Google"
+                                }
+
                             </button>
                         </div>
                     </div>
 
                     <div style={{ display: "flex", alignItems: "center", gap: 12, marginTop: "20px" }}>
                         <p className="text-white">Don't have account?</p>
-                        <Link style={{ color: "#ac1a1a", fontStyle:"italic", textDecoration:"underline" }} href={`${routing.register}`}>Sign up</Link>
+                        <Link style={{ color: "#ac1a1a", fontStyle: "italic", textDecoration: "underline" }} href={`${routing.register}`}>Sign up</Link>
                     </div>
 
                     <div style={{ display: "flex", alignItems: "center", gap: 12, marginTop: "20px" }}>
-                        <Link style={{ color: "#ac1a1a", fontStyle:"italic", textDecoration:"underline" }} href={`${routing.activation}`}>Activate your account</Link>
+                        <Link style={{ color: "#ac1a1a", fontStyle: "italic", textDecoration: "underline" }} href={`${routing.activation}`}>Activate your account</Link>
                     </div>
                 </div>
             </div>

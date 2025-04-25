@@ -7,6 +7,7 @@ import * as bcrypt from 'bcrypt';
 import { EmailService } from './email/email.service';
 import { ConfigService } from '@nestjs/config';
 import { ActivationDto } from './dto/user.dto';
+import { Response } from 'express'; 
 @Injectable()
 export class UsersService {
 
@@ -21,6 +22,7 @@ export class UsersService {
     return 'Hello World User!';
   }
 
+  // register user
   async register(register: RegisterDto, response: Response) {
     const { name, email, password, rePassword } = register;
 
@@ -64,6 +66,7 @@ export class UsersService {
     return { activation_token, response }
   }
 
+  // activate user
   async activateUser(activationDto: ActivationDto, response: Response) {
     const { activationToken, activationCode } = activationDto;
     try {
@@ -145,5 +148,41 @@ export class UsersService {
     //   }
     // })
     // return { user, response }
+  }
+
+  // login user
+  async login({ email, password }, res: Response) {
+    try {
+      const user = await this.prisma.user.findUnique({
+        where: { email }
+      })
+      if (user) {
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (isMatch) {
+          const accessToken = this.jwtService.generateAccessToken({ id: user.id });
+          const refreshToken = this.jwtService.generateRefreshToken({ id: user.id });
+          // res.cookie('refresh_token', refreshToken, {
+          //   httpOnly: true, // 
+          //   // secure: process.env.NODE_ENV === 'production',
+          //   secure: false,
+          //   sameSite: 'lax',  // Giúp ngăn CSRF 
+          //   maxAge: 24 * 60 * 60 * 1000  // Thời gian tồn tại của cookie,
+          // });
+          // console.log('Cookie set:', res.get('Set-Cookie'))
+          return {
+            user: user,
+            accessToken,
+            refreshToken
+          }
+        } else {
+          throw new BadRequestException("Password is not valid!");
+        }
+      } else {
+        throw new BadRequestException("Cannot find users with this email!")
+      }
+    } catch (err) {
+      console.log("error login: ", err);
+      throw new BadRequestException(err);
+    }
   }
 }

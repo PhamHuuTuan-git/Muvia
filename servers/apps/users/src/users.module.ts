@@ -14,7 +14,7 @@ import { ConfigService } from '@nestjs/config';
 // cho service này, và nó có resolver, controller, service logic
 @Module({
   imports: [
-   
+
     ConfigModule.forRoot({
       envFilePath: './apps/users/.env',
       isGlobal: true
@@ -23,7 +23,13 @@ import { ConfigService } from '@nestjs/config';
       driver: ApolloFederationDriver,
       autoSchemaFile: {
         federation: 2 // Sử dụng federation version 2, hỗ trợ các directive như là @key, @external, @requires, v.v 
-      }
+      },
+      context: ({ req, res }) => ({ req, res }), // dùng để truyền cookie về cho client
+      playground: {
+        settings: {
+          "request.credentials": "include", // Otherwise cookies won't be sent
+        }
+      },
     }),
     EmailModule
   ],
@@ -31,4 +37,4 @@ import { ConfigService } from '@nestjs/config';
   controllers: [],
   providers: [UsersService, JwtService, UserResolver, PrismaService, MyJwtService, ConfigService],
 })
-export class UsersModule {}
+export class UsersModule { }

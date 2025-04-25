@@ -39,7 +39,7 @@ function RegisterPage() {
         variables: dataUser
       })
       setIsLoading(false)
-      console.log("data: ", response.data);
+      // console.log("data: ", response.data);
       addToast({
         title: "Success",
         description: `Sign up successfully, you need check your email to get code`,
@@ -67,7 +67,6 @@ function RegisterPage() {
           radius: "sm",
         })
       }
-
     }
   };
 
