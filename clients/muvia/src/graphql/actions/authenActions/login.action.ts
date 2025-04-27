@@ -22,8 +22,8 @@ mutation LoginUser(
             avatar {
                 url,
                 imgId
-        }
-    },
+            }
+        },
         accessToken,
         refreshToken    
     }

@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from "@nestjs/common";
+import { BadRequestException, Injectable, UnauthorizedException } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { JwtService } from "@nestjs/jwt";
 
@@ -42,7 +42,7 @@ export class MyJwtService {
             )
             return payload;
         } catch (err) {
-            throw new BadRequestException(err);
+            throw new UnauthorizedException(err);
         }
         
     }

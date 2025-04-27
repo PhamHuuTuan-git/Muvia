@@ -4,6 +4,7 @@ import { ConfigService } from '@nestjs/config';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { ValidationPipe, BadRequestException  } from '@nestjs/common';
 import { join } from 'path';
+import * as cookieParser from 'cookie-parser';
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(UsersModule);
   const configService = app.get(ConfigService);
@@ -24,6 +25,8 @@ async function bootstrap() {
       }
     ),
   );
+
+  app.use(cookieParser());
 
   // Giusp phục vụ file tĩnh từ thư mục public, giả sử trong thư mục /public/images/logo.png
   // thì chúng ta có thể truy cập thông qua http://localhost:3001/images/logo.png

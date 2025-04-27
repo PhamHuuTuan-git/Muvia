@@ -4,7 +4,6 @@ import { GraphQLDataSourceRequestKind } from "@apollo/gateway/dist/datasources/t
 export class GraphQLDataSource extends RemoteGraphQLDataSource {
     didReceiveResponse({ response, context }): typeof response {
         const cookies = response.http.headers?.raw()["set-cookie"] as string[] | null;
-
         if (cookies) {
             context?.req.res.append("set-cookie", cookies);
         }
@@ -17,8 +16,12 @@ export class GraphQLDataSource extends RemoteGraphQLDataSource {
 
         if (kind === GraphQLDataSourceRequestKind.INCOMING_OPERATION && context?.req) {
             const cookie = context.req.headers['cookie'];
+            const authorization = context.req.headers['authorization'];
             if (cookie) {
                 request.http?.headers?.set('Cookie', cookie);
+            }
+            if(authorization) {
+                request.http?.headers?.set('authorization', authorization);
             }
         }
     }

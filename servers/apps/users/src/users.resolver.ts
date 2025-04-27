@@ -1,9 +1,10 @@
 import { Args, Mutation, Resolver, Query, Context } from "@nestjs/graphql";
 import { UsersService } from "./users.service";
-import { RegisterReponse, ActivationResponse, LoginResponse } from "./types/user.type";
+import { RegisterReponse, ActivationResponse, LoginResponse, RefreshTokenResponse } from "./types/user.type";
 import { RegisterDto, ActivationDto, LoginDto } from "./dto/user.dto";
 import { BadRequestException, UseGuards } from "@nestjs/common";
-import { Response  } from 'express'; // 👈 import từ express
+import { Request, Response } from 'express'; 
+import { AuthGuard } from "./guards/auth.guard";
 @Resolver()
 export class UserResolver {
   constructor(
@@ -49,6 +50,34 @@ export class UserResolver {
     return result;
   }
 
+  // Refresh Token
+  @Mutation(() => RefreshTokenResponse)
+  async refreshToken(
+    @Context() context: { req: Request; res: Response }
+  ): Promise<RefreshTokenResponse> {
+     return await this.usersService.refreshToken(context.req, context.res);
+  }
+
+  // Logout User
+  @Mutation(() => Boolean)
+  async logout(
+    @Context() context: { res: Response }
+  ): Promise<Boolean> {
+    return this.usersService.logout(context.res);
+  }
+
+
+  // test
+  @Mutation(() => String)
+  @UseGuards(AuthGuard)
+  async test(
+    @Args("id") userId :string,
+    @Context() context: { res: Response }
+  ): Promise<String> {
+    return this.usersService.test(context.res);
+  }
+
+  // Default query
   @Query(() => String)
   helloMovie() {
     return this.usersService.getHello();

@@ -24,7 +24,7 @@ import { ConfigService } from '@nestjs/config';
       autoSchemaFile: {
         federation: 2 // Sử dụng federation version 2, hỗ trợ các directive như là @key, @external, @requires, v.v 
       },
-      context: ({ req, res }) => ({ req, res }), // dùng để truyền cookie về cho client
+      context: ({ req, res }) => ({ req, res, authorization: req.headers.authorization, }), // dùng để truyền cookie về cho client
       playground: {
         settings: {
           "request.credentials": "include", // Otherwise cookies won't be sent

@@ -1,18 +1,21 @@
 
 'use client'
 import './style.scss';
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { Avatar, Dropdown, DropdownTrigger, DropdownMenu, DropdownItem } from "@heroui/react";
 // import SwitchDarkLight from '../SwtichDarkLight/SwitchDarkLight';
-import { Input } from "@heroui/react";
+import { Input, Divider } from "@heroui/react";
 import FindIcon from '../icons/FindIcon';
 import sidebarSlide from '@/components/Sidebar/sidebarSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { sidebarSelectorMode } from "@/redux-toolkit/selector";
-
+import { authenSelectorUser } from '@/redux-toolkit/selector';
+import Link from 'next/link';
+import routing from '@/utils/routing';
 
 const Header = () => {
   const sidebarMode = useSelector(sidebarSelectorMode);
+  const userAuthen = useSelector(authenSelectorUser);
   const dispatch = useDispatch();
   const handleTongleSidebar = () => {
     dispatch(sidebarSlide.actions.changeMode(!sidebarMode));
@@ -62,16 +65,26 @@ const Header = () => {
         </div>
         {/* Avatar */}
         <div>
+          {
+            userAuthen === null ? (
+              <div style={{ whiteSpace: 'nowrap' }} className="flex h-5 items-center space-x-4 text-small ">
+                <Link  href={`${routing.login}`} style={{ color: "#fff", fontSize:"0.7rem" }}>Đăng nhập</Link>
+                <Divider orientation="vertical" className='bg-white' />
+                <Link href={`${routing.register}`} style={{ color: "#fff", fontSize:"0.7rem" }}>Đăng ký</Link>
+              </div>
+            ) : (
+              <Dropdown>
+                <DropdownTrigger>
+                  <Avatar className='cursor-pointer' size="lg" src={`${userAuthen.avatar.url}`} />
+                </DropdownTrigger>
+                <DropdownMenu disabledKeys={["edit", "delete"]}>
+                  <DropdownItem key="new">Profile</DropdownItem>
+                  <DropdownItem key="copy">Log out</DropdownItem>
+                </DropdownMenu>
+              </Dropdown>
+            )
+          }
 
-          <Dropdown>
-            <DropdownTrigger>
-              <Avatar className='cursor-pointer' size="lg" src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
-            </DropdownTrigger>
-            <DropdownMenu disabledKeys={["edit", "delete"]}>
-              <DropdownItem key="new">Profile</DropdownItem>
-              <DropdownItem key="copy">Log out</DropdownItem>
-            </DropdownMenu>
-          </Dropdown>
         </div>
 
         {/* Switch mode dark light */}

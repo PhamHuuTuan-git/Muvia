@@ -27,7 +27,8 @@ import { GraphQLDataSource } from './graphql-data-source';
       gateway: {
         supergraphSdl: new IntrospectAndCompose({ // Tự động lấy schema từ các subgraph services thông qua introspection, rồi compose thành 1 supergraph.
           subgraphs: [
-            { name: 'user', url: 'http://localhost:4001/graphql' }
+            { name: 'user', url: 'http://localhost:4001/graphql' },
+            { name: 'movie', url: 'http://localhost:4002/graphql'}
           ], // Nơi khai báo các subgraph (service con) cần được gom lại thành supergraph
 
         }),

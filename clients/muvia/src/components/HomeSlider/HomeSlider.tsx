@@ -63,6 +63,26 @@ const content = [
 
     },
 ]
+import { gql, DocumentNode } from "@apollo/client";
+import { useMutation } from "@apollo/client";
+
+export const REFRESH_TOKEN: DocumentNode = gql`
+mutation RefreshToken {
+    refreshToken {
+        accessToken
+    }
+}
+`
+
+export const TEST:  DocumentNode = gql`
+mutation Test(
+    $id: String!
+) {
+    test (
+        id: $id
+    )
+}
+`
 
 const itemsPerPage = 4
 function HomeSlider() {
@@ -70,6 +90,19 @@ function HomeSlider() {
     const totalPagesRef = useRef(Math.ceil(content.length / itemsPerPage));
     const [pageSelected, setPageSelected] = useState(0);
     const slidersContainer = useRef<HTMLDivElement>(null);
+    const [RefreshTokenrMutation, { loading, error, data }] = useMutation(TEST);
+    const handleWatchNow = async () => {
+        try {
+            const response = await RefreshTokenrMutation({
+                variables: {
+                    id: "680b5b4e4ca6c36f70e8b284"
+                }
+            });
+            console.log("data: ", response)
+        }catch(err: any) {
+            console.log(err.message)
+        }
+    }
 
     const changeSpecifiedPage = (index: number) => {
         setPageSelected(index);
@@ -145,7 +178,9 @@ function HomeSlider() {
                                         </div>
                                     </div>
                                     <div className='mt-[40px]'>
-                                        <Button className='w-[150px] h-[50px] bg-[#a94242] text-white font-bold p-[10px]'>Watch now</Button>
+                                        <Button
+                                            onClick={handleWatchNow}
+                                            className='w-[150px] h-[50px] bg-[#a94242] text-white font-bold p-[10px]'>Watch now</Button>
                                     </div>
                                 </div>
                             </div>

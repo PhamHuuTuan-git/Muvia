@@ -10,13 +10,20 @@ import LoginSchema from "@/validator/login.schema";
 import { useMutation } from "@apollo/client";
 import { LOGIN_USER } from "@/graphql/actions/authenActions/login.action";
 import { Spinner, addToast } from "@heroui/react";
+import { useRouter } from "next/navigation";
+import { useSelector,useDispatch } from "react-redux";
+import { authenSelectorUser } from "@/redux-toolkit/selector";
+import authenSlice from "@/redux-toolkit/slices/authen.slice";
+
 type FormData = z.infer<typeof LoginSchema>;
 
 function Login() {
     const [isShowPass, setIsShowPass] = useState(false);
     const [loginUserMutation, { loading, error, data }] = useMutation(LOGIN_USER);
     const [isLoading, setIsLoading] = useState(false);
-
+    const route = useRouter();
+    const userAuthen = useSelector(authenSelectorUser);
+    const dispatch = useDispatch();
     const {
         register,
         handleSubmit,
@@ -40,6 +47,9 @@ function Login() {
               })
               const accessToken = response.data.login.accessToken;
               localStorage.setItem("access_token", accessToken);
+              dispatch(authenSlice.actions.setUser(response.data.login.user));
+              route.push(`${routing.home}`)
+              
         } catch (err: any) {
             setIsLoading(false)
             if (err.networkError) {

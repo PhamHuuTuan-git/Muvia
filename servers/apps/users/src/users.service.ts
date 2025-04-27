@@ -2,12 +2,12 @@ import { Injectable } from '@nestjs/common';
 import { MyJwtService } from './jwt.service';
 import { PrismaService } from 'apps/users/prisma/prisma.service';
 import { RegisterDto } from './dto/user.dto';
-import { BadRequestException } from "@nestjs/common";
+import { BadRequestException, UnauthorizedException } from "@nestjs/common";
 import * as bcrypt from 'bcrypt';
 import { EmailService } from './email/email.service';
 import { ConfigService } from '@nestjs/config';
 import { ActivationDto } from './dto/user.dto';
-import { Response } from 'express'; 
+import { Response, Request } from 'express';
 @Injectable()
 export class UsersService {
 
@@ -184,5 +184,34 @@ export class UsersService {
       console.log("error login: ", err);
       throw new BadRequestException(err);
     }
+  }
+
+  // Refresh Token
+  async refreshToken(req: Request, res: Response) {
+    // console.log("req header: ", req);
+    const refreshToken = req.cookies['refresh_token'];
+    if (!refreshToken) {
+      throw new UnauthorizedException('No refresh token');
+    }
+
+    try {
+      const payload = this.jwtService.verify(refreshToken, 'REFRESS_TOKEN_SECRET');
+      const newAccessToken = this.jwtService.generateAccessToken({ id: payload.id });
+      return { accessToken: newAccessToken };
+    } catch (err) {
+      throw new UnauthorizedException('Invalid or expired refresh token');
+    }
+  }
+
+  // Logout user
+  async logout(res: Response): Promise<boolean> {
+    res.clearCookie('refresh_token');
+    return true;
+  }
+
+  //test
+  async test(res: Response) {
+    console.log("Test mutation")
+    return "Test mutation";
   }
 }
