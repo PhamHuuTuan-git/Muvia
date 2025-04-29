@@ -51,3 +51,12 @@ export class RefreshTokenResponse {
     @Field()
     accessToken: string
 }
+
+@ObjectType()
+export class CheckTokenResponse {
+    @Field(() => User)
+    user: User | any;
+
+    @Field(() => ErrorType, { nullable: true })
+    error?: ErrorType;
+}

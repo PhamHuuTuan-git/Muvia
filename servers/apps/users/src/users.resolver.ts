@@ -1,6 +1,6 @@
 import { Args, Mutation, Resolver, Query, Context } from "@nestjs/graphql";
 import { UsersService } from "./users.service";
-import { RegisterReponse, ActivationResponse, LoginResponse, RefreshTokenResponse } from "./types/user.type";
+import { RegisterReponse, ActivationResponse, LoginResponse, RefreshTokenResponse, CheckTokenResponse } from "./types/user.type";
 import { RegisterDto, ActivationDto, LoginDto } from "./dto/user.dto";
 import { BadRequestException, UseGuards } from "@nestjs/common";
 import { Request, Response } from 'express'; 
@@ -64,6 +64,14 @@ export class UserResolver {
     @Context() context: { res: Response }
   ): Promise<Boolean> {
     return this.usersService.logout(context.res);
+  }
+
+  // Check token
+  @Mutation(() => CheckTokenResponse)
+  async checkToken(
+    @Context() context: { req: Request; res: Response }
+  ): Promise<CheckTokenResponse> {
+    return this.usersService.checkToken(context.req, context.res);
   }
 
 

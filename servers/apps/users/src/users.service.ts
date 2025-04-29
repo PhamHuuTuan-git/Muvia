@@ -209,6 +209,29 @@ export class UsersService {
     return true;
   }
 
+  async checkToken(req: Request, res: Response) {
+    const accessToken = req.headers.authorization?.split(" ")[1] as string;
+    try {
+      const payload = this.jwtService.verify(accessToken, 'ACCESS_TOKEN_SECRET');
+      if(!payload) {
+        throw new UnauthorizedException('Invalid access token!');
+      }
+
+      const user = await this.prisma.user.findUnique({
+        where: {
+          id: payload.id
+        }
+      })
+      if(!user) {
+        throw new BadRequestException("User not found")
+      }
+      const { password, ...got_user } = user;
+      return {user: got_user}
+    } catch (err) {
+      throw new UnauthorizedException(err.message);
+    }
+  }
+
   //test
   async test(res: Response) {
     console.log("Test mutation")

@@ -3,12 +3,13 @@ import { MoviesController } from './movies.controller';
 import { MoviesService } from './movies.service';
 import { ApolloFederationDriver, ApolloFederationDriverConfig } from '@nestjs/apollo';
 import { GraphQLModule } from '@nestjs/graphql';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { MovieResolver } from './movies.resolver';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
-          envFilePath: './apps/users/.env',
+          envFilePath: './apps/movies/.env',
           isGlobal: true
         }),
         GraphQLModule.forRoot<ApolloFederationDriverConfig>({
@@ -24,7 +25,7 @@ import { ConfigModule } from '@nestjs/config';
           },
         }),
   ],
-  controllers: [MoviesController],
-  providers: [MoviesService],
+  controllers: [],
+  providers: [MoviesService, MovieResolver, ConfigService],
 })
 export class MoviesModule {}

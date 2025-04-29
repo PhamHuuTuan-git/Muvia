@@ -19,11 +19,11 @@ export class SpecifiedEpiso {
 }
 
 @ObjectType()
-export class Episo {
+export class Episode {
     
     @Field()
     server_name: string;
 
-    @Field()
-    server_data: [SpecifiedEpiso]
+    @Field(() => [SpecifiedEpiso])
+    server_data: SpecifiedEpiso[]
 }
