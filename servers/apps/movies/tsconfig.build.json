@@ -1,6 +1,0 @@
-{
-    "extends": "../../tsconfig.build.json", // Kế thừa cấu hình từ tsconfig.build.json ở thư mục gốc
-    "compilerOptions": {
-        "outDir": "../../dist/apps/movies" // Đảm bảo thư mục xuất cho ứng dụng này
-    }
-}
