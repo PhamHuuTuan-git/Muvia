@@ -1,5 +1,5 @@
 import { Injectable, OnModuleInit } from "@nestjs/common";
-import { PrismaClient } from "@prisma/client"; // Giusp giao tiếp với DB
+import { PrismaClient } from "../src/generated/client"; // Giusp giao tiếp với DB
 
 // Kết nối tới DB thông qua Prisma ORM trong NestJS
 @Injectable()

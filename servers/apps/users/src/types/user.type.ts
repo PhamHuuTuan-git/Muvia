@@ -2,6 +2,7 @@ import { ObjectType, Field,Directive } from "@nestjs/graphql";
 import { User } from "../entities/user.entity";
 
 @ObjectType()
+@Directive('@shareable') 
 export class ErrorType {
     @Field()
     message: string;

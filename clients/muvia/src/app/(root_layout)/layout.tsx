@@ -6,7 +6,8 @@ import SideBar from '@/components/Sidebar/SideBar';
 import React from 'react'
 import { useSelector } from 'react-redux';
 import { sidebarSelectorMode } from "@/redux-toolkit/selector";
-import { Divider } from "@heroui/react";
+
+import AuthProvider from "../providers/AuthProvider";
 function RootLayout({
   children,
 }: Readonly<{
@@ -14,7 +15,7 @@ function RootLayout({
 }>) {
   const sidebarMode = useSelector(sidebarSelectorMode);
   return (
-    <div>
+    <AuthProvider>
 
       <div className={`sidebar--container ${sidebarMode === true ? "on" : "off"}`}>
         <SideBar />
@@ -45,7 +46,7 @@ function RootLayout({
 
       </div>
 
-    </div>
+    </AuthProvider>
   )
 }
 

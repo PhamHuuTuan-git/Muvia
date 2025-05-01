@@ -1,4 +1,4 @@
-import { Args, Mutation, Resolver, Query, Context } from "@nestjs/graphql";
+import { Args, Mutation, Resolver, Query, Int } from "@nestjs/graphql";
 import { MoviesService } from "./movies.service";
 import { MoviesResposne } from "./types/movie.type";
 @Resolver()
@@ -10,9 +10,10 @@ export class MovieResolver {
     // get top new movie
     @Query(() => MoviesResposne)
     async getTopNewMovie(
-
+        @Args("limit", { type: () => Int }) limit: number,
+        
     ): Promise<MoviesResposne> {
-         this.movieService.getTopNewMovie()
+         this.movieService.getTopNewMovie(limit)
          return {
             movies: [
                 

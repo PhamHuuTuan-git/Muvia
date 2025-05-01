@@ -1,7 +1,8 @@
-import { ObjectType, Field } from "@nestjs/graphql";
+import { ObjectType, Field, Directive} from "@nestjs/graphql";
 import { Movie } from "../entities/movie.entity";
 
 @ObjectType()
+@Directive('@shareable') 
 export class ErrorType {
     @Field()
     message: string;
