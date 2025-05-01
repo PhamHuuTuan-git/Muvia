@@ -9,9 +9,53 @@ datasource db {
 }
 
 model Movie {
-  id       String @id @default(auto()) @map("_id") @db.ObjectId
-  movie    Json?
-  episodes Json?
+  id              String   @id @default(auto()) @map("_id") @db.ObjectId
+  tmdb            Json
+  imdb            Json
+  created         Json
+  modified        Json
+  name            String
+  slug            String
+  origin_name     String
+  content         String
+  type            String
+  status          String
+  thumb_url       String
+  poster_url      String
+  is_copyRight    Boolean
+  sub_docquyen    Boolean
+  chieurap        Boolean
+  trailer_url     String
+  time            String
+  episode_current String
+  episode_total   String
+  quality         String
+  lang            String
+  notify          String
+  showtimes       String
+  year            Int
+  view            Int
+  actor           String[]
+  director        String[]
+  category        String[]
+  country         String[]
+  episodes        Json?
 
   @@map("movies")
+}
+
+model Category {
+  id   String @id @default(auto()) @map("_id") @db.ObjectId
+  name String
+  slug String
+
+  @@map("categories")
+}
+
+model Country {
+  id   String @id @default(auto()) @map("_id") @db.ObjectId
+  name String
+  slug String
+
+  @@map("countries")
 }

@@ -11,14 +11,10 @@ export class MovieResolver {
     @Query(() => MoviesResposne)
     async getTopNewMovie(
         @Args("limit", { type: () => Int }) limit: number,
-        
+
     ): Promise<MoviesResposne> {
-         this.movieService.getTopNewMovie(limit)
-         return {
-            movies: [
-                
-            ]
-         }
+        const result = await this.movieService.getTopNewMovie(limit)
+        return { movies: result };
     }
 
     // default query

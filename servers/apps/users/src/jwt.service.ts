@@ -65,7 +65,7 @@ export class MyJwtService {
             data,
             {
                 secret: this.configService.get('REFRESS_TOKEN_SECRET'),
-                expiresIn: '365d'
+                expiresIn: '7d'
             }
         )
         return reFreshToken;

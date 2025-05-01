@@ -1,21 +1,23 @@
 "use client";
 import { gql, DocumentNode } from "@apollo/client";
 
-export const ACTIVATE_USER: DocumentNode = gql`
-mutation ActivateUser(
-    $activationToken: String!
-    $activationCode: String!
+export const GET_NEW_MOVIES: DocumentNode = gql`
+query GetNewMovies(
+   $limit
 ) {
-    activateUser(
-        activationInput: {
-            activationToken: $activationToken,
-            activationCode: $activationCode,
-        }
+    getTopNewMovie(
+        limit: $limit
     ) {
-        user {
+        movies {
             id,
             name,
-            email
+            poster_url,
+            content,
+            imdb,
+            thumb_url,
+            tmdb,
+            view,
+            slug
         }     
     }
 }

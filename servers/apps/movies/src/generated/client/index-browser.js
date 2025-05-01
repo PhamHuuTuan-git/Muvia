@@ -115,8 +115,48 @@ Prisma.NullTypes = {
 
 exports.Prisma.MovieScalarFieldEnum = {
   id: 'id',
-  movie: 'movie',
+  tmdb: 'tmdb',
+  imdb: 'imdb',
+  created: 'created',
+  modified: 'modified',
+  name: 'name',
+  slug: 'slug',
+  origin_name: 'origin_name',
+  content: 'content',
+  type: 'type',
+  status: 'status',
+  thumb_url: 'thumb_url',
+  poster_url: 'poster_url',
+  is_copyRight: 'is_copyRight',
+  sub_docquyen: 'sub_docquyen',
+  chieurap: 'chieurap',
+  trailer_url: 'trailer_url',
+  time: 'time',
+  episode_current: 'episode_current',
+  episode_total: 'episode_total',
+  quality: 'quality',
+  lang: 'lang',
+  notify: 'notify',
+  showtimes: 'showtimes',
+  year: 'year',
+  view: 'view',
+  actor: 'actor',
+  director: 'director',
+  category: 'category',
+  country: 'country',
   episodes: 'episodes'
+};
+
+exports.Prisma.CategoryScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  slug: 'slug'
+};
+
+exports.Prisma.CountryScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  slug: 'slug'
 };
 
 exports.Prisma.SortOrder = {
@@ -131,7 +171,9 @@ exports.Prisma.QueryMode = {
 
 
 exports.Prisma.ModelName = {
-  Movie: 'Movie'
+  Movie: 'Movie',
+  Category: 'Category',
+  Country: 'Country'
 };
 
 /**
