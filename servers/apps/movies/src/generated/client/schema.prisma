@@ -10,36 +10,36 @@ datasource db {
 
 model Movie {
   id              String   @id @default(auto()) @map("_id") @db.ObjectId
-  tmdb            Json
-  imdb            Json
-  created         Json
-  modified        Json
-  name            String
-  slug            String
-  origin_name     String
-  content         String
-  type            String
-  status          String
-  thumb_url       String
-  poster_url      String
-  is_copyRight    Boolean
-  sub_docquyen    Boolean
+  episodes        Json?
+  actor           String[]
+  category        String[]
   chieurap        Boolean
-  trailer_url     String
-  time            String
+  content         String
+  country         String[]
+  created         Json
+  director        String[]
   episode_current String
   episode_total   String
-  quality         String
+  imdb            Json
+  is_copyright    Boolean
   lang            String
+  modified        Json
+  name            String
   notify          String
+  origin_name     String
+  poster_url      String
+  quality         String
   showtimes       String
-  year            Int
+  slug            String
+  status          String
+  sub_docquyen    Boolean
+  thumb_url       String
+  time            String
+  tmdb            Json
+  trailer_url     String
+  type            String
   view            Int
-  actor           String[]
-  director        String[]
-  category        String[]
-  country         String[]
-  episodes        Json?
+  year            Int
 
   @@map("movies")
 }

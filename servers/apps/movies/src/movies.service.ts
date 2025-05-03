@@ -40,6 +40,46 @@ export class MoviesService {
     }
   }
 
+  // get specified movie
+  async getSpecifiedMovie(slug: string) {
+    try {
+      
+      const movie = await this.prisma.movie.findFirst({
+        where: {
+          slug
+        }
+      })
+
+      // console.log("got movie: ", movie);
+      if(!movie) {
+        throw new BadRequestException("Cannot find this movie")
+      }
+
+      const categories = await this.prisma.category.findMany({
+        where: {
+          id: { in: movie.category }
+        }
+      });
+
+      const countries = await this.prisma.country.findMany({
+        where: {
+          id: { in: movie.country }
+        }
+      });
+
+      const fullMovie = {
+        ...movie,
+        category: categories,
+        country: countries
+      };
+      
+      return fullMovie;
+    }catch(err) {
+      //console.log("er: ", err)
+      throw new BadRequestException(err);
+    }
+  }
+
   // default query
   getMovie(): string {
     return 'Hello Movie!';

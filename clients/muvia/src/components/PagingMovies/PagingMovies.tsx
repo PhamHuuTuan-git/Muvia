@@ -7,10 +7,15 @@ import { useState } from "react";
 
 type Movie = {
     id: string,
-    url: string,
+    thumb_url: string,
     name: string,
     // imdb: string,
-    // view: string
+    view: number,
+    episode_current: string,
+    episode_total: string,
+    slug: string,
+    [key: string]: any;
+
 }
 type Props = {
     movies: Movie[],
@@ -28,12 +33,14 @@ function PagingMovies({ movies, itemsPerRow }: Props) {
                         return (
                             <div key={index} style={{width:`${100/itemsPerRow}%`, minWidth:`${100/itemsPerRow}%`}}>
                                 <MovieCard
+                                    episode_total = {ele.episode_total}
+                                    episode_current={ele.episode_current}
                                     id={ele.id}
-                                    url={ele.url}
+                                    url={ele.thumb_url}
                                     name={ele.name}
-                                    slug="heo-an-toi"
+                                    slug={ele.slug}
                                     imdb='7.6'
-                                    view='12' />
+                                    view={ele.view} />
                             </div>
                         )
                     })

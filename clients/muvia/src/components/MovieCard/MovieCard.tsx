@@ -10,7 +10,10 @@ type Props = {
     slug: string
     name: string,
     imdb: string,
-    view: string
+    view: number,
+    episode_current: string,  
+    episode_total: string
+
 }
 function MovieCard(props: Props) {
     const router = useRouter();
@@ -21,7 +24,7 @@ function MovieCard(props: Props) {
         <div className="card--container">
             <div className="card-content--container">
                 <div className="card-content--state">
-                    full 17/17 vietsub
+                    {props.episode_current} {!props.episode_current.startsWith("Hoàn") && `/ ${props.episode_total}`}
                 </div>
                 <div className="p-[0px] h-[100%] rounded-xl overflow-hidden">
                     <img src={`${props.url}`} className="image-card" />
@@ -35,7 +38,7 @@ function MovieCard(props: Props) {
                         </div>
                         <div className='flex gap-[8px]'>
                             <EyeSolidIcon className='text-white size-6' />
-                            <p className='text-white'>7.2</p>
+                            <p className='text-white'>{props.view}</p>
                         </div>
                     </div>
                     <Button onClick={handleDirect} className="card-detail--button">Detail</Button>

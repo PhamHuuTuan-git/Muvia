@@ -1,24 +1,23 @@
 "use client";
 import { gql, DocumentNode } from "@apollo/client";
 
-export const GET_NEW_MOVIES: DocumentNode = gql`
-query GetNewMovies(
-   $limit
-) {
-    getTopNewMovie(
-        limit: $limit
-    ) {
-        movies {
-            id,
-            name,
-            poster_url,
-            content,
-            imdb,
-            thumb_url,
-            tmdb,
-            view,
-            slug
-        }     
+export const GET_NEW_MOVIES = gql`
+  query GetTopNewMovies($limit: Int!) {
+    getTopNewMovie(limit: $limit) {
+      movies {
+        id
+        name
+        origin_name
+        poster_url
+        content
+        imdb
+        thumb_url
+        tmdb
+        view
+        slug
+        episode_current
+        episode_total
+      }
     }
-}
-`
+  }
+`;

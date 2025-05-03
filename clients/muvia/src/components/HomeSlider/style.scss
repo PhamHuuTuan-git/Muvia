@@ -1,7 +1,7 @@
 .slider--container {
     width: 100%;
-    height: calc(100vh - var(--header-height));
-
+    // height: calc(100vh - var(--header-height));
+    height: 100vh;
     position: relative;
 }
 
@@ -185,7 +185,7 @@
     top: 10%;
     left: 40px;
     z-index: 1;
-    max-width: 40%;
+    max-width: 400px;
 }
 
 .movie--context--main {
@@ -197,8 +197,8 @@
 
 .movie--context-sub {
     color: #fff;
-    font-weight: 400;
-    font-size: 1.2rem;
+    font-weight: 200;
+    font-size: 0.7rem;
 }
 
 .movie--context {

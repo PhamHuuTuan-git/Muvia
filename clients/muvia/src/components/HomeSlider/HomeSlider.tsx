@@ -64,17 +64,8 @@ const content = [
     },
 ]
 import { gql, DocumentNode } from "@apollo/client";
-import { useMutation } from "@apollo/client";
 
-export const REFRESH_TOKEN: DocumentNode = gql`
-mutation RefreshToken {
-    refreshToken {
-        accessToken
-    }
-}
-`
-
-export const TEST:  DocumentNode = gql`
+export const TEST: DocumentNode = gql`
 mutation Test(
     $id: String!
 ) {
@@ -83,25 +74,25 @@ mutation Test(
     )
 }
 `
+type Movie = {
+    id: string,
+    poster_url: string,
+    name: string,
+    content: string,
+    // imdb: string,
+    view: number,
+    [key: string]: any;
+}
 
 const itemsPerPage = 4
-function HomeSlider() {
+function HomeSlider({ movies }: {movies: Movie}) {
     const [slideSelected, setSlideSelected] = useState(0);
     const totalPagesRef = useRef(Math.ceil(content.length / itemsPerPage));
     const [pageSelected, setPageSelected] = useState(0);
     const slidersContainer = useRef<HTMLDivElement>(null);
-    const [RefreshTokenrMutation, { loading, error, data }] = useMutation(TEST);
+   
     const handleWatchNow = async () => {
-        try {
-            const response = await RefreshTokenrMutation({
-                variables: {
-                    id: "680b5b4e4ca6c36f70e8b284"
-                }
-            });
-            console.log("data: ", response)
-        }catch(err: any) {
-            console.log(err.message)
-        }
+        
     }
 
     const changeSpecifiedPage = (index: number) => {
@@ -158,15 +149,15 @@ function HomeSlider() {
             {/* background */}
             <div style={{ overflow: "hidden", width: "100%", height: "100%", position: "absolute" }}>
                 {
-                    content.map((ele, index) => {
+                    movies.map((ele: any, index: number) => {
                         return (
                             <div key={index} className={`image ${index === slideSelected ? "active" : null}`}>
                                 <img style={{ width: "100%", height: "100%", objectFit: "cover" }}
-                                    src={ele.url} />
+                                    src={ele.poster_url} />
                                 <div className='context--container'>
                                     <p className='movie--context--main'>TNN MOVIE</p>
-                                    <p className='movie--context mt-[20px]'>{ele.content}</p>
-                                    <p className='movie--context-sub mt-[10px]'>Bộ phim kể về gia cảnh 1 chú mèo nhỏ bị nhốt trong chuồng, sau đó được 1 người đàn ông tốt bụng giúp đỡ, sau đó họ trở thành bạn tốt</p>
+                                    <p className='movie--context mt-[20px]'>{ele.name}</p>
+                                    <p className='movie--context-sub mt-[10px]' dangerouslySetInnerHTML={{ __html: ele.content }}/>
                                     <div className='mt-[10px] flex gap-[32px]'>
                                         <div className='flex gap-[8px]'>
                                             <img src='/imdb-logo.png' className='w-[40px]' />
@@ -174,7 +165,7 @@ function HomeSlider() {
                                         </div>
                                         <div className='flex gap-[8px]'>
                                             <EyeSolidIcon className='text-white size-6' />
-                                            <p className='text-white'>7.2</p>
+                                            <p className='text-white'>{ele.view}</p>
                                         </div>
                                     </div>
                                     <div className='mt-[40px]'>
@@ -193,11 +184,11 @@ function HomeSlider() {
             <div className='sub-slider--container'>
                 <div ref={slidersContainer} className='sliders--container'>
                     {
-                        content.map((ele, index) => {
+                        movies.map((ele: any, index: number) => {
                             return (
                                 <div onClick={() => changeCurrentSlide(index)} className='slider--item ' key={index}>
                                     <div className={`image--container ${slideSelected === index && "active"}`}>
-                                        <img className={`slider-image--item ${slideSelected !== index && "can"}`} src={`${ele.url}`} />
+                                        <img className={`slider-image--item ${slideSelected !== index && "can"}`} src={`${ele.poster_url}`} />
                                     </div>
 
                                 </div>

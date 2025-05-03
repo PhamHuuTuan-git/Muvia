@@ -1,5 +1,5 @@
 import { ObjectType, Field, Directive} from "@nestjs/graphql";
-import { Movie } from "../entities/movie.entity";
+import { Movie, MovieDetail } from "../entities/movie.entity";
 
 @ObjectType()
 @Directive('@shareable') 
@@ -19,4 +19,14 @@ export class MoviesResposne {
 
     @Field(() => ErrorType, {nullable: true})
     error?: ErrorType
+}
+
+@ObjectType()
+export class MovieResponse {
+    @Field(() => MovieDetail)
+    movie: MovieDetail | any;
+    
+    @Field(() => ErrorType, {nullable: true})
+    error?: ErrorType
+
 }

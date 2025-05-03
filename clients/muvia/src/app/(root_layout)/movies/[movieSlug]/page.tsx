@@ -7,7 +7,7 @@ type Props = {
 async function MovieSlug({ params }: Props) {
   const movieSlug = (await params).movieSlug;
   return (
-    <DetailMovie slug={movieSlug} id ="123"/>
+    <DetailMovie slug={movieSlug} />
   )
 }
 

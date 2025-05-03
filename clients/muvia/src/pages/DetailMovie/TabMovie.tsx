@@ -3,7 +3,7 @@ import "./style.scss";
 import { Tabs, Tab, Card, CardBody } from "@heroui/react";
 import { useRouter } from "next/navigation"
 import { usePathname } from "next/navigation";
-function TabMovie() {
+function TabMovie({ movie }: { movie: any }) {
     const pathname = usePathname();
     const router = useRouter();
     const redirectWatching = (slug: string) => {
@@ -18,7 +18,7 @@ function TabMovie() {
                             <div className="flex gap-4">
                                 <div
                                     style={{ display: "flex", justifyContent: "center", alignItems: "center", padding: "4px", border: "solid 1px #fed875", borderRadius: "6px" }}>
-                                    <p className="text-[0.6rem]" style={{ color: "#fed875" }}>HD</p>
+                                    <p className="text-[0.6rem]" style={{ color: "#fed875" }}>{movie.quality}</p>
                                 </div>
                                 <div
                                     style={{ display: "flex", justifyContent: "center", alignItems: "center", padding: "4px", border: "solid 1px #fff", borderRadius: "6px" }}>
@@ -47,9 +47,9 @@ function TabMovie() {
                 <Tab key="trailer" title="Trailer">
                     <Card className="movie-tab-body--container">
                         <CardBody >
-                            <div style={{width:"100%", aspectRatio:"16/9"}}>
+                            <div style={{ width: "100%", aspectRatio: "16/9" }}>
                                 <iframe
-                                    
+
                                     width="100%" height="100%"
                                     src="https://www.youtube.com/embed/ykIeWW9f-fQ"
                                     title="YouTube video player"

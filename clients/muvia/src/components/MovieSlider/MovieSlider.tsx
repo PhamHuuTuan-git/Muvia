@@ -4,6 +4,7 @@ type Movie = {
     name: string;
     id: string;
     url: string;
+    view: number
 };
 
 type Props = {
@@ -25,7 +26,7 @@ function MovieSlider({ movies, itemsPerScreen }: Props) {
                                     url={ele.url}
                                     name={ele.name}
                                     imdb='7.6'
-                                    view='12' />
+                                    view={ele.view} />
                             </div>
 
                         )

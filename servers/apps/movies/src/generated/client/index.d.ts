@@ -1018,193 +1018,193 @@ export namespace Prisma {
   }
 
   export type MovieAvgAggregateOutputType = {
-    year: number | null
     view: number | null
+    year: number | null
   }
 
   export type MovieSumAggregateOutputType = {
-    year: number | null
     view: number | null
+    year: number | null
   }
 
   export type MovieMinAggregateOutputType = {
     id: string | null
-    name: string | null
-    slug: string | null
-    origin_name: string | null
-    content: string | null
-    type: string | null
-    status: string | null
-    thumb_url: string | null
-    poster_url: string | null
-    is_copyRight: boolean | null
-    sub_docquyen: boolean | null
     chieurap: boolean | null
-    trailer_url: string | null
-    time: string | null
+    content: string | null
     episode_current: string | null
     episode_total: string | null
-    quality: string | null
+    is_copyright: boolean | null
     lang: string | null
+    name: string | null
     notify: string | null
+    origin_name: string | null
+    poster_url: string | null
+    quality: string | null
     showtimes: string | null
-    year: number | null
+    slug: string | null
+    status: string | null
+    sub_docquyen: boolean | null
+    thumb_url: string | null
+    time: string | null
+    trailer_url: string | null
+    type: string | null
     view: number | null
+    year: number | null
   }
 
   export type MovieMaxAggregateOutputType = {
     id: string | null
-    name: string | null
-    slug: string | null
-    origin_name: string | null
-    content: string | null
-    type: string | null
-    status: string | null
-    thumb_url: string | null
-    poster_url: string | null
-    is_copyRight: boolean | null
-    sub_docquyen: boolean | null
     chieurap: boolean | null
-    trailer_url: string | null
-    time: string | null
+    content: string | null
     episode_current: string | null
     episode_total: string | null
-    quality: string | null
+    is_copyright: boolean | null
     lang: string | null
+    name: string | null
     notify: string | null
+    origin_name: string | null
+    poster_url: string | null
+    quality: string | null
     showtimes: string | null
-    year: number | null
+    slug: string | null
+    status: string | null
+    sub_docquyen: boolean | null
+    thumb_url: string | null
+    time: string | null
+    trailer_url: string | null
+    type: string | null
     view: number | null
+    year: number | null
   }
 
   export type MovieCountAggregateOutputType = {
     id: number
-    tmdb: number
-    imdb: number
-    created: number
-    modified: number
-    name: number
-    slug: number
-    origin_name: number
-    content: number
-    type: number
-    status: number
-    thumb_url: number
-    poster_url: number
-    is_copyRight: number
-    sub_docquyen: number
+    episodes: number
+    actor: number
+    category: number
     chieurap: number
-    trailer_url: number
-    time: number
+    content: number
+    country: number
+    created: number
+    director: number
     episode_current: number
     episode_total: number
-    quality: number
+    imdb: number
+    is_copyright: number
     lang: number
+    modified: number
+    name: number
     notify: number
+    origin_name: number
+    poster_url: number
+    quality: number
     showtimes: number
-    year: number
+    slug: number
+    status: number
+    sub_docquyen: number
+    thumb_url: number
+    time: number
+    tmdb: number
+    trailer_url: number
+    type: number
     view: number
-    actor: number
-    director: number
-    category: number
-    country: number
-    episodes: number
+    year: number
     _all: number
   }
 
 
   export type MovieAvgAggregateInputType = {
-    year?: true
     view?: true
+    year?: true
   }
 
   export type MovieSumAggregateInputType = {
-    year?: true
     view?: true
+    year?: true
   }
 
   export type MovieMinAggregateInputType = {
     id?: true
-    name?: true
-    slug?: true
-    origin_name?: true
-    content?: true
-    type?: true
-    status?: true
-    thumb_url?: true
-    poster_url?: true
-    is_copyRight?: true
-    sub_docquyen?: true
     chieurap?: true
-    trailer_url?: true
-    time?: true
+    content?: true
     episode_current?: true
     episode_total?: true
-    quality?: true
+    is_copyright?: true
     lang?: true
+    name?: true
     notify?: true
+    origin_name?: true
+    poster_url?: true
+    quality?: true
     showtimes?: true
-    year?: true
+    slug?: true
+    status?: true
+    sub_docquyen?: true
+    thumb_url?: true
+    time?: true
+    trailer_url?: true
+    type?: true
     view?: true
+    year?: true
   }
 
   export type MovieMaxAggregateInputType = {
     id?: true
-    name?: true
-    slug?: true
-    origin_name?: true
-    content?: true
-    type?: true
-    status?: true
-    thumb_url?: true
-    poster_url?: true
-    is_copyRight?: true
-    sub_docquyen?: true
     chieurap?: true
-    trailer_url?: true
-    time?: true
+    content?: true
     episode_current?: true
     episode_total?: true
-    quality?: true
+    is_copyright?: true
     lang?: true
+    name?: true
     notify?: true
+    origin_name?: true
+    poster_url?: true
+    quality?: true
     showtimes?: true
-    year?: true
+    slug?: true
+    status?: true
+    sub_docquyen?: true
+    thumb_url?: true
+    time?: true
+    trailer_url?: true
+    type?: true
     view?: true
+    year?: true
   }
 
   export type MovieCountAggregateInputType = {
     id?: true
-    tmdb?: true
-    imdb?: true
-    created?: true
-    modified?: true
-    name?: true
-    slug?: true
-    origin_name?: true
-    content?: true
-    type?: true
-    status?: true
-    thumb_url?: true
-    poster_url?: true
-    is_copyRight?: true
-    sub_docquyen?: true
+    episodes?: true
+    actor?: true
+    category?: true
     chieurap?: true
-    trailer_url?: true
-    time?: true
+    content?: true
+    country?: true
+    created?: true
+    director?: true
     episode_current?: true
     episode_total?: true
-    quality?: true
+    imdb?: true
+    is_copyright?: true
     lang?: true
+    modified?: true
+    name?: true
     notify?: true
+    origin_name?: true
+    poster_url?: true
+    quality?: true
     showtimes?: true
-    year?: true
+    slug?: true
+    status?: true
+    sub_docquyen?: true
+    thumb_url?: true
+    time?: true
+    tmdb?: true
+    trailer_url?: true
+    type?: true
     view?: true
-    actor?: true
-    director?: true
-    category?: true
-    country?: true
-    episodes?: true
+    year?: true
     _all?: true
   }
 
@@ -1296,36 +1296,36 @@ export namespace Prisma {
 
   export type MovieGroupByOutputType = {
     id: string
-    tmdb: JsonValue
-    imdb: JsonValue
-    created: JsonValue
-    modified: JsonValue
-    name: string
-    slug: string
-    origin_name: string
-    content: string
-    type: string
-    status: string
-    thumb_url: string
-    poster_url: string
-    is_copyRight: boolean
-    sub_docquyen: boolean
+    episodes: JsonValue | null
+    actor: string[]
+    category: string[]
     chieurap: boolean
-    trailer_url: string
-    time: string
+    content: string
+    country: string[]
+    created: JsonValue
+    director: string[]
     episode_current: string
     episode_total: string
-    quality: string
+    imdb: JsonValue
+    is_copyright: boolean
     lang: string
+    modified: JsonValue
+    name: string
     notify: string
+    origin_name: string
+    poster_url: string
+    quality: string
     showtimes: string
-    year: number
+    slug: string
+    status: string
+    sub_docquyen: boolean
+    thumb_url: string
+    time: string
+    tmdb: JsonValue
+    trailer_url: string
+    type: string
     view: number
-    actor: string[]
-    director: string[]
-    category: string[]
-    country: string[]
-    episodes: JsonValue | null
+    year: number
     _count: MovieCountAggregateOutputType | null
     _avg: MovieAvgAggregateOutputType | null
     _sum: MovieSumAggregateOutputType | null
@@ -1349,111 +1349,111 @@ export namespace Prisma {
 
   export type MovieSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    tmdb?: boolean
-    imdb?: boolean
-    created?: boolean
-    modified?: boolean
-    name?: boolean
-    slug?: boolean
-    origin_name?: boolean
-    content?: boolean
-    type?: boolean
-    status?: boolean
-    thumb_url?: boolean
-    poster_url?: boolean
-    is_copyRight?: boolean
-    sub_docquyen?: boolean
+    episodes?: boolean
+    actor?: boolean
+    category?: boolean
     chieurap?: boolean
-    trailer_url?: boolean
-    time?: boolean
+    content?: boolean
+    country?: boolean
+    created?: boolean
+    director?: boolean
     episode_current?: boolean
     episode_total?: boolean
-    quality?: boolean
+    imdb?: boolean
+    is_copyright?: boolean
     lang?: boolean
+    modified?: boolean
+    name?: boolean
     notify?: boolean
+    origin_name?: boolean
+    poster_url?: boolean
+    quality?: boolean
     showtimes?: boolean
-    year?: boolean
+    slug?: boolean
+    status?: boolean
+    sub_docquyen?: boolean
+    thumb_url?: boolean
+    time?: boolean
+    tmdb?: boolean
+    trailer_url?: boolean
+    type?: boolean
     view?: boolean
-    actor?: boolean
-    director?: boolean
-    category?: boolean
-    country?: boolean
-    episodes?: boolean
+    year?: boolean
   }, ExtArgs["result"]["movie"]>
 
 
 
   export type MovieSelectScalar = {
     id?: boolean
-    tmdb?: boolean
-    imdb?: boolean
-    created?: boolean
-    modified?: boolean
-    name?: boolean
-    slug?: boolean
-    origin_name?: boolean
-    content?: boolean
-    type?: boolean
-    status?: boolean
-    thumb_url?: boolean
-    poster_url?: boolean
-    is_copyRight?: boolean
-    sub_docquyen?: boolean
+    episodes?: boolean
+    actor?: boolean
+    category?: boolean
     chieurap?: boolean
-    trailer_url?: boolean
-    time?: boolean
+    content?: boolean
+    country?: boolean
+    created?: boolean
+    director?: boolean
     episode_current?: boolean
     episode_total?: boolean
-    quality?: boolean
+    imdb?: boolean
+    is_copyright?: boolean
     lang?: boolean
+    modified?: boolean
+    name?: boolean
     notify?: boolean
+    origin_name?: boolean
+    poster_url?: boolean
+    quality?: boolean
     showtimes?: boolean
-    year?: boolean
+    slug?: boolean
+    status?: boolean
+    sub_docquyen?: boolean
+    thumb_url?: boolean
+    time?: boolean
+    tmdb?: boolean
+    trailer_url?: boolean
+    type?: boolean
     view?: boolean
-    actor?: boolean
-    director?: boolean
-    category?: boolean
-    country?: boolean
-    episodes?: boolean
+    year?: boolean
   }
 
-  export type MovieOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tmdb" | "imdb" | "created" | "modified" | "name" | "slug" | "origin_name" | "content" | "type" | "status" | "thumb_url" | "poster_url" | "is_copyRight" | "sub_docquyen" | "chieurap" | "trailer_url" | "time" | "episode_current" | "episode_total" | "quality" | "lang" | "notify" | "showtimes" | "year" | "view" | "actor" | "director" | "category" | "country" | "episodes", ExtArgs["result"]["movie"]>
+  export type MovieOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "episodes" | "actor" | "category" | "chieurap" | "content" | "country" | "created" | "director" | "episode_current" | "episode_total" | "imdb" | "is_copyright" | "lang" | "modified" | "name" | "notify" | "origin_name" | "poster_url" | "quality" | "showtimes" | "slug" | "status" | "sub_docquyen" | "thumb_url" | "time" | "tmdb" | "trailer_url" | "type" | "view" | "year", ExtArgs["result"]["movie"]>
 
   export type $MoviePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Movie"
     objects: {}
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      tmdb: Prisma.JsonValue
-      imdb: Prisma.JsonValue
-      created: Prisma.JsonValue
-      modified: Prisma.JsonValue
-      name: string
-      slug: string
-      origin_name: string
-      content: string
-      type: string
-      status: string
-      thumb_url: string
-      poster_url: string
-      is_copyRight: boolean
-      sub_docquyen: boolean
+      episodes: Prisma.JsonValue | null
+      actor: string[]
+      category: string[]
       chieurap: boolean
-      trailer_url: string
-      time: string
+      content: string
+      country: string[]
+      created: Prisma.JsonValue
+      director: string[]
       episode_current: string
       episode_total: string
-      quality: string
+      imdb: Prisma.JsonValue
+      is_copyright: boolean
       lang: string
+      modified: Prisma.JsonValue
+      name: string
       notify: string
+      origin_name: string
+      poster_url: string
+      quality: string
       showtimes: string
-      year: number
+      slug: string
+      status: string
+      sub_docquyen: boolean
+      thumb_url: string
+      time: string
+      tmdb: Prisma.JsonValue
+      trailer_url: string
+      type: string
       view: number
-      actor: string[]
-      director: string[]
-      category: string[]
-      country: string[]
-      episodes: Prisma.JsonValue | null
+      year: number
     }, ExtArgs["result"]["movie"]>
     composites: {}
   }
@@ -1847,36 +1847,36 @@ export namespace Prisma {
    */
   interface MovieFieldRefs {
     readonly id: FieldRef<"Movie", 'String'>
-    readonly tmdb: FieldRef<"Movie", 'Json'>
-    readonly imdb: FieldRef<"Movie", 'Json'>
-    readonly created: FieldRef<"Movie", 'Json'>
-    readonly modified: FieldRef<"Movie", 'Json'>
-    readonly name: FieldRef<"Movie", 'String'>
-    readonly slug: FieldRef<"Movie", 'String'>
-    readonly origin_name: FieldRef<"Movie", 'String'>
-    readonly content: FieldRef<"Movie", 'String'>
-    readonly type: FieldRef<"Movie", 'String'>
-    readonly status: FieldRef<"Movie", 'String'>
-    readonly thumb_url: FieldRef<"Movie", 'String'>
-    readonly poster_url: FieldRef<"Movie", 'String'>
-    readonly is_copyRight: FieldRef<"Movie", 'Boolean'>
-    readonly sub_docquyen: FieldRef<"Movie", 'Boolean'>
+    readonly episodes: FieldRef<"Movie", 'Json'>
+    readonly actor: FieldRef<"Movie", 'String[]'>
+    readonly category: FieldRef<"Movie", 'String[]'>
     readonly chieurap: FieldRef<"Movie", 'Boolean'>
-    readonly trailer_url: FieldRef<"Movie", 'String'>
-    readonly time: FieldRef<"Movie", 'String'>
+    readonly content: FieldRef<"Movie", 'String'>
+    readonly country: FieldRef<"Movie", 'String[]'>
+    readonly created: FieldRef<"Movie", 'Json'>
+    readonly director: FieldRef<"Movie", 'String[]'>
     readonly episode_current: FieldRef<"Movie", 'String'>
     readonly episode_total: FieldRef<"Movie", 'String'>
-    readonly quality: FieldRef<"Movie", 'String'>
+    readonly imdb: FieldRef<"Movie", 'Json'>
+    readonly is_copyright: FieldRef<"Movie", 'Boolean'>
     readonly lang: FieldRef<"Movie", 'String'>
+    readonly modified: FieldRef<"Movie", 'Json'>
+    readonly name: FieldRef<"Movie", 'String'>
     readonly notify: FieldRef<"Movie", 'String'>
+    readonly origin_name: FieldRef<"Movie", 'String'>
+    readonly poster_url: FieldRef<"Movie", 'String'>
+    readonly quality: FieldRef<"Movie", 'String'>
     readonly showtimes: FieldRef<"Movie", 'String'>
-    readonly year: FieldRef<"Movie", 'Int'>
+    readonly slug: FieldRef<"Movie", 'String'>
+    readonly status: FieldRef<"Movie", 'String'>
+    readonly sub_docquyen: FieldRef<"Movie", 'Boolean'>
+    readonly thumb_url: FieldRef<"Movie", 'String'>
+    readonly time: FieldRef<"Movie", 'String'>
+    readonly tmdb: FieldRef<"Movie", 'Json'>
+    readonly trailer_url: FieldRef<"Movie", 'String'>
+    readonly type: FieldRef<"Movie", 'String'>
     readonly view: FieldRef<"Movie", 'Int'>
-    readonly actor: FieldRef<"Movie", 'String[]'>
-    readonly director: FieldRef<"Movie", 'String[]'>
-    readonly category: FieldRef<"Movie", 'String[]'>
-    readonly country: FieldRef<"Movie", 'String[]'>
-    readonly episodes: FieldRef<"Movie", 'Json'>
+    readonly year: FieldRef<"Movie", 'Int'>
   }
     
 
@@ -4051,36 +4051,36 @@ export namespace Prisma {
 
   export const MovieScalarFieldEnum: {
     id: 'id',
-    tmdb: 'tmdb',
-    imdb: 'imdb',
-    created: 'created',
-    modified: 'modified',
-    name: 'name',
-    slug: 'slug',
-    origin_name: 'origin_name',
-    content: 'content',
-    type: 'type',
-    status: 'status',
-    thumb_url: 'thumb_url',
-    poster_url: 'poster_url',
-    is_copyRight: 'is_copyRight',
-    sub_docquyen: 'sub_docquyen',
+    episodes: 'episodes',
+    actor: 'actor',
+    category: 'category',
     chieurap: 'chieurap',
-    trailer_url: 'trailer_url',
-    time: 'time',
+    content: 'content',
+    country: 'country',
+    created: 'created',
+    director: 'director',
     episode_current: 'episode_current',
     episode_total: 'episode_total',
-    quality: 'quality',
+    imdb: 'imdb',
+    is_copyright: 'is_copyright',
     lang: 'lang',
+    modified: 'modified',
+    name: 'name',
     notify: 'notify',
+    origin_name: 'origin_name',
+    poster_url: 'poster_url',
+    quality: 'quality',
     showtimes: 'showtimes',
-    year: 'year',
+    slug: 'slug',
+    status: 'status',
+    sub_docquyen: 'sub_docquyen',
+    thumb_url: 'thumb_url',
+    time: 'time',
+    tmdb: 'tmdb',
+    trailer_url: 'trailer_url',
+    type: 'type',
     view: 'view',
-    actor: 'actor',
-    director: 'director',
-    category: 'category',
-    country: 'country',
-    episodes: 'episodes'
+    year: 'year'
   };
 
   export type MovieScalarFieldEnum = (typeof MovieScalarFieldEnum)[keyof typeof MovieScalarFieldEnum]
@@ -4189,70 +4189,70 @@ export namespace Prisma {
     OR?: MovieWhereInput[]
     NOT?: MovieWhereInput | MovieWhereInput[]
     id?: StringFilter<"Movie"> | string
-    tmdb?: JsonFilter<"Movie">
-    imdb?: JsonFilter<"Movie">
-    created?: JsonFilter<"Movie">
-    modified?: JsonFilter<"Movie">
-    name?: StringFilter<"Movie"> | string
-    slug?: StringFilter<"Movie"> | string
-    origin_name?: StringFilter<"Movie"> | string
-    content?: StringFilter<"Movie"> | string
-    type?: StringFilter<"Movie"> | string
-    status?: StringFilter<"Movie"> | string
-    thumb_url?: StringFilter<"Movie"> | string
-    poster_url?: StringFilter<"Movie"> | string
-    is_copyRight?: BoolFilter<"Movie"> | boolean
-    sub_docquyen?: BoolFilter<"Movie"> | boolean
+    episodes?: JsonNullableFilter<"Movie">
+    actor?: StringNullableListFilter<"Movie">
+    category?: StringNullableListFilter<"Movie">
     chieurap?: BoolFilter<"Movie"> | boolean
-    trailer_url?: StringFilter<"Movie"> | string
-    time?: StringFilter<"Movie"> | string
+    content?: StringFilter<"Movie"> | string
+    country?: StringNullableListFilter<"Movie">
+    created?: JsonFilter<"Movie">
+    director?: StringNullableListFilter<"Movie">
     episode_current?: StringFilter<"Movie"> | string
     episode_total?: StringFilter<"Movie"> | string
-    quality?: StringFilter<"Movie"> | string
+    imdb?: JsonFilter<"Movie">
+    is_copyright?: BoolFilter<"Movie"> | boolean
     lang?: StringFilter<"Movie"> | string
+    modified?: JsonFilter<"Movie">
+    name?: StringFilter<"Movie"> | string
     notify?: StringFilter<"Movie"> | string
+    origin_name?: StringFilter<"Movie"> | string
+    poster_url?: StringFilter<"Movie"> | string
+    quality?: StringFilter<"Movie"> | string
     showtimes?: StringFilter<"Movie"> | string
-    year?: IntFilter<"Movie"> | number
+    slug?: StringFilter<"Movie"> | string
+    status?: StringFilter<"Movie"> | string
+    sub_docquyen?: BoolFilter<"Movie"> | boolean
+    thumb_url?: StringFilter<"Movie"> | string
+    time?: StringFilter<"Movie"> | string
+    tmdb?: JsonFilter<"Movie">
+    trailer_url?: StringFilter<"Movie"> | string
+    type?: StringFilter<"Movie"> | string
     view?: IntFilter<"Movie"> | number
-    actor?: StringNullableListFilter<"Movie">
-    director?: StringNullableListFilter<"Movie">
-    category?: StringNullableListFilter<"Movie">
-    country?: StringNullableListFilter<"Movie">
-    episodes?: JsonNullableFilter<"Movie">
+    year?: IntFilter<"Movie"> | number
   }
 
   export type MovieOrderByWithRelationInput = {
     id?: SortOrder
-    tmdb?: SortOrder
-    imdb?: SortOrder
-    created?: SortOrder
-    modified?: SortOrder
-    name?: SortOrder
-    slug?: SortOrder
-    origin_name?: SortOrder
-    content?: SortOrder
-    type?: SortOrder
-    status?: SortOrder
-    thumb_url?: SortOrder
-    poster_url?: SortOrder
-    is_copyRight?: SortOrder
-    sub_docquyen?: SortOrder
+    episodes?: SortOrder
+    actor?: SortOrder
+    category?: SortOrder
     chieurap?: SortOrder
-    trailer_url?: SortOrder
-    time?: SortOrder
+    content?: SortOrder
+    country?: SortOrder
+    created?: SortOrder
+    director?: SortOrder
     episode_current?: SortOrder
     episode_total?: SortOrder
-    quality?: SortOrder
+    imdb?: SortOrder
+    is_copyright?: SortOrder
     lang?: SortOrder
+    modified?: SortOrder
+    name?: SortOrder
     notify?: SortOrder
+    origin_name?: SortOrder
+    poster_url?: SortOrder
+    quality?: SortOrder
     showtimes?: SortOrder
-    year?: SortOrder
+    slug?: SortOrder
+    status?: SortOrder
+    sub_docquyen?: SortOrder
+    thumb_url?: SortOrder
+    time?: SortOrder
+    tmdb?: SortOrder
+    trailer_url?: SortOrder
+    type?: SortOrder
     view?: SortOrder
-    actor?: SortOrder
-    director?: SortOrder
-    category?: SortOrder
-    country?: SortOrder
-    episodes?: SortOrder
+    year?: SortOrder
   }
 
   export type MovieWhereUniqueInput = Prisma.AtLeast<{
@@ -4260,70 +4260,70 @@ export namespace Prisma {
     AND?: MovieWhereInput | MovieWhereInput[]
     OR?: MovieWhereInput[]
     NOT?: MovieWhereInput | MovieWhereInput[]
-    tmdb?: JsonFilter<"Movie">
-    imdb?: JsonFilter<"Movie">
-    created?: JsonFilter<"Movie">
-    modified?: JsonFilter<"Movie">
-    name?: StringFilter<"Movie"> | string
-    slug?: StringFilter<"Movie"> | string
-    origin_name?: StringFilter<"Movie"> | string
-    content?: StringFilter<"Movie"> | string
-    type?: StringFilter<"Movie"> | string
-    status?: StringFilter<"Movie"> | string
-    thumb_url?: StringFilter<"Movie"> | string
-    poster_url?: StringFilter<"Movie"> | string
-    is_copyRight?: BoolFilter<"Movie"> | boolean
-    sub_docquyen?: BoolFilter<"Movie"> | boolean
+    episodes?: JsonNullableFilter<"Movie">
+    actor?: StringNullableListFilter<"Movie">
+    category?: StringNullableListFilter<"Movie">
     chieurap?: BoolFilter<"Movie"> | boolean
-    trailer_url?: StringFilter<"Movie"> | string
-    time?: StringFilter<"Movie"> | string
+    content?: StringFilter<"Movie"> | string
+    country?: StringNullableListFilter<"Movie">
+    created?: JsonFilter<"Movie">
+    director?: StringNullableListFilter<"Movie">
     episode_current?: StringFilter<"Movie"> | string
     episode_total?: StringFilter<"Movie"> | string
-    quality?: StringFilter<"Movie"> | string
+    imdb?: JsonFilter<"Movie">
+    is_copyright?: BoolFilter<"Movie"> | boolean
     lang?: StringFilter<"Movie"> | string
+    modified?: JsonFilter<"Movie">
+    name?: StringFilter<"Movie"> | string
     notify?: StringFilter<"Movie"> | string
+    origin_name?: StringFilter<"Movie"> | string
+    poster_url?: StringFilter<"Movie"> | string
+    quality?: StringFilter<"Movie"> | string
     showtimes?: StringFilter<"Movie"> | string
-    year?: IntFilter<"Movie"> | number
+    slug?: StringFilter<"Movie"> | string
+    status?: StringFilter<"Movie"> | string
+    sub_docquyen?: BoolFilter<"Movie"> | boolean
+    thumb_url?: StringFilter<"Movie"> | string
+    time?: StringFilter<"Movie"> | string
+    tmdb?: JsonFilter<"Movie">
+    trailer_url?: StringFilter<"Movie"> | string
+    type?: StringFilter<"Movie"> | string
     view?: IntFilter<"Movie"> | number
-    actor?: StringNullableListFilter<"Movie">
-    director?: StringNullableListFilter<"Movie">
-    category?: StringNullableListFilter<"Movie">
-    country?: StringNullableListFilter<"Movie">
-    episodes?: JsonNullableFilter<"Movie">
+    year?: IntFilter<"Movie"> | number
   }, "id">
 
   export type MovieOrderByWithAggregationInput = {
     id?: SortOrder
-    tmdb?: SortOrder
-    imdb?: SortOrder
-    created?: SortOrder
-    modified?: SortOrder
-    name?: SortOrder
-    slug?: SortOrder
-    origin_name?: SortOrder
-    content?: SortOrder
-    type?: SortOrder
-    status?: SortOrder
-    thumb_url?: SortOrder
-    poster_url?: SortOrder
-    is_copyRight?: SortOrder
-    sub_docquyen?: SortOrder
+    episodes?: SortOrder
+    actor?: SortOrder
+    category?: SortOrder
     chieurap?: SortOrder
-    trailer_url?: SortOrder
-    time?: SortOrder
+    content?: SortOrder
+    country?: SortOrder
+    created?: SortOrder
+    director?: SortOrder
     episode_current?: SortOrder
     episode_total?: SortOrder
-    quality?: SortOrder
+    imdb?: SortOrder
+    is_copyright?: SortOrder
     lang?: SortOrder
+    modified?: SortOrder
+    name?: SortOrder
     notify?: SortOrder
+    origin_name?: SortOrder
+    poster_url?: SortOrder
+    quality?: SortOrder
     showtimes?: SortOrder
-    year?: SortOrder
+    slug?: SortOrder
+    status?: SortOrder
+    sub_docquyen?: SortOrder
+    thumb_url?: SortOrder
+    time?: SortOrder
+    tmdb?: SortOrder
+    trailer_url?: SortOrder
+    type?: SortOrder
     view?: SortOrder
-    actor?: SortOrder
-    director?: SortOrder
-    category?: SortOrder
-    country?: SortOrder
-    episodes?: SortOrder
+    year?: SortOrder
     _count?: MovieCountOrderByAggregateInput
     _avg?: MovieAvgOrderByAggregateInput
     _max?: MovieMaxOrderByAggregateInput
@@ -4336,36 +4336,36 @@ export namespace Prisma {
     OR?: MovieScalarWhereWithAggregatesInput[]
     NOT?: MovieScalarWhereWithAggregatesInput | MovieScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Movie"> | string
-    tmdb?: JsonWithAggregatesFilter<"Movie">
-    imdb?: JsonWithAggregatesFilter<"Movie">
-    created?: JsonWithAggregatesFilter<"Movie">
-    modified?: JsonWithAggregatesFilter<"Movie">
-    name?: StringWithAggregatesFilter<"Movie"> | string
-    slug?: StringWithAggregatesFilter<"Movie"> | string
-    origin_name?: StringWithAggregatesFilter<"Movie"> | string
-    content?: StringWithAggregatesFilter<"Movie"> | string
-    type?: StringWithAggregatesFilter<"Movie"> | string
-    status?: StringWithAggregatesFilter<"Movie"> | string
-    thumb_url?: StringWithAggregatesFilter<"Movie"> | string
-    poster_url?: StringWithAggregatesFilter<"Movie"> | string
-    is_copyRight?: BoolWithAggregatesFilter<"Movie"> | boolean
-    sub_docquyen?: BoolWithAggregatesFilter<"Movie"> | boolean
+    episodes?: JsonNullableWithAggregatesFilter<"Movie">
+    actor?: StringNullableListFilter<"Movie">
+    category?: StringNullableListFilter<"Movie">
     chieurap?: BoolWithAggregatesFilter<"Movie"> | boolean
-    trailer_url?: StringWithAggregatesFilter<"Movie"> | string
-    time?: StringWithAggregatesFilter<"Movie"> | string
+    content?: StringWithAggregatesFilter<"Movie"> | string
+    country?: StringNullableListFilter<"Movie">
+    created?: JsonWithAggregatesFilter<"Movie">
+    director?: StringNullableListFilter<"Movie">
     episode_current?: StringWithAggregatesFilter<"Movie"> | string
     episode_total?: StringWithAggregatesFilter<"Movie"> | string
-    quality?: StringWithAggregatesFilter<"Movie"> | string
+    imdb?: JsonWithAggregatesFilter<"Movie">
+    is_copyright?: BoolWithAggregatesFilter<"Movie"> | boolean
     lang?: StringWithAggregatesFilter<"Movie"> | string
+    modified?: JsonWithAggregatesFilter<"Movie">
+    name?: StringWithAggregatesFilter<"Movie"> | string
     notify?: StringWithAggregatesFilter<"Movie"> | string
+    origin_name?: StringWithAggregatesFilter<"Movie"> | string
+    poster_url?: StringWithAggregatesFilter<"Movie"> | string
+    quality?: StringWithAggregatesFilter<"Movie"> | string
     showtimes?: StringWithAggregatesFilter<"Movie"> | string
-    year?: IntWithAggregatesFilter<"Movie"> | number
+    slug?: StringWithAggregatesFilter<"Movie"> | string
+    status?: StringWithAggregatesFilter<"Movie"> | string
+    sub_docquyen?: BoolWithAggregatesFilter<"Movie"> | boolean
+    thumb_url?: StringWithAggregatesFilter<"Movie"> | string
+    time?: StringWithAggregatesFilter<"Movie"> | string
+    tmdb?: JsonWithAggregatesFilter<"Movie">
+    trailer_url?: StringWithAggregatesFilter<"Movie"> | string
+    type?: StringWithAggregatesFilter<"Movie"> | string
     view?: IntWithAggregatesFilter<"Movie"> | number
-    actor?: StringNullableListFilter<"Movie">
-    director?: StringNullableListFilter<"Movie">
-    category?: StringNullableListFilter<"Movie">
-    country?: StringNullableListFilter<"Movie">
-    episodes?: JsonNullableWithAggregatesFilter<"Movie">
+    year?: IntWithAggregatesFilter<"Movie"> | number
   }
 
   export type CategoryWhereInput = {
@@ -4454,236 +4454,236 @@ export namespace Prisma {
 
   export type MovieCreateInput = {
     id?: string
-    tmdb: InputJsonValue
-    imdb: InputJsonValue
-    created: InputJsonValue
-    modified: InputJsonValue
-    name: string
-    slug: string
-    origin_name: string
-    content: string
-    type: string
-    status: string
-    thumb_url: string
-    poster_url: string
-    is_copyRight: boolean
-    sub_docquyen: boolean
+    episodes?: InputJsonValue | null
+    actor?: MovieCreateactorInput | string[]
+    category?: MovieCreatecategoryInput | string[]
     chieurap: boolean
-    trailer_url: string
-    time: string
+    content: string
+    country?: MovieCreatecountryInput | string[]
+    created: InputJsonValue
+    director?: MovieCreatedirectorInput | string[]
     episode_current: string
     episode_total: string
-    quality: string
+    imdb: InputJsonValue
+    is_copyright: boolean
     lang: string
+    modified: InputJsonValue
+    name: string
     notify: string
+    origin_name: string
+    poster_url: string
+    quality: string
     showtimes: string
-    year: number
+    slug: string
+    status: string
+    sub_docquyen: boolean
+    thumb_url: string
+    time: string
+    tmdb: InputJsonValue
+    trailer_url: string
+    type: string
     view: number
-    actor?: MovieCreateactorInput | string[]
-    director?: MovieCreatedirectorInput | string[]
-    category?: MovieCreatecategoryInput | string[]
-    country?: MovieCreatecountryInput | string[]
-    episodes?: InputJsonValue | null
+    year: number
   }
 
   export type MovieUncheckedCreateInput = {
     id?: string
-    tmdb: InputJsonValue
-    imdb: InputJsonValue
-    created: InputJsonValue
-    modified: InputJsonValue
-    name: string
-    slug: string
-    origin_name: string
-    content: string
-    type: string
-    status: string
-    thumb_url: string
-    poster_url: string
-    is_copyRight: boolean
-    sub_docquyen: boolean
+    episodes?: InputJsonValue | null
+    actor?: MovieCreateactorInput | string[]
+    category?: MovieCreatecategoryInput | string[]
     chieurap: boolean
-    trailer_url: string
-    time: string
+    content: string
+    country?: MovieCreatecountryInput | string[]
+    created: InputJsonValue
+    director?: MovieCreatedirectorInput | string[]
     episode_current: string
     episode_total: string
-    quality: string
+    imdb: InputJsonValue
+    is_copyright: boolean
     lang: string
+    modified: InputJsonValue
+    name: string
     notify: string
+    origin_name: string
+    poster_url: string
+    quality: string
     showtimes: string
-    year: number
+    slug: string
+    status: string
+    sub_docquyen: boolean
+    thumb_url: string
+    time: string
+    tmdb: InputJsonValue
+    trailer_url: string
+    type: string
     view: number
-    actor?: MovieCreateactorInput | string[]
-    director?: MovieCreatedirectorInput | string[]
-    category?: MovieCreatecategoryInput | string[]
-    country?: MovieCreatecountryInput | string[]
-    episodes?: InputJsonValue | null
+    year: number
   }
 
   export type MovieUpdateInput = {
-    tmdb?: InputJsonValue | InputJsonValue
-    imdb?: InputJsonValue | InputJsonValue
-    created?: InputJsonValue | InputJsonValue
-    modified?: InputJsonValue | InputJsonValue
-    name?: StringFieldUpdateOperationsInput | string
-    slug?: StringFieldUpdateOperationsInput | string
-    origin_name?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
-    thumb_url?: StringFieldUpdateOperationsInput | string
-    poster_url?: StringFieldUpdateOperationsInput | string
-    is_copyRight?: BoolFieldUpdateOperationsInput | boolean
-    sub_docquyen?: BoolFieldUpdateOperationsInput | boolean
+    episodes?: InputJsonValue | InputJsonValue | null
+    actor?: MovieUpdateactorInput | string[]
+    category?: MovieUpdatecategoryInput | string[]
     chieurap?: BoolFieldUpdateOperationsInput | boolean
-    trailer_url?: StringFieldUpdateOperationsInput | string
-    time?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    country?: MovieUpdatecountryInput | string[]
+    created?: InputJsonValue | InputJsonValue
+    director?: MovieUpdatedirectorInput | string[]
     episode_current?: StringFieldUpdateOperationsInput | string
     episode_total?: StringFieldUpdateOperationsInput | string
-    quality?: StringFieldUpdateOperationsInput | string
+    imdb?: InputJsonValue | InputJsonValue
+    is_copyright?: BoolFieldUpdateOperationsInput | boolean
     lang?: StringFieldUpdateOperationsInput | string
+    modified?: InputJsonValue | InputJsonValue
+    name?: StringFieldUpdateOperationsInput | string
     notify?: StringFieldUpdateOperationsInput | string
+    origin_name?: StringFieldUpdateOperationsInput | string
+    poster_url?: StringFieldUpdateOperationsInput | string
+    quality?: StringFieldUpdateOperationsInput | string
     showtimes?: StringFieldUpdateOperationsInput | string
-    year?: IntFieldUpdateOperationsInput | number
+    slug?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    sub_docquyen?: BoolFieldUpdateOperationsInput | boolean
+    thumb_url?: StringFieldUpdateOperationsInput | string
+    time?: StringFieldUpdateOperationsInput | string
+    tmdb?: InputJsonValue | InputJsonValue
+    trailer_url?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
     view?: IntFieldUpdateOperationsInput | number
-    actor?: MovieUpdateactorInput | string[]
-    director?: MovieUpdatedirectorInput | string[]
-    category?: MovieUpdatecategoryInput | string[]
-    country?: MovieUpdatecountryInput | string[]
-    episodes?: InputJsonValue | InputJsonValue | null
+    year?: IntFieldUpdateOperationsInput | number
   }
 
   export type MovieUncheckedUpdateInput = {
-    tmdb?: InputJsonValue | InputJsonValue
-    imdb?: InputJsonValue | InputJsonValue
-    created?: InputJsonValue | InputJsonValue
-    modified?: InputJsonValue | InputJsonValue
-    name?: StringFieldUpdateOperationsInput | string
-    slug?: StringFieldUpdateOperationsInput | string
-    origin_name?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
-    thumb_url?: StringFieldUpdateOperationsInput | string
-    poster_url?: StringFieldUpdateOperationsInput | string
-    is_copyRight?: BoolFieldUpdateOperationsInput | boolean
-    sub_docquyen?: BoolFieldUpdateOperationsInput | boolean
+    episodes?: InputJsonValue | InputJsonValue | null
+    actor?: MovieUpdateactorInput | string[]
+    category?: MovieUpdatecategoryInput | string[]
     chieurap?: BoolFieldUpdateOperationsInput | boolean
-    trailer_url?: StringFieldUpdateOperationsInput | string
-    time?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    country?: MovieUpdatecountryInput | string[]
+    created?: InputJsonValue | InputJsonValue
+    director?: MovieUpdatedirectorInput | string[]
     episode_current?: StringFieldUpdateOperationsInput | string
     episode_total?: StringFieldUpdateOperationsInput | string
-    quality?: StringFieldUpdateOperationsInput | string
+    imdb?: InputJsonValue | InputJsonValue
+    is_copyright?: BoolFieldUpdateOperationsInput | boolean
     lang?: StringFieldUpdateOperationsInput | string
+    modified?: InputJsonValue | InputJsonValue
+    name?: StringFieldUpdateOperationsInput | string
     notify?: StringFieldUpdateOperationsInput | string
+    origin_name?: StringFieldUpdateOperationsInput | string
+    poster_url?: StringFieldUpdateOperationsInput | string
+    quality?: StringFieldUpdateOperationsInput | string
     showtimes?: StringFieldUpdateOperationsInput | string
-    year?: IntFieldUpdateOperationsInput | number
+    slug?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    sub_docquyen?: BoolFieldUpdateOperationsInput | boolean
+    thumb_url?: StringFieldUpdateOperationsInput | string
+    time?: StringFieldUpdateOperationsInput | string
+    tmdb?: InputJsonValue | InputJsonValue
+    trailer_url?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
     view?: IntFieldUpdateOperationsInput | number
-    actor?: MovieUpdateactorInput | string[]
-    director?: MovieUpdatedirectorInput | string[]
-    category?: MovieUpdatecategoryInput | string[]
-    country?: MovieUpdatecountryInput | string[]
-    episodes?: InputJsonValue | InputJsonValue | null
+    year?: IntFieldUpdateOperationsInput | number
   }
 
   export type MovieCreateManyInput = {
     id?: string
-    tmdb: InputJsonValue
-    imdb: InputJsonValue
-    created: InputJsonValue
-    modified: InputJsonValue
-    name: string
-    slug: string
-    origin_name: string
-    content: string
-    type: string
-    status: string
-    thumb_url: string
-    poster_url: string
-    is_copyRight: boolean
-    sub_docquyen: boolean
+    episodes?: InputJsonValue | null
+    actor?: MovieCreateactorInput | string[]
+    category?: MovieCreatecategoryInput | string[]
     chieurap: boolean
-    trailer_url: string
-    time: string
+    content: string
+    country?: MovieCreatecountryInput | string[]
+    created: InputJsonValue
+    director?: MovieCreatedirectorInput | string[]
     episode_current: string
     episode_total: string
-    quality: string
+    imdb: InputJsonValue
+    is_copyright: boolean
     lang: string
+    modified: InputJsonValue
+    name: string
     notify: string
+    origin_name: string
+    poster_url: string
+    quality: string
     showtimes: string
-    year: number
+    slug: string
+    status: string
+    sub_docquyen: boolean
+    thumb_url: string
+    time: string
+    tmdb: InputJsonValue
+    trailer_url: string
+    type: string
     view: number
-    actor?: MovieCreateactorInput | string[]
-    director?: MovieCreatedirectorInput | string[]
-    category?: MovieCreatecategoryInput | string[]
-    country?: MovieCreatecountryInput | string[]
-    episodes?: InputJsonValue | null
+    year: number
   }
 
   export type MovieUpdateManyMutationInput = {
-    tmdb?: InputJsonValue | InputJsonValue
-    imdb?: InputJsonValue | InputJsonValue
-    created?: InputJsonValue | InputJsonValue
-    modified?: InputJsonValue | InputJsonValue
-    name?: StringFieldUpdateOperationsInput | string
-    slug?: StringFieldUpdateOperationsInput | string
-    origin_name?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
-    thumb_url?: StringFieldUpdateOperationsInput | string
-    poster_url?: StringFieldUpdateOperationsInput | string
-    is_copyRight?: BoolFieldUpdateOperationsInput | boolean
-    sub_docquyen?: BoolFieldUpdateOperationsInput | boolean
+    episodes?: InputJsonValue | InputJsonValue | null
+    actor?: MovieUpdateactorInput | string[]
+    category?: MovieUpdatecategoryInput | string[]
     chieurap?: BoolFieldUpdateOperationsInput | boolean
-    trailer_url?: StringFieldUpdateOperationsInput | string
-    time?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    country?: MovieUpdatecountryInput | string[]
+    created?: InputJsonValue | InputJsonValue
+    director?: MovieUpdatedirectorInput | string[]
     episode_current?: StringFieldUpdateOperationsInput | string
     episode_total?: StringFieldUpdateOperationsInput | string
-    quality?: StringFieldUpdateOperationsInput | string
+    imdb?: InputJsonValue | InputJsonValue
+    is_copyright?: BoolFieldUpdateOperationsInput | boolean
     lang?: StringFieldUpdateOperationsInput | string
+    modified?: InputJsonValue | InputJsonValue
+    name?: StringFieldUpdateOperationsInput | string
     notify?: StringFieldUpdateOperationsInput | string
+    origin_name?: StringFieldUpdateOperationsInput | string
+    poster_url?: StringFieldUpdateOperationsInput | string
+    quality?: StringFieldUpdateOperationsInput | string
     showtimes?: StringFieldUpdateOperationsInput | string
-    year?: IntFieldUpdateOperationsInput | number
+    slug?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    sub_docquyen?: BoolFieldUpdateOperationsInput | boolean
+    thumb_url?: StringFieldUpdateOperationsInput | string
+    time?: StringFieldUpdateOperationsInput | string
+    tmdb?: InputJsonValue | InputJsonValue
+    trailer_url?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
     view?: IntFieldUpdateOperationsInput | number
-    actor?: MovieUpdateactorInput | string[]
-    director?: MovieUpdatedirectorInput | string[]
-    category?: MovieUpdatecategoryInput | string[]
-    country?: MovieUpdatecountryInput | string[]
-    episodes?: InputJsonValue | InputJsonValue | null
+    year?: IntFieldUpdateOperationsInput | number
   }
 
   export type MovieUncheckedUpdateManyInput = {
-    tmdb?: InputJsonValue | InputJsonValue
-    imdb?: InputJsonValue | InputJsonValue
-    created?: InputJsonValue | InputJsonValue
-    modified?: InputJsonValue | InputJsonValue
-    name?: StringFieldUpdateOperationsInput | string
-    slug?: StringFieldUpdateOperationsInput | string
-    origin_name?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
-    thumb_url?: StringFieldUpdateOperationsInput | string
-    poster_url?: StringFieldUpdateOperationsInput | string
-    is_copyRight?: BoolFieldUpdateOperationsInput | boolean
-    sub_docquyen?: BoolFieldUpdateOperationsInput | boolean
+    episodes?: InputJsonValue | InputJsonValue | null
+    actor?: MovieUpdateactorInput | string[]
+    category?: MovieUpdatecategoryInput | string[]
     chieurap?: BoolFieldUpdateOperationsInput | boolean
-    trailer_url?: StringFieldUpdateOperationsInput | string
-    time?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    country?: MovieUpdatecountryInput | string[]
+    created?: InputJsonValue | InputJsonValue
+    director?: MovieUpdatedirectorInput | string[]
     episode_current?: StringFieldUpdateOperationsInput | string
     episode_total?: StringFieldUpdateOperationsInput | string
-    quality?: StringFieldUpdateOperationsInput | string
+    imdb?: InputJsonValue | InputJsonValue
+    is_copyright?: BoolFieldUpdateOperationsInput | boolean
     lang?: StringFieldUpdateOperationsInput | string
+    modified?: InputJsonValue | InputJsonValue
+    name?: StringFieldUpdateOperationsInput | string
     notify?: StringFieldUpdateOperationsInput | string
+    origin_name?: StringFieldUpdateOperationsInput | string
+    poster_url?: StringFieldUpdateOperationsInput | string
+    quality?: StringFieldUpdateOperationsInput | string
     showtimes?: StringFieldUpdateOperationsInput | string
-    year?: IntFieldUpdateOperationsInput | number
+    slug?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    sub_docquyen?: BoolFieldUpdateOperationsInput | boolean
+    thumb_url?: StringFieldUpdateOperationsInput | string
+    time?: StringFieldUpdateOperationsInput | string
+    tmdb?: InputJsonValue | InputJsonValue
+    trailer_url?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
     view?: IntFieldUpdateOperationsInput | number
-    actor?: MovieUpdateactorInput | string[]
-    director?: MovieUpdatedirectorInput | string[]
-    category?: MovieUpdatecategoryInput | string[]
-    country?: MovieUpdatecountryInput | string[]
-    episodes?: InputJsonValue | InputJsonValue | null
+    year?: IntFieldUpdateOperationsInput | number
   }
 
   export type CategoryCreateInput = {
@@ -4776,41 +4776,6 @@ export namespace Prisma {
     mode?: QueryMode
     not?: NestedStringFilter<$PrismaModel> | string
   }
-  export type JsonFilter<$PrismaModel = never> =
-    | PatchUndefined<
-        Either<Required<JsonFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonFilterBase<$PrismaModel>>, 'path'>>,
-        Required<JsonFilterBase<$PrismaModel>>
-      >
-    | OptionalFlat<Omit<Required<JsonFilterBase<$PrismaModel>>, 'path'>>
-
-  export type JsonFilterBase<$PrismaModel = never> = {
-    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-  }
-
-  export type BoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
-  }
-
-  export type IntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
-  }
-
-  export type StringNullableListFilter<$PrismaModel = never> = {
-    equals?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    has?: string | StringFieldRefInput<$PrismaModel> | null
-    hasEvery?: string[] | ListStringFieldRefInput<$PrismaModel>
-    hasSome?: string[] | ListStringFieldRefInput<$PrismaModel>
-    isEmpty?: boolean
-  }
   export type JsonNullableFilter<$PrismaModel = never> =
     | PatchUndefined<
         Either<Required<JsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>,
@@ -4824,98 +4789,133 @@ export namespace Prisma {
     isSet?: boolean
   }
 
+  export type StringNullableListFilter<$PrismaModel = never> = {
+    equals?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    has?: string | StringFieldRefInput<$PrismaModel> | null
+    hasEvery?: string[] | ListStringFieldRefInput<$PrismaModel>
+    hasSome?: string[] | ListStringFieldRefInput<$PrismaModel>
+    isEmpty?: boolean
+  }
+
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+  export type JsonFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+  }
+
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
   export type MovieCountOrderByAggregateInput = {
     id?: SortOrder
-    tmdb?: SortOrder
-    imdb?: SortOrder
-    created?: SortOrder
-    modified?: SortOrder
-    name?: SortOrder
-    slug?: SortOrder
-    origin_name?: SortOrder
-    content?: SortOrder
-    type?: SortOrder
-    status?: SortOrder
-    thumb_url?: SortOrder
-    poster_url?: SortOrder
-    is_copyRight?: SortOrder
-    sub_docquyen?: SortOrder
+    episodes?: SortOrder
+    actor?: SortOrder
+    category?: SortOrder
     chieurap?: SortOrder
-    trailer_url?: SortOrder
-    time?: SortOrder
+    content?: SortOrder
+    country?: SortOrder
+    created?: SortOrder
+    director?: SortOrder
     episode_current?: SortOrder
     episode_total?: SortOrder
-    quality?: SortOrder
+    imdb?: SortOrder
+    is_copyright?: SortOrder
     lang?: SortOrder
+    modified?: SortOrder
+    name?: SortOrder
     notify?: SortOrder
+    origin_name?: SortOrder
+    poster_url?: SortOrder
+    quality?: SortOrder
     showtimes?: SortOrder
-    year?: SortOrder
+    slug?: SortOrder
+    status?: SortOrder
+    sub_docquyen?: SortOrder
+    thumb_url?: SortOrder
+    time?: SortOrder
+    tmdb?: SortOrder
+    trailer_url?: SortOrder
+    type?: SortOrder
     view?: SortOrder
-    actor?: SortOrder
-    director?: SortOrder
-    category?: SortOrder
-    country?: SortOrder
-    episodes?: SortOrder
+    year?: SortOrder
   }
 
   export type MovieAvgOrderByAggregateInput = {
-    year?: SortOrder
     view?: SortOrder
+    year?: SortOrder
   }
 
   export type MovieMaxOrderByAggregateInput = {
     id?: SortOrder
-    name?: SortOrder
-    slug?: SortOrder
-    origin_name?: SortOrder
-    content?: SortOrder
-    type?: SortOrder
-    status?: SortOrder
-    thumb_url?: SortOrder
-    poster_url?: SortOrder
-    is_copyRight?: SortOrder
-    sub_docquyen?: SortOrder
     chieurap?: SortOrder
-    trailer_url?: SortOrder
-    time?: SortOrder
+    content?: SortOrder
     episode_current?: SortOrder
     episode_total?: SortOrder
-    quality?: SortOrder
+    is_copyright?: SortOrder
     lang?: SortOrder
+    name?: SortOrder
     notify?: SortOrder
+    origin_name?: SortOrder
+    poster_url?: SortOrder
+    quality?: SortOrder
     showtimes?: SortOrder
-    year?: SortOrder
+    slug?: SortOrder
+    status?: SortOrder
+    sub_docquyen?: SortOrder
+    thumb_url?: SortOrder
+    time?: SortOrder
+    trailer_url?: SortOrder
+    type?: SortOrder
     view?: SortOrder
+    year?: SortOrder
   }
 
   export type MovieMinOrderByAggregateInput = {
     id?: SortOrder
-    name?: SortOrder
-    slug?: SortOrder
-    origin_name?: SortOrder
-    content?: SortOrder
-    type?: SortOrder
-    status?: SortOrder
-    thumb_url?: SortOrder
-    poster_url?: SortOrder
-    is_copyRight?: SortOrder
-    sub_docquyen?: SortOrder
     chieurap?: SortOrder
-    trailer_url?: SortOrder
-    time?: SortOrder
+    content?: SortOrder
     episode_current?: SortOrder
     episode_total?: SortOrder
-    quality?: SortOrder
+    is_copyright?: SortOrder
     lang?: SortOrder
+    name?: SortOrder
     notify?: SortOrder
+    origin_name?: SortOrder
+    poster_url?: SortOrder
+    quality?: SortOrder
     showtimes?: SortOrder
-    year?: SortOrder
+    slug?: SortOrder
+    status?: SortOrder
+    sub_docquyen?: SortOrder
+    thumb_url?: SortOrder
+    time?: SortOrder
+    trailer_url?: SortOrder
+    type?: SortOrder
     view?: SortOrder
+    year?: SortOrder
   }
 
   export type MovieSumOrderByAggregateInput = {
-    year?: SortOrder
     view?: SortOrder
+    year?: SortOrder
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -4935,6 +4935,29 @@ export namespace Prisma {
     _min?: NestedStringFilter<$PrismaModel>
     _max?: NestedStringFilter<$PrismaModel>
   }
+  export type JsonNullableWithAggregatesFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonNullableWithAggregatesFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedJsonNullableFilter<$PrismaModel>
+    _max?: NestedJsonNullableFilter<$PrismaModel>
+    isSet?: boolean
+  }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
   export type JsonWithAggregatesFilter<$PrismaModel = never> =
     | PatchUndefined<
         Either<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
@@ -4948,14 +4971,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedJsonFilter<$PrismaModel>
     _max?: NestedJsonFilter<$PrismaModel>
-  }
-
-  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type IntWithAggregatesFilter<$PrismaModel = never> = {
@@ -4972,21 +4987,6 @@ export namespace Prisma {
     _sum?: NestedIntFilter<$PrismaModel>
     _min?: NestedIntFilter<$PrismaModel>
     _max?: NestedIntFilter<$PrismaModel>
-  }
-  export type JsonNullableWithAggregatesFilter<$PrismaModel = never> =
-    | PatchUndefined<
-        Either<Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
-        Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>
-      >
-    | OptionalFlat<Omit<Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
-
-  export type JsonNullableWithAggregatesFilterBase<$PrismaModel = never> = {
-    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedJsonNullableFilter<$PrismaModel>
-    _max?: NestedJsonNullableFilter<$PrismaModel>
-    isSet?: boolean
   }
 
   export type CategoryCountOrderByAggregateInput = {
@@ -5029,10 +5029,6 @@ export namespace Prisma {
     set: string[]
   }
 
-  export type MovieCreatedirectorInput = {
-    set: string[]
-  }
-
   export type MovieCreatecategoryInput = {
     set: string[]
   }
@@ -5041,28 +5037,11 @@ export namespace Prisma {
     set: string[]
   }
 
-  export type StringFieldUpdateOperationsInput = {
-    set?: string
-  }
-
-  export type BoolFieldUpdateOperationsInput = {
-    set?: boolean
-  }
-
-  export type IntFieldUpdateOperationsInput = {
-    set?: number
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
+  export type MovieCreatedirectorInput = {
+    set: string[]
   }
 
   export type MovieUpdateactorInput = {
-    set?: string[]
-    push?: string | string[]
-  }
-
-  export type MovieUpdatedirectorInput = {
     set?: string[]
     push?: string | string[]
   }
@@ -5072,9 +5051,30 @@ export namespace Prisma {
     push?: string | string[]
   }
 
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
+  }
+
+  export type StringFieldUpdateOperationsInput = {
+    set?: string
+  }
+
   export type MovieUpdatecountryInput = {
     set?: string[]
     push?: string | string[]
+  }
+
+  export type MovieUpdatedirectorInput = {
+    set?: string[]
+    push?: string | string[]
+  }
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -5123,6 +5123,38 @@ export namespace Prisma {
     _min?: NestedStringFilter<$PrismaModel>
     _max?: NestedStringFilter<$PrismaModel>
   }
+
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+    isSet?: boolean
+  }
+  export type NestedJsonNullableFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<NestedJsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonNullableFilterBase<$PrismaModel>>, 'path'>>,
+        Required<NestedJsonNullableFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<NestedJsonNullableFilterBase<$PrismaModel>>, 'path'>>
+
+  export type NestedJsonNullableFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    isSet?: boolean
+  }
+
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
   export type NestedJsonFilter<$PrismaModel = never> =
     | PatchUndefined<
         Either<Required<NestedJsonFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>,
@@ -5133,14 +5165,6 @@ export namespace Prisma {
   export type NestedJsonFilterBase<$PrismaModel = never> = {
     equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
     not?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-  }
-
-  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
@@ -5168,30 +5192,6 @@ export namespace Prisma {
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
     not?: NestedFloatFilter<$PrismaModel> | number
-  }
-
-  export type NestedIntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
-    isSet?: boolean
-  }
-  export type NestedJsonNullableFilter<$PrismaModel = never> =
-    | PatchUndefined<
-        Either<Required<NestedJsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonNullableFilterBase<$PrismaModel>>, 'path'>>,
-        Required<NestedJsonNullableFilterBase<$PrismaModel>>
-      >
-    | OptionalFlat<Omit<Required<NestedJsonNullableFilterBase<$PrismaModel>>, 'path'>>
-
-  export type NestedJsonNullableFilterBase<$PrismaModel = never> = {
-    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    isSet?: boolean
   }
 
 

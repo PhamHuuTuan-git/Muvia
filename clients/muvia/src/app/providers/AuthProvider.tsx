@@ -17,7 +17,7 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
                 try {
                     setIsLoading(true);
                     const response = await checkTokenMutation();
-                    console.log("response: ", response);
+                    // console.log("response: ", response);
                     dispatch(authenSlice.actions.setUser(response.data.checkToken.user));
                     setIsLoading(false);
                 } catch (err: any) {

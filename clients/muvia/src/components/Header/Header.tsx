@@ -1,7 +1,7 @@
 
 'use client'
 import './style.scss';
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { Avatar, Dropdown, DropdownTrigger, DropdownMenu, DropdownItem } from "@heroui/react";
 // import SwitchDarkLight from '../SwtichDarkLight/SwitchDarkLight';
 import { Input, Divider } from "@heroui/react";
@@ -14,6 +14,7 @@ import Link from 'next/link';
 import routing from '@/utils/routing';
 
 const Header = () => {
+  const headerRef = useRef<HTMLDivElement>(null);
   const sidebarMode = useSelector(sidebarSelectorMode);
   const userAuthen = useSelector(authenSelectorUser);
   const dispatch = useDispatch();
@@ -21,8 +22,24 @@ const Header = () => {
     dispatch(sidebarSlide.actions.changeMode(!sidebarMode));
   }
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!headerRef.current) return;
+      if (window.scrollY > 0) {
+        headerRef.current.classList.add('active');
+        headerRef.current.classList.remove('non-active');
+      } else {
+        headerRef.current.classList.remove('active');
+        headerRef.current.classList.add('non-active');
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
-    <div className={`header-container ${sidebarMode === true ? "on" : "off"}`}>
+    <div ref={headerRef} className={`header-container non-active ${sidebarMode === true ? "on" : "off"}`}>
       {/* Left part */}
       <div>
         <div className='back-button--container' onClick={handleTongleSidebar}>
@@ -68,9 +85,9 @@ const Header = () => {
           {
             userAuthen === null ? (
               <div style={{ whiteSpace: 'nowrap' }} className="flex h-5 items-center space-x-4 text-small ">
-                <Link  href={`${routing.login}`} style={{ color: "#fff", fontSize:"0.7rem" }}>Đăng nhập</Link>
+                <Link href={`${routing.login}`} style={{ color: "#fff", fontSize: "0.7rem" }}>Đăng nhập</Link>
                 <Divider orientation="vertical" className='bg-white' />
-                <Link href={`${routing.register}`} style={{ color: "#fff", fontSize:"0.7rem" }}>Đăng ký</Link>
+                <Link href={`${routing.register}`} style={{ color: "#fff", fontSize: "0.7rem" }}>Đăng ký</Link>
               </div>
             ) : (
               <Dropdown>
