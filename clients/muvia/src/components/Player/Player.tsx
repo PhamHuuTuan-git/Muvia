@@ -83,7 +83,7 @@ function ControlSlider({ video, parentTime }: { video: HTMLVideoElement, parentT
 }
 
 function Player({ src }: { src: string }) {
-
+  console.log("src: ", src)
   const [isPlaying, setIsPlaying] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isMute, setIsMute] = useState(false);

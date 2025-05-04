@@ -2,6 +2,7 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 import { PrismaMovieService } from '../prisma/prisma.service';
 import { ConfigService } from '@nestjs/config';
 import { Movie } from './entities/movie.entity';
+import { QueryPagingDto } from './dto/movie.dto';
 interface RunCommandResult {
   cursor?: {
     firstBatch?: Movie[];
@@ -43,7 +44,7 @@ export class MoviesService {
   // get specified movie
   async getSpecifiedMovie(slug: string) {
     try {
-      
+
       const movie = await this.prisma.movie.findFirst({
         where: {
           slug
@@ -51,7 +52,7 @@ export class MoviesService {
       })
 
       // console.log("got movie: ", movie);
-      if(!movie) {
+      if (!movie) {
         throw new BadRequestException("Cannot find this movie")
       }
 
@@ -72,11 +73,29 @@ export class MoviesService {
         category: categories,
         country: countries
       };
-      
+
       return fullMovie;
-    }catch(err) {
+    } catch (err) {
       //console.log("er: ", err)
       throw new BadRequestException(err);
+    }
+  }
+
+  // lay danh sach phim
+  async getMovies(paging: QueryPagingDto) {
+    try {
+      const { limit, page } = paging;
+      // type:
+      // "series",
+      //   "single",
+      //   "tvshows",
+      //   "hoathinh"
+      const movies = await this.prisma.movie.findMany({
+
+      })
+
+    } catch (err) {
+      throw new BadRequestException(err.message);
     }
   }
 

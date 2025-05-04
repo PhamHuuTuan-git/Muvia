@@ -1,6 +1,7 @@
 import { Args, Mutation, Resolver, Query, Int } from "@nestjs/graphql";
 import { MoviesService } from "./movies.service";
 import { MoviesResposne, MovieResponse } from "./types/movie.type";
+import { MoviesQueryDto, QueryPagingDto } from "./dto/movie.dto";
 @Resolver()
 export class MovieResolver {
     constructor(
@@ -24,6 +25,18 @@ export class MovieResolver {
     ): Promise<MovieResponse> {
         const result = await this.movieService.getSpecifiedMovie(slug);
         return { movie: result }
+    }
+
+    @Query(() => MoviesResposne)
+    async getMovies(
+        @Args("paging") paging: QueryPagingDto,
+        @Args("query") query: MoviesQueryDto
+    ) {
+        const { limit = 10, page = 1 } = paging;
+        
+        const result = await this.movieService.getMovies(
+            { limit, page }
+        )
     }
 
 

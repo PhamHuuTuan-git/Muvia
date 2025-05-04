@@ -1,5 +1,5 @@
 "use client";
-import { Button } from "@heroui/react";
+import { addToast, Button } from "@heroui/react";
 import "./style.scss";
 import PlayIcon from "@/components/icons/PlayIcon";
 import LoveFillIcon from "@/components/icons/LoveFillIcon";
@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation"
 import { usePathname } from "next/navigation";
 import { GET_SPECIFIED_MOVIE } from "@/graphql/actions/movieActions/get_specified_movie.action";
 import { useQuery } from "@apollo/client";
+import Loading from "@/components/Loading/Loading";
 
 type Props = {
     slug: string
@@ -23,12 +24,26 @@ function DetailMovie({ slug }: Props) {
         variables: { slug: slug },
         fetchPolicy: "no-cache",
     })
-    console.log("movie selected: ", data);
+
     const redirectWatching = () => {
-        router.push(`${pathname}/watch/tap-1`)
+        const slug = data.getSpecifiedMovie.movie.episodes[0].server_data[0].slug;
+        if (!slug || slug === "") {
+            addToast({
+                title: "Cảnh báo",
+                description: "Phim chưa sẵn sàng",
+                color: "danger"
+            })
+        } else {
+            router.push(`${pathname}/watch/tap-${slug}`)
+        }
+
     }
     if (data === undefined || data === null) {
-        return <p style={{ color: "white", fontWeight: "bold" }}>Loading...</p>
+        return (
+            <div style={{marginTop:"80px"}}>
+                <Loading />
+            </div>
+        )
     }
     return (
         <div className="detail--container">
@@ -67,18 +82,17 @@ function DetailMovie({ slug }: Props) {
 
                     {/* the loai */}
                     <div className="mt-[20px] flex gap-2">
-                        <div className="type-detail-movie--container">
-                            <p className="text-white text-[0.6rem]">Chính kịch</p>
-                        </div>
-                        <div className="type-detail-movie--container">
-                            <p className="text-white text-[0.6rem]">Hài hước</p>
-                        </div>
-                        <div className="type-detail-movie--container">
-                            <p className="text-white text-[0.6rem]">Kinh dị</p>
-                        </div>
-                        <div className="type-detail-movie--container">
-                            <p className="text-white text-[0.6rem]">Âm nhạc</p>
-                        </div>
+                        {
+                            data.getSpecifiedMovie.movie.category&&
+                            data.getSpecifiedMovie.movie.category.length > 0 && 
+                            data.getSpecifiedMovie.movie.category.map((ele: any, index: number) => {
+                                return (
+                                    <div key={index}className="type-detail-movie--container">
+                                        <p className="text-white text-[0.6rem]">{ele.name}</p>
+                                    </div>
+                                )
+                            })
+                        }
                     </div>
 
                     {/* Gioi thieu */}
@@ -93,6 +107,8 @@ function DetailMovie({ slug }: Props) {
                     <div className="mt-[20px] w-full">
                         <h3 className="text-white font-bold mr-1">Quốc gia:
                             {
+                                data.getSpecifiedMovie.movie.country &&
+                                data.getSpecifiedMovie.movie.country.length > 0 &&
                                 data.getSpecifiedMovie.movie.country.map((ele: any, index: number) => {
                                     return <span key={index} className="detail-movie-another--content"> {ele.name}</span>
                                 })
@@ -104,6 +120,7 @@ function DetailMovie({ slug }: Props) {
                         <h3 className="text-white font-bold">Đạo diễn:
                             {
                                 data.getSpecifiedMovie.movie.director &&
+                                data.getSpecifiedMovie.movie.director.length > 0 &&
                                 data.getSpecifiedMovie.movie.director.map((ele: any, index: number) => {
                                     return <span key={index} className="detail-movie-another--content"> {ele}</span>
                                 })
@@ -115,6 +132,7 @@ function DetailMovie({ slug }: Props) {
                         <h3 className="text-white font-bold">Diễn viên:
                             {
                                 data.getSpecifiedMovie.movie.actor &&
+                                data.getSpecifiedMovie.movie.actor.length > 0 &&
                                 data.getSpecifiedMovie.movie.actor.map((ele: any, index: number) => {
                                     return <span key={index} className="detail-movie-another--content"> {ele}</span>
                                 })
