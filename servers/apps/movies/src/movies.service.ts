@@ -21,7 +21,7 @@ export class MoviesService {
     try {
       const start = new Date(new Date().getFullYear() - 1, 0, 1).toISOString();
       const end = new Date().toISOString();
-      console.log("start end: ", start, end)
+      // console.log("start end: ", start, end)
       const result = await this.prisma.$runCommandRaw({ // cho phép bạn chạy các lệnh MongoDB gốc, không bị giới hạn bởi Prisma schema.
         aggregate: 'movies', //"Movie" là tên collection (được ánh xạ từ Prisma model Movie).
         pipeline: [
@@ -37,6 +37,30 @@ export class MoviesService {
         id: movie._id?.toString() ?? null, // dùng toString nếu là ObjectId
       }));
       return movies;
+    } catch (err) {
+      throw new BadRequestException(err.message)
+    }
+  }
+
+  // get recommend movies
+  async getRecommendedMovies(limit: number) {
+    if (!limit) limit = 20;
+    try {
+      const currentYear = new Date().getFullYear();
+      const lastYear = currentYear - 1;
+      const result = await this.prisma.movie.findMany({
+        where: {
+          year: {
+            gte: lastYear,
+            lte: currentYear,
+          }
+        },
+        orderBy: {
+          view: 'desc',
+        },
+        take: limit,
+      });
+      return result;
     } catch (err) {
       throw new BadRequestException(err.message)
     }
@@ -114,7 +138,7 @@ export class MoviesService {
             slug: country
           }
         })
-        if(!result) throw new BadRequestException("Country is not existed");
+        if (!result) throw new BadRequestException("Country is not existed");
         where.country = {
           has: result.id // kiểm tra mảng có chứa đúng id
         };

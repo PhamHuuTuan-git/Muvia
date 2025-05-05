@@ -1,5 +1,5 @@
 "use client";
-import { gql, DocumentNode } from "@apollo/client";
+import { gql } from "@apollo/client";
 
 export const GET_NEW_MOVIES = gql`
   query GetTopNewMovies($limit: Int!) {

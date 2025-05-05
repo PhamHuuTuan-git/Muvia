@@ -27,6 +27,7 @@ export class MovieResolver {
         return { movie: result }
     }
 
+    // get movies with query
     @Query(() => MoviesResponseWithMetaData)
     async getMovies(
         @Args("paging", { nullable: true }) paging?: QueryPagingDto,
@@ -42,6 +43,17 @@ export class MovieResolver {
             { sort }
         )
         return result
+    }
+
+    // get default recommend movies
+    @Query(() => MoviesResposne)
+    async getRecommendedMovies(
+        @Args("limit", { type: () => Int }) limit: number,
+
+    ): Promise<MoviesResposne> {
+        if(!limit) limit = 20;
+        const result = await this.movieService.getRecommendedMovies(limit)
+        return { movies: result };
     }
 
 

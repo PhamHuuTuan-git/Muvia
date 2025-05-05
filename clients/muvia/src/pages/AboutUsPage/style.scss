@@ -1,0 +1,24 @@
+.wall-paper-about-us {
+    position: relative;
+}
+
+.wall-paper-about-us::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(to right, rgba(0,0,0,1), rgba(0,0,0,0));
+}
+
+.text-about-us {
+    position: absolute;
+    top: 35%;
+    left: 0px;
+    z-index: 1;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}

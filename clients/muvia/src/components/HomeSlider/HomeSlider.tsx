@@ -64,6 +64,8 @@ const content = [
     },
 ]
 import { gql, DocumentNode } from "@apollo/client";
+import { useRouter } from 'next/navigation';
+import routing from '@/utils/routing';
 
 export const TEST: DocumentNode = gql`
 mutation Test(
@@ -81,6 +83,7 @@ type Movie = {
     content: string,
     // imdb: string,
     view: number,
+    slug: string,
     [key: string]: any;
 }
 
@@ -90,9 +93,10 @@ function HomeSlider({ movies }: {movies: Movie}) {
     const totalPagesRef = useRef(Math.ceil(content.length / itemsPerPage));
     const [pageSelected, setPageSelected] = useState(0);
     const slidersContainer = useRef<HTMLDivElement>(null);
+    const router = useRouter()
    
-    const handleWatchNow = async () => {
-        
+    const handleWatchNow = async (movie_slug: string) => {
+        router.push(`${routing.movies}/${movie_slug}`)
     }
 
     const changeSpecifiedPage = (index: number) => {
@@ -170,7 +174,7 @@ function HomeSlider({ movies }: {movies: Movie}) {
                                     </div>
                                     <div className='mt-[40px]'>
                                         <Button
-                                            onClick={handleWatchNow}
+                                            onClick={() => handleWatchNow(ele.slug)}
                                             className='w-[150px] h-[50px] bg-[#a94242] text-white font-bold p-[10px]'>Watch now</Button>
                                     </div>
                                 </div>

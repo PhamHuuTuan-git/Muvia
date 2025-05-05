@@ -35,10 +35,11 @@ type Props = {
     itemsPerRow: number,
     // itemsPerPage: number
     queryParams: QueryParams,
-    meta: MetaData
+    meta: MetaData,
+    isPaging: boolean
 }
 
-function PagingMovies({ queryParams, movies, itemsPerRow,meta }: Props) {
+function PagingMovies({ queryParams, movies, itemsPerRow, meta, isPaging }: Props) {
     const [currentPage, setCurrentPage] = useState(queryParams.page);
     const pathname = usePathname();
     const router = useRouter();
@@ -77,15 +78,18 @@ function PagingMovies({ queryParams, movies, itemsPerRow,meta }: Props) {
             </div>
 
             {/* Paging */}
-            <div style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>
-                <Pagination classNames={{
-                    item: "bg-black text-white ",
-                    cursor: "bg-[#ac1a1a] text-white ",
-                    next: "text-white bg-black",
-                    prev: "bg-black text-white"
-                }}
-                    loop showControls page={currentPage} initialPage={1} total={meta.totalPages} onChange={handlePageChange} />
-            </div>
+            {
+                isPaging && <div style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>
+                    <Pagination classNames={{
+                        item: "bg-black text-white ",
+                        cursor: "bg-[#ac1a1a] text-white ",
+                        next: "text-white bg-black",
+                        prev: "bg-black text-white"
+                    }}
+                        loop showControls page={currentPage} initialPage={1} total={meta.totalPages} onChange={handlePageChange} />
+                </div>
+            }
+
         </div>
     )
 }

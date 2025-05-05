@@ -1,9 +1,10 @@
+import AboutUsPage from '@/pages/AboutUsPage/AboutUsPage'
 import React from 'react'
 
-function AboutUsPage() {
+function AboutUsPageMain() {
   return (
-    <div>AboutUsPage</div>
+    <AboutUsPage />
   )
 }
 
-export default AboutUsPage
+export default AboutUsPageMain

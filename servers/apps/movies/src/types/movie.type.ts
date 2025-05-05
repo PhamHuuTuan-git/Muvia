@@ -15,7 +15,7 @@ export class ErrorType {
 @ObjectType()
 export class MoviesResposne {
     @Field(() => [Movie])
-    movies: Movie[];
+    movies: Movie[] | any;
 
     @Field(() => ErrorType, { nullable: true })
     error?: ErrorType

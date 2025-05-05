@@ -21,7 +21,7 @@ function MoviesPage({ queryParams }: { queryParams: QueryParams }) {
   const resultNewMovies = useQuery(GET_MOVIES_WITH_QUERY, {
     variables: {
       paging: {
-        limit: 20,
+        limit: 30,
         page: queryParams.page
       },
       query: {
@@ -51,7 +51,7 @@ function MoviesPage({ queryParams }: { queryParams: QueryParams }) {
         !resultNewMovies.data ? <Loading /> :
           (
 
-            movies.current && meta.current && <PagingMovies queryParams={queryParams} meta={meta.current}  movies={movies.current} itemsPerRow={5} />
+            movies.current && meta.current && <PagingMovies isPaging queryParams={queryParams} meta={meta.current}  movies={movies.current} itemsPerRow={6} />
 
           )
       }
