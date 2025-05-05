@@ -22,14 +22,18 @@ export class MoviesQueryDto {
     @IsString({ message: "Category must be string" })
     category: string
 
-    @Field(() => String, {nullable: true})
-    @IsString({message: "Country must be string"})
+    @Field(() => String, { nullable: true })
+    @IsString({ message: "Country must be string" })
     country: string
 
-    @Field(() => String, {nullable: true})
-    @IsString({message: "Year must be string"})
+    @Field(() => String, { nullable: true })
+    @IsString({ message: "Year must be string" })
     year: string
 }
 
 @InputType()
-export class 
+export class MovieSortDto {
+    @Field(() => String, { nullable: true })
+    @IsString({ message: "Sorting must be string" })
+    sort: string
+}

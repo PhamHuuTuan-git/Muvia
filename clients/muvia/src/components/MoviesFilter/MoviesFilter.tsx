@@ -1,12 +1,14 @@
 "use client";
 import { useState } from "react";
 import { Button, Select, SelectItem } from "@heroui/react";
+import { useRouter, useSearchParams, usePathname } from "next/navigation";
 
 const types = [
     { key: "tat-ca", label: "Tất cả" },
-    { key: "phim-bo", label: "Phim bộ" },
-    { key: "phim-le", label: "Phim lẻ" },
-    { key: "tv-show", label: "TV Show" },
+    { key: "series", label: "Phim bộ" },
+    { key: "single", label: "Phim lẻ" },
+    { key: "tvshows", label: "TV Show" },
+    { key: "hoathinh", label: "Hoạt hình" }
 ];
 
 const categories = [
@@ -281,12 +283,26 @@ const years = Array.from({ length: 2025 - 1958 + 1 }, (_, i) => {
     const year = (2025 - i).toString();
     return { key: year, label: year };
 });
+
 years.unshift({ key: "tat-ca", label: "Tất cả" },)
-function MoviesFilter() {
-    const [valueType, setValueType] = useState("tat-ca");
-    const [valueCate, setValueCate] = useState("tat-ca");
-    const [valueCountry, setValueCountry] = useState("tat-ca");
-    const [valueYear, setValueYear] = useState("tat-ca");
+type QueryParams = {
+    type: string,
+    category: string,
+    country: string,
+    year: string,
+    sort: string,
+    page: number
+}
+function MoviesFilter({ queryParams }: { queryParams:QueryParams }) {
+    const [valueType, setValueType] = useState(queryParams.type);
+    const [valueCate, setValueCate] = useState(queryParams.category);
+    const [valueCountry, setValueCountry] = useState(queryParams.country);
+    const [valueYear, setValueYear] = useState(queryParams.year);
+
+    const pathname = usePathname();
+    const router = useRouter();
+    const searchParams = useSearchParams();
+
     const handleSelectionChangeType = (e: React.ChangeEvent<HTMLSelectElement>) => {
         setValueType(e.target.value);
     };
@@ -299,6 +315,35 @@ function MoviesFilter() {
     const handleSelectionChangeYear = (e: React.ChangeEvent<HTMLSelectElement>) => {
         setValueYear(e.target.value);
     };
+
+    const handleFilter = () => {
+        const params = new URLSearchParams(searchParams!.toString());
+        if (valueType === "tat-ca") {
+            params.delete("type");
+        } else {
+            params.set("type", valueType);
+        }
+
+        if (valueCate === "tat-ca") {
+            params.delete("category");
+        } else {
+            params.set("category", valueCate);
+        }
+
+        if (valueCountry === "tat-ca") {
+            params.delete("country");
+        } else {
+            params.set("country", valueCountry);
+        }
+
+        if (valueYear === "tat-ca") {
+            params.delete("year");
+        } else {
+            params.set("year", valueYear);
+        }
+
+        router.push(`${pathname}?${params.toString()}`);
+    }
     return (
         <div className="p-[20px]">
             <p className="text-white font-bold text-[1.2rem] w-full">Bộ lọc</p>
@@ -328,7 +373,9 @@ function MoviesFilter() {
                     ))}
                 </Select>
 
-                <Button className="bg-[#a94242] text-white font-bold ">Lọc</Button>
+                <Button
+                    onClick={handleFilter}
+                    className="bg-[#a94242] text-white font-bold ">Lọc</Button>
             </div>
         </div>
     )

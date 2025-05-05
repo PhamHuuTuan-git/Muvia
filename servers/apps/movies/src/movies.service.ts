@@ -2,7 +2,8 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 import { PrismaMovieService } from '../prisma/prisma.service';
 import { ConfigService } from '@nestjs/config';
 import { Movie } from './entities/movie.entity';
-import { QueryPagingDto } from './dto/movie.dto';
+import { MovieSortDto, MoviesQueryDto, QueryPagingDto } from './dto/movie.dto';
+
 interface RunCommandResult {
   cursor?: {
     firstBatch?: Movie[];
@@ -42,6 +43,11 @@ export class MoviesService {
   }
 
   // get specified movie
+  // type:
+  //   "series",
+  //   "single",
+  //   "tvshows",
+  //   "hoathinh"
   async getSpecifiedMovie(slug: string) {
     try {
 
@@ -82,18 +88,68 @@ export class MoviesService {
   }
 
   // lay danh sach phim
-  async getMovies(paging: QueryPagingDto) {
+  async getMovies(paging: QueryPagingDto, query: MoviesQueryDto, sorting: MovieSortDto) {
     try {
-      const { limit, page } = paging;
-      // type:
-      // "series",
-      //   "single",
-      //   "tvshows",
-      //   "hoathinh"
-      const movies = await this.prisma.movie.findMany({
+      const { limit = 10, page = 1 } = paging;
+      const { type = "tat-ca", category = "tat-ca", country = "tat-ca", year = "tat-ca" } = query;
+      const { sort = "mac-dinh" } = sorting;
 
+      // pre-handle filter
+      const where: any = {};
+      if (type !== "tat-ca") where.type = type;
+      if (category !== "tat-ca") {
+        const result = await this.prisma.category.findFirst({
+          where: {
+            slug: category
+          }
+        })
+        if (!result) throw new BadRequestException("Category is not existed");
+        where.category = {
+          has: result.id // kiểm tra mảng có chứa đúng id
+        };
+      }
+      if (country !== "tat-ca") {
+        const result = await this.prisma.country.findFirst({
+          where: {
+            slug: country
+          }
+        })
+        if(!result) throw new BadRequestException("Country is not existed");
+        where.country = {
+          has: result.id // kiểm tra mảng có chứa đúng id
+        };
+      }
+      if (year !== "tat-ca") where.year = parseInt(year);
+
+      // pre-handle sort
+      let orderBy: any = {};
+      switch (sort) {
+        case "nam":
+          orderBy = [{ year: "desc" }, { id: 'asc' }];
+          break;
+        case "luot-xem":
+          orderBy = [{ view: "desc" }, { id: 'asc' }];
+          break;
+        default:
+          orderBy = [{ id: 'asc' }]; // mặc định không sắp xếp
+      }
+
+      const movies = await this.prisma.movie.findMany({
+        where,
+        orderBy,
+        skip: (page - 1) * limit,
+        take: limit,
       })
 
+      const total = await this.prisma.movie.count({ where });
+      return {
+        movies: movies,
+        meta: {
+          total: total,
+          page: page,
+          totalPages: Math.ceil(total / limit),
+        }
+      }
     } catch (err) {
       throw new BadRequestException(err.message);
     }
