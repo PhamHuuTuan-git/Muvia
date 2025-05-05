@@ -2,7 +2,14 @@
 
 **Muvia** là một nền tảng xem phim trực tuyến, cung cấp một thư viện phong phú các bộ phim, từ các bộ phim mới nhất, phim bom tấn, cho đến các thể loại đa dạng như hành động, khoa học viễn tưởng, tình cảm, và nhiều thể loại khác. Với giao diện thân thiện và dễ sử dụng, Muvia giúp người dùng dễ dàng tìm kiếm và thưởng thức những bộ phim yêu thích.
 
-![MovieStream Logo](clients/muvia/public/aboutuswallpaper.jpeg)
+## Trang chủ
+![Muvia Logo](clients/muvia/public/readme_01.png)
+## Lọc phim
+![Muvia Logo](clients/muvia/public/readme_02.png)
+## Chi tiết
+![Muvia Logo](clients/muvia/public/readme_03.png)
+## Xem phim
+![Muvia Logo](clients/muvia/public/readme_04.png)
 
 ## Tính Năng Chính
 
