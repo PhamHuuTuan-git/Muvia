@@ -2,6 +2,7 @@
 
 **Muvia** là một nền tảng xem phim trực tuyến, cung cấp một thư viện phong phú các bộ phim, từ các bộ phim mới nhất, phim bom tấn, cho đến các thể loại đa dạng như hành động, khoa học viễn tưởng, tình cảm, và nhiều thể loại khác. Với giao diện thân thiện và dễ sử dụng, Muvia giúp người dùng dễ dàng tìm kiếm và thưởng thức những bộ phim yêu thích.
 
+![MovieStream Logo](clients/muvia/public/aboutuswallpaper.jpeg)
 
 ## Tính Năng Chính
 
@@ -23,8 +24,8 @@
 
 - Email: phamhuutuan24112003@gmail.com
 - GitHub: [github.com/username](https://github.com/username)
-- Website: [yourmovieplatform.com](http://yourmovieplatform.com)
+
 
 ## Giấy Phép
 
-MovieStream là dự án mã nguồn mở được phát triển dưới Giấy phép MIT. Xem chi tiết tại [LICENSE](LICENSE).
+Muvia chỉ phục vụ mục đích học tập và nghiên cứu, không thực hiện thương mại với các nội dung phim bên trong trang web. 
