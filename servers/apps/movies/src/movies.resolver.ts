@@ -1,12 +1,18 @@
 import { Args, Mutation, Resolver, Query, Int } from "@nestjs/graphql";
 import { MoviesService } from "./movies.service";
-import { MoviesResposne, MovieResponse, MoviesResponseWithMetaData } from "./types/movie.type";
-import { MovieSortDto, MoviesQueryDto, QueryPagingDto } from "./dto/movie.dto";
+import { MoviesResposne, MovieResponse, MoviesResponseWithMetaData,CommentResponse } from "./types/movie.type";
+import { MovieSortDto, MoviesQueryDto, QueryPagingDto, CommentDto } from "./dto/movie.dto";
+import { GraphQLClient, gql } from 'graphql-request';
+import { UseGuards } from "@nestjs/common";
+import { AuthenGuardMovie } from "./guards/authen.guards";
+
 @Resolver()
 export class MovieResolver {
+  
     constructor(
         private readonly movieService: MoviesService
     ) { }
+    
 
     // get top new movies
     @Query(() => MoviesResposne)
@@ -56,6 +62,25 @@ export class MovieResolver {
         return { movies: result };
     }
 
+    // test with guard
+    @Query(() => MoviesResposne)
+    @UseGuards(AuthenGuardMovie)
+    async getPrivateMovies(
+        @Args("id") userId: string,
+    ): Promise<MoviesResposne> {
+        const result = await this.movieService.getPrivateMovies();
+        return { movies: result };
+    }
+
+    @Mutation(() => CommentResponse)
+    @UseGuards(AuthenGuardMovie)
+    async addComment(
+        @Args("id") userId: string,
+        @Args("comment") comment: CommentDto
+    ): Promise<CommentResponse> {
+        const result = await this.movieService.addComment(comment)
+        return {comment: result};
+    }
 
     // default query
     @Query(() => String)

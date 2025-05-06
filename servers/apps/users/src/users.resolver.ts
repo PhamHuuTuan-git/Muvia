@@ -1,6 +1,6 @@
 import { Args, Mutation, Resolver, Query, Context } from "@nestjs/graphql";
 import { UsersService } from "./users.service";
-import { RegisterReponse, ActivationResponse, LoginResponse, RefreshTokenResponse, CheckTokenResponse } from "./types/user.type";
+import { RegisterReponse, ActivationResponse, LoginResponse, RefreshTokenResponse, CheckTokenResponse, UserResponse } from "./types/user.type";
 import { RegisterDto, ActivationDto, LoginDto } from "./dto/user.dto";
 import { BadRequestException, UseGuards } from "@nestjs/common";
 import { Request, Response } from 'express'; 
@@ -76,13 +76,14 @@ export class UserResolver {
 
 
   // test
-  @Mutation(() => String)
+  @Query(() => Boolean)
   @UseGuards(AuthGuard)
-  async test(
+  async authorizeUserPolicy(
     @Args("id") userId :string,
     @Context() context: { res: Response }
-  ): Promise<String> {
-    return this.usersService.test(context.res);
+  ): Promise<Boolean> {
+    const result = await this.usersService.authorizeUserPolicy(context.res,userId);
+    return result;
   }
 
   // Default query

@@ -179,6 +179,37 @@ export class MoviesService {
     }
   }
 
+  async getPrivateMovies() {
+    try {
+      const movies = await this.prisma.movie.findMany({
+        where: {
+          year:2025
+        }
+      })
+      return movies;
+    }catch(err) {
+      throw new BadRequestException(err.message);
+    }
+  }
+
+  async addComment (comment) {
+    const {userId, movieId, type, content} = comment;
+    try {
+      const result = await this.prisma.comment.create({
+        data: {
+          type,
+          content,
+          userId,
+          movieId
+        }
+      })
+      return result
+    }catch(err) {
+      console.log("comment error: ", err.message)
+      throw new BadRequestException(err.message);
+    }
+  }
+
   // default query
   getMovie(): string {
     return 'Hello Movie!';

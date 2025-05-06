@@ -1,5 +1,5 @@
 import { InputType, Field, Int } from "@nestjs/graphql";
-import { IsNumber, IsString } from "class-validator";
+import { IsNotEmpty, IsNumber, IsString } from "class-validator";
 
 @InputType()
 export class QueryPagingDto {
@@ -36,4 +36,27 @@ export class MovieSortDto {
     @Field(() => String, { nullable: true })
     @IsString({ message: "Sorting must be string" })
     sort: string
+}
+
+@InputType()
+export class CommentDto {
+    @Field()
+    @IsString({ message: "Type must be string" })
+    @IsNotEmpty({message:"Type is required"})
+    type: string;
+
+    @Field()
+    @IsString({ message: "Content must be string" })
+    @IsNotEmpty({message:"Content is required"})
+    content: string;
+
+    @Field()
+    @IsString({ message: "UserId must be string" })
+    @IsNotEmpty({message:"UserId is required"})
+    userId: string;
+
+    @Field()
+    @IsString({ message: "MovieId must be string" })
+    @IsNotEmpty({message:"MovieId is required"})
+    movieId: string;
 }

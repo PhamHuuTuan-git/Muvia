@@ -61,3 +61,12 @@ export class CheckTokenResponse {
     @Field(() => ErrorType, { nullable: true })
     error?: ErrorType;
 }
+
+@ObjectType()
+export class UserResponse {
+    @Field(() => User)
+    user: User | any;
+
+    @Field(() => ErrorType, { nullable: true })
+    error?: ErrorType;
+}

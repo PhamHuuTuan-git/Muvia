@@ -15,7 +15,7 @@ export class UsersService {
     private readonly jwtService: MyJwtService,
     private readonly prisma: PrismaService,
     private readonly emailService: EmailService,
-    private readonly configService: ConfigService
+    // private readonly configService: ConfigService
 
   ) { }
   getHello(): string {
@@ -120,34 +120,6 @@ export class UsersService {
       // console.log("Catched error: ", err);
       throw new BadRequestException(err);
     }
-
-
-    // const newUser: { user: UserData, activationCode: string } = this.jwtService.verify(
-    //   activationToken,
-    //   {
-    //     secret: this.configService.get<string>('ACTIVATION_SECRET')
-    //   } as JwtVerifyOptions
-    // ) as { user: UserData; activationCode: string }
-    // if (newUser.activationCode !== activationCode) {
-    //   throw new BadRequestException('Invalid activation code');
-    // }
-    // const { name, email, password, phone_number } = newUser.user;
-    // const existUser = await this.prisma.user.findUnique({
-    //   where: {
-    //     email
-    //   }
-    // });
-    // if (existUser) {
-    //   throw new BadRequestException('User already exist with this email')
-    // }
-    // const user = await this.prisma.user.create({
-    //   data: {
-    //     name,
-    //     email,
-    //     password,
-    //   }
-    // })
-    // return { user, response }
   }
 
   // login user
@@ -233,8 +205,18 @@ export class UsersService {
   }
 
   //test
-  async test(res: Response) {
-    console.log("Test mutation")
-    return "Test mutation";
+  async authorizeUserPolicy(res: Response, userId: string) {
+    try {
+      const user = await this.prisma.user.findUnique({
+        where: {
+          id: userId
+        }
+      })
+
+      if(!user) throw new BadRequestException("Not exist this user")
+      return true;
+    }catch(err) {
+      throw new BadRequestException(err.message);
+    }
   }
 }

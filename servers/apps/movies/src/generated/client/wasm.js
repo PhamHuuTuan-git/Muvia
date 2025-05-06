@@ -159,6 +159,15 @@ exports.Prisma.CountryScalarFieldEnum = {
   slug: 'slug'
 };
 
+exports.Prisma.CommentScalarFieldEnum = {
+  id: 'id',
+  type: 'type',
+  content: 'content',
+  date: 'date',
+  userId: 'userId',
+  movieId: 'movieId'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -173,7 +182,8 @@ exports.Prisma.QueryMode = {
 exports.Prisma.ModelName = {
   Movie: 'Movie',
   Category: 'Category',
-  Country: 'Country'
+  Country: 'Country',
+  Comment: 'Comment'
 };
 
 /**

@@ -58,3 +58,13 @@ model Country {
 
   @@map("countries")
 }
+
+model Comment {
+  id        String @id @default(auto()) @map("_id") @db.ObjectId
+  type      String
+  content   String
+  date      DateTime @default(now())
+  userId    String
+  movieId   String
+  @@map("comments")
+}

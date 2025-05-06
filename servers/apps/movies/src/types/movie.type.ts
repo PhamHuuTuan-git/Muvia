@@ -1,5 +1,6 @@
 import { ObjectType, Field, Directive } from "@nestjs/graphql";
 import { Movie, MovieDetail } from "../entities/movie.entity";
+import { Comment } from "../entities/comment.entity";
 
 @ObjectType()
 @Directive('@shareable')
@@ -54,6 +55,20 @@ export class MoviesResponseWithMetaData {
 
     @Field(() => ErrorType, { nullable: true })
     error?: ErrorType;
-
    
+}
+
+@ObjectType()
+export class AuthorizeUserPolicyResult {
+    @Field(() => [Movie])
+    authorizeUserPolicy: boolean;
+}
+
+@ObjectType()
+export class CommentResponse {
+    @Field(() => Comment)
+    comment: Comment | any
+
+    @Field(() => ErrorType, { nullable: true })
+    error?: ErrorType;
 }
