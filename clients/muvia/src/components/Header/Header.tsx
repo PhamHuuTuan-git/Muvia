@@ -1,7 +1,7 @@
 
 'use client'
 import './style.scss';
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Avatar, Dropdown, DropdownTrigger, DropdownMenu, DropdownItem } from "@heroui/react";
 // import SwitchDarkLight from '../SwtichDarkLight/SwitchDarkLight';
 import { Input, Divider } from "@heroui/react";
@@ -12,12 +12,14 @@ import { sidebarSelectorMode } from "@/redux-toolkit/selector";
 import { authenSelectorUser } from '@/redux-toolkit/selector';
 import Link from 'next/link';
 import routing from '@/utils/routing';
-
+import { useRouter } from "next/navigation";
 const Header = () => {
   const headerRef = useRef<HTMLDivElement>(null);
   const sidebarMode = useSelector(sidebarSelectorMode);
   const userAuthen = useSelector(authenSelectorUser);
+  const [input, setInput] = useState("");
   const dispatch = useDispatch();
+  const router = useRouter();
   const handleTongleSidebar = () => {
     dispatch(sidebarSlide.actions.changeMode(!sidebarMode));
   }
@@ -37,6 +39,12 @@ const Header = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const handleRedirect = () => {
+    if(input.trim() === "") return
+    setInput("")
+    router.push(`${routing.finding}?content=${input}`)
+  }
 
   return (
     <div ref={headerRef} className={`header-container non-active ${sidebarMode === true ? "on" : "off"}`}>
@@ -65,13 +73,14 @@ const Header = () => {
         {/* Search */}
 
         <Input
-
+          value={input}
+          onValueChange={setInput}
           labelPlacement="outside"
           placeholder="Search everything"
           startContent={
-            <FindIcon />
+            <FindIcon style={{cursor:"pointer"}} onClick={handleRedirect} />
           }
-          type="email"
+      
         />
 
         {/* Notification */}

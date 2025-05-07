@@ -42,21 +42,32 @@ export class MovieSortDto {
 export class CommentDto {
     @Field()
     @IsString({ message: "Type must be string" })
-    @IsNotEmpty({message:"Type is required"})
+    @IsNotEmpty({ message: "Type is required" })
     type: string;
 
     @Field()
     @IsString({ message: "Content must be string" })
-    @IsNotEmpty({message:"Content is required"})
+    @IsNotEmpty({ message: "Content is required" })
     content: string;
 
     @Field()
     @IsString({ message: "UserId must be string" })
-    @IsNotEmpty({message:"UserId is required"})
+    @IsNotEmpty({ message: "UserId is required" })
     userId: string;
 
     @Field()
     @IsString({ message: "MovieId must be string" })
-    @IsNotEmpty({message:"MovieId is required"})
+    @IsNotEmpty({ message: "MovieId is required" })
     movieId: string;
 }
+
+@InputType()
+export class QueryDto {
+    @Field(() => Int, { nullable: true })
+    @IsNumber({}, { message: "Limit must be a number" })
+    page: number;
+
+    @Field(() => Int, { nullable: true })
+    @IsNumber({}, { message: "Limit must be a number" })
+    limit: number
+} 

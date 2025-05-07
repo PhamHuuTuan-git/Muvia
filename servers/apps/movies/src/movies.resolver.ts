@@ -1,7 +1,7 @@
 import { Args, Mutation, Resolver, Query, Int, ResolveField, Parent } from "@nestjs/graphql";
 import { MoviesService } from "./movies.service";
 import { MoviesResposne, MovieResponse, MoviesResponseWithMetaData, CommentResponse, CommentsResponse } from "./types/movie.type";
-import { MovieSortDto, MoviesQueryDto, QueryPagingDto, CommentDto } from "./dto/movie.dto";
+import { MovieSortDto, MoviesQueryDto, QueryPagingDto, CommentDto, QueryDto } from "./dto/movie.dto";
 import { GraphQLClient, gql } from 'graphql-request';
 import { UseGuards } from "@nestjs/common";
 import { AuthenGuardMovie } from "./guards/authen.guards";
@@ -74,14 +74,17 @@ export class MovieResolver {
         return { movies: result };
     }
 
-    // @ResolveField(() => User)
-    // user(@Parent() comment: Comment): User {
-    //     return {
-    //         __typename: 'User',
-    //         id: comment.userId,
-    //     } as any; // bypass TypeScript check
-    // }
+    // Get Movies with name
+    @Query(() => MoviesResponseWithMetaData)
+    async getMoviesWithName(
+        @Args("content") content: string,
+        @Args("query") query: QueryDto
+    ): Promise<MoviesResponseWithMetaData> {
+        const { page = 1, limit = 10 } = query
+        const result = await this.movieService.getMoviesWithName(content, { page, limit });
 
+        return result
+    }
 
     // default query
     @Query(() => String)
@@ -96,16 +99,16 @@ export class CommentResolver {
         private readonly movieService: MoviesService
     ) { }
 
-     // add comment
-     @Mutation(() => CommentResponse)
-     @UseGuards(AuthenGuardMovie)
-     async addComment(
-         @Args("id") userId: string,
-         @Args("comment") comment: CommentDto
-     ): Promise<CommentResponse> {
-         const result = await this.movieService.addComment(comment)
-         return { comment: result };
-     }
+    // add comment
+    @Mutation(() => CommentResponse)
+    @UseGuards(AuthenGuardMovie)
+    async addComment(
+        @Args("id") userId: string,
+        @Args("comment") comment: CommentDto
+    ): Promise<CommentResponse> {
+        const result = await this.movieService.addComment(comment)
+        return { comment: result };
+    }
 
     // get comments
     @Query(() => CommentsResponse)

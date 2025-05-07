@@ -2,7 +2,7 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 import { PrismaMovieService } from '../prisma/prisma.service';
 import { ConfigService } from '@nestjs/config';
 import { Movie } from './entities/movie.entity';
-import { MovieSortDto, MoviesQueryDto, QueryPagingDto } from './dto/movie.dto';
+import { MovieSortDto, MoviesQueryDto, QueryDto, QueryPagingDto } from './dto/movie.dto';
 
 interface RunCommandResult {
   cursor?: {
@@ -66,12 +66,7 @@ export class MoviesService {
     }
   }
 
-  // get specified movie
-  // type:
-  //   "series",
-  //   "single",
-  //   "tvshows",
-  //   "hoathinh"
+
   async getSpecifiedMovie(slug: string) {
     try {
 
@@ -183,17 +178,17 @@ export class MoviesService {
     try {
       const movies = await this.prisma.movie.findMany({
         where: {
-          year:2025
+          year: 2025
         }
       })
       return movies;
-    }catch(err) {
+    } catch (err) {
       throw new BadRequestException(err.message);
     }
   }
 
-  async addComment (comment) {
-    const {userId, movieId, type, content} = comment;
+  async addComment(comment) {
+    const { userId, movieId, type, content } = comment;
     try {
       const result = await this.prisma.comment.create({
         data: {
@@ -204,7 +199,7 @@ export class MoviesService {
         }
       })
       return result
-    }catch(err) {
+    } catch (err) {
       console.log("comment error: ", err.message)
       throw new BadRequestException(err.message);
     }
@@ -219,8 +214,55 @@ export class MoviesService {
         }
       })
       return result
-    }catch(err) {
+    } catch (err) {
       console.log("comment error: ", err.message)
+      throw new BadRequestException(err.message);
+    }
+  }
+
+  // get movies with name
+  async getMoviesWithName(content: string, query: QueryDto) {
+    const { page = 1, limit = 10 } = query;
+    const skip = (page - 1) * limit;
+    try {
+      const totalItems = await this.prisma.movie.count({
+        where: {
+          name: {
+            contains: content,
+            mode: 'insensitive', // Không phân biệt chữ hoa/chữ thường (tùy chọn)
+          }
+        }
+      });
+      if (totalItems === 0) {
+        return {
+          movies: [],
+          meta: {
+            total: 0,
+            totalPages: 0,
+            page
+          }
+        }
+      }
+      const result = await this.prisma.movie.findMany({
+        where: {
+          name: {
+            contains: content,
+            mode: 'insensitive', // Không phân biệt chữ hoa/chữ thường (tùy chọn)
+          }
+        },
+        skip,
+        take: limit,
+      })
+      const totalPages = Math.ceil(totalItems / limit);
+      return {
+        movies: result,
+        meta: {
+          total: totalItems,
+          totalPages,
+          page
+        }
+      };
+    } catch (err) {
       throw new BadRequestException(err.message);
     }
   }

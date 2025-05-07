@@ -5,7 +5,8 @@ const routing = {
     aboutUs: "/about-us",
     register: "/register",
     login: "/login",
-    activation: "/activation"
+    activation: "/activation",
+    finding: "/finding"
 }
 
 export default routing;
