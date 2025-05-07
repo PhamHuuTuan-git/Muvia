@@ -204,6 +204,22 @@ export class UsersService {
     }
   }
 
+  async findById(userId: string) {
+    // console.log("userid: ", userId);
+    try {
+      const result = await this.prisma.user.findUnique({
+        where: {
+          id: userId
+        }
+      })
+      if(!result) throw new BadRequestException("Not exist this user");
+      const {password, ...finalUser} = result;
+      return finalUser
+    }catch(err) {
+      throw new BadRequestException(err.message);
+    }
+  } 
+
   //test
   async authorizeUserPolicy(res: Response, userId: string) {
     try {

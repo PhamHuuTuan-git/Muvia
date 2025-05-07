@@ -30,7 +30,7 @@ export class AuthenGuardMovie implements CanActivate {
             ),
         });
 
-        const userId = args?.id;
+        const userId = args?.id || null;
         if (!userId) {
             throw new UnauthorizedException('User ID is required');
         }

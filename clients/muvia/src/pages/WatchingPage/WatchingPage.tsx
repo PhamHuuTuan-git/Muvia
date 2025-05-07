@@ -6,10 +6,12 @@ import RatingMovie from '@/components/RatingMovie/RatingMovie';
 import PlayIcon from '@/components/icons/PlayIcon';
 import { GET_SPECIFIED_MOVIE } from "@/graphql/actions/movieActions/get_specified_movie.action";
 import { useQuery } from "@apollo/client";
-import { useCallback, useRef } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { addToast } from '@heroui/react';
 import { usePathname, useRouter } from 'next/navigation';
 import Loading from '@/components/Loading/Loading';
+import { GET_RECOMMENDED_MOVIES } from "@/graphql/actions/movieActions/get_recommended_movies.action";
+import routing from '@/utils/routing';
 type Props = {
   slug: string,
   episode: string
@@ -17,6 +19,11 @@ type Props = {
 function WatchingPage({ slug, episode }: Props) {
   const { data, loading, error } = useQuery(GET_SPECIFIED_MOVIE, {
     variables: { slug: slug },
+    fetchPolicy: "no-cache",
+  })
+  const [isloading, setLoading] = useState(true)
+  const resultRecommendedMovies = useQuery(GET_RECOMMENDED_MOVIES, {
+    variables: { limit: 10 },
     fetchPolicy: "no-cache",
   })
   const router = useRouter();
@@ -31,6 +38,11 @@ function WatchingPage({ slug, episode }: Props) {
       })[0]
     }
   }
+  useEffect(() => {
+    if (data && resultRecommendedMovies.data) {
+      setLoading(false)
+    }
+  }, [data, resultRecommendedMovies.data])
   const handleRedirectMovie = (curr_episode: string) => {
     if (episode === curr_episode) return;
     if (!episode || episode == "") {
@@ -49,8 +61,8 @@ function WatchingPage({ slug, episode }: Props) {
 
     }
   }
-  console.log("video current: ", getVideo())
-  if (!data) {
+  // console.log("video current: ", getVideo())
+  if (isloading) {
     return (
       <div style={{ marginTop: "80px" }}>
         <Loading />
@@ -59,6 +71,9 @@ function WatchingPage({ slug, episode }: Props) {
   }
   if (data) {
     movie.current = data.getSpecifiedMovie.movie
+  }
+  const handleRedirect = (slug: string) => {
+    router.push(`${routing.movies}/${slug}`)
   }
   return (
     <div className='watching--container'>
@@ -150,7 +165,7 @@ function WatchingPage({ slug, episode }: Props) {
           {/* Rating */}
           <div className='mt-[40px] flex' >
             <div className='watching-left-part'>
-              <RatingMovie />
+              <RatingMovie idMovie={movie.current.id} nameMovie={movie.current.name} />
             </div>
           </div>
         </div>
@@ -158,13 +173,17 @@ function WatchingPage({ slug, episode }: Props) {
         <div className='watching-right-part'>
           <p style={{ color: "#fff", fontWeight: "bold", fontSize: "1.4rem" }}>Đề xuất</p>
           <div style={{ display: "flex", flexDirection: "column", marginTop: "20px", gap: 8 }}>
-            <div style={{ cursor: "pointer", height: "120px", display: "flex", alignItems: "center", gap: 12, backgroundColor: "#000", borderRadius: "12px", overflow: "hidden", paddingRight: "8px" }}>
-              <img style={{ height: "100%" }} src='https://img.ophim.live/uploads/movies/900-ngay-vang-anabel-thumb.jpg' />
-              <div>
-                <p style={{ fontSize: "1rem", fontWeight: "bold", color: "#fff" }}>Pho mai chinh phu tro cap</p>
-                <p className='text-white'>Government Cheese</p>
-              </div>
-            </div>
+            {
+              resultRecommendedMovies.data.getRecommendedMovies.movies.map((movie: any, index: number) => {
+                return <div onClick={() => handleRedirect(movie.slug)} key={index} style={{ cursor: "pointer", height: "120px", display: "flex", alignItems: "center", gap: 12, backgroundColor: "#000", borderRadius: "12px", overflow: "hidden", paddingRight: "8px" }}>
+                  <img style={{ height: "100%" }} src={`${movie.thumb_url}`} />
+                  <div>
+                    <p style={{ fontSize: "1rem", fontWeight: "bold", color: "#fff" }}>{movie.name}</p>
+                    <p className='text-white'>{movie.origin_name}</p>
+                  </div>
+                </div>
+              })
+            }
 
           </div>
         </div>

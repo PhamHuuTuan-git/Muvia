@@ -69,7 +69,7 @@ function DetailMovie({ slug }: Props) {
                             <p className="text-white text-[0.6rem]"><span style={{ color: "#c0a46b" }}>IMDb: </span> 8.2</p>
                         </div>
                         <div className="year-detail-movie--container">
-                            <p className="text-white text-[0.6rem]">12</p>
+                            <p className="text-white text-[0.6rem]">{data.getSpecifiedMovie.movie.year}</p>
                         </div>
                         <div className="year-detail-movie--container">
                             <p className="text-white text-[0.6rem]">
@@ -157,7 +157,7 @@ function DetailMovie({ slug }: Props) {
 
                     {/* Rating */}
                     <div style={{ marginTop: "80px", padding: "40px" }}>
-                        <RatingMovie />
+                        <RatingMovie idMovie={data.getSpecifiedMovie.movie.id} nameMovie={data.getSpecifiedMovie.movie.name}/>
                     </div>
                 </div>
             </div>

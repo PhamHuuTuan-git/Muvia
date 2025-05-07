@@ -1,6 +1,25 @@
+"use client";
 import "./style.scss";
+// import { gql } from "@apollo/client";
+// import { useQuery } from "@apollo/client";
+// export const GET_PRIVATE_MOVIES = gql`
+//   query GetPrivateMovies($id: String!) {
+//     getPrivateMovies(id: $id) {
+//       movies {
+//         id
+//         name
+//       }
+//     }
+//   }
+// `;
 
 function AboutUsPage() {
+  // const resultNewMovies = useQuery(GET_PRIVATE_MOVIES, {
+  //     variables:{id: "680b5b4e4ca6c36f70e8b284"},
+  //     fetchPolicy: "no-cache",
+  //   });
+  
+  // console.log("private movies: ",resultNewMovies)
   return (
     <div >
       <div className="wall-paper-about-us">
@@ -21,9 +40,8 @@ function AboutUsPage() {
             </p>
           </div>
         </div>
-
-
       </div>
+      
     </div>
   )
 }

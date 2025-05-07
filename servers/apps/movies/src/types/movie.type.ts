@@ -72,3 +72,12 @@ export class CommentResponse {
     @Field(() => ErrorType, { nullable: true })
     error?: ErrorType;
 }
+
+@ObjectType()
+export  class CommentsResponse {
+    @Field(() => [Comment])
+    comments: Comment[] | any
+
+    @Field(() => ErrorType, { nullable: true })
+    error?: ErrorType;
+}

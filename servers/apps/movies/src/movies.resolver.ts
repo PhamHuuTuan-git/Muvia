@@ -1,18 +1,20 @@
-import { Args, Mutation, Resolver, Query, Int } from "@nestjs/graphql";
+import { Args, Mutation, Resolver, Query, Int, ResolveField, Parent } from "@nestjs/graphql";
 import { MoviesService } from "./movies.service";
-import { MoviesResposne, MovieResponse, MoviesResponseWithMetaData,CommentResponse } from "./types/movie.type";
+import { MoviesResposne, MovieResponse, MoviesResponseWithMetaData, CommentResponse, CommentsResponse } from "./types/movie.type";
 import { MovieSortDto, MoviesQueryDto, QueryPagingDto, CommentDto } from "./dto/movie.dto";
 import { GraphQLClient, gql } from 'graphql-request';
 import { UseGuards } from "@nestjs/common";
 import { AuthenGuardMovie } from "./guards/authen.guards";
+import { User, Comment } from "./entities/comment.entity";
+import { Movie } from "./entities/movie.entity";
 
-@Resolver()
+@Resolver(() => Movie)
 export class MovieResolver {
-  
+
     constructor(
         private readonly movieService: MoviesService
     ) { }
-    
+
 
     // get top new movies
     @Query(() => MoviesResposne)
@@ -57,7 +59,7 @@ export class MovieResolver {
         @Args("limit", { type: () => Int }) limit: number,
 
     ): Promise<MoviesResposne> {
-        if(!limit) limit = 20;
+        if (!limit) limit = 20;
         const result = await this.movieService.getRecommendedMovies(limit)
         return { movies: result };
     }
@@ -72,19 +74,57 @@ export class MovieResolver {
         return { movies: result };
     }
 
-    @Mutation(() => CommentResponse)
-    @UseGuards(AuthenGuardMovie)
-    async addComment(
-        @Args("id") userId: string,
-        @Args("comment") comment: CommentDto
-    ): Promise<CommentResponse> {
-        const result = await this.movieService.addComment(comment)
-        return {comment: result};
-    }
+    // @ResolveField(() => User)
+    // user(@Parent() comment: Comment): User {
+    //     return {
+    //         __typename: 'User',
+    //         id: comment.userId,
+    //     } as any; // bypass TypeScript check
+    // }
+
 
     // default query
     @Query(() => String)
     getMovie() {
         return this.movieService.getMovie();
+    }
+}
+
+@Resolver(() => Comment)
+export class CommentResolver {
+    constructor(
+        private readonly movieService: MoviesService
+    ) { }
+
+     // add comment
+     @Mutation(() => CommentResponse)
+     @UseGuards(AuthenGuardMovie)
+     async addComment(
+         @Args("id") userId: string,
+         @Args("comment") comment: CommentDto
+     ): Promise<CommentResponse> {
+         const result = await this.movieService.addComment(comment)
+         return { comment: result };
+     }
+
+    // get comments
+    @Query(() => CommentsResponse)
+    async getComments(
+        @Args("movieId") movieId: string
+    ): Promise<CommentsResponse> {
+        const result = await this.movieService.getComments(movieId);
+
+        return {
+            comments: result
+        }
+    }
+
+    // resolver tham chiếu đến user của comment, lấy thông tin user
+    @ResolveField(() => User)
+    user(@Parent() comment: Comment): User {
+        return {
+            __typename: 'User',
+            id: comment.userId,
+        } as any; // bypass TypeScript check
     }
 }

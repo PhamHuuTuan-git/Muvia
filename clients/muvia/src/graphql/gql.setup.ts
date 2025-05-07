@@ -79,7 +79,7 @@ const errorLink = onError(({ graphQLErrors, networkError, operation, forward }) 
                                         localStorage.removeItem('access_token');
 
                                         // Chuyển hướng đến trang đăng nhập
-                                        window.location.href = `${routing.login}`;
+                                        // window.location.href = `${routing.login}`;
 
                                         throw new Error('Yêu cầu đăng nhập');
                                     });

@@ -210,6 +210,21 @@ export class MoviesService {
     }
   }
 
+  // get comments
+  async getComments(movieId: string) {
+    try {
+      const result = await this.prisma.comment.findMany({
+        where: {
+          movieId
+        }
+      })
+      return result
+    }catch(err) {
+      console.log("comment error: ", err.message)
+      throw new BadRequestException(err.message);
+    }
+  }
+
   // default query
   getMovie(): string {
     return 'Hello Movie!';

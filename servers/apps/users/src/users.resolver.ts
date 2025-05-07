@@ -1,11 +1,12 @@
-import { Args, Mutation, Resolver, Query, Context } from "@nestjs/graphql";
+import { Args, Mutation, Resolver, Query, Context,ResolveReference } from "@nestjs/graphql";
 import { UsersService } from "./users.service";
 import { RegisterReponse, ActivationResponse, LoginResponse, RefreshTokenResponse, CheckTokenResponse, UserResponse } from "./types/user.type";
 import { RegisterDto, ActivationDto, LoginDto } from "./dto/user.dto";
 import { BadRequestException, UseGuards } from "@nestjs/common";
 import { Request, Response } from 'express'; 
 import { AuthGuard } from "./guards/auth.guard";
-@Resolver()
+import { User } from "./entities/user.entity";
+@Resolver(() => User)
 export class UserResolver {
   constructor(
     private readonly usersService: UsersService
@@ -84,6 +85,12 @@ export class UserResolver {
   ): Promise<Boolean> {
     const result = await this.usersService.authorizeUserPolicy(context.res,userId);
     return result;
+  }
+
+  @ResolveReference()
+  async resolveReference(reference: { __typename: string; id: string }) {
+    // console.log("user-resolver: ", reference.id)
+    return await this.usersService.findById(reference.id); // id được truyền từ service khác
   }
 
   // Default query
