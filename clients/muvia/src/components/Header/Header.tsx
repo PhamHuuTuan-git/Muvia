@@ -2,17 +2,20 @@
 'use client'
 import './style.scss';
 import { useEffect, useRef, useState } from 'react'
-import { Avatar, Dropdown, DropdownTrigger, DropdownMenu, DropdownItem } from "@heroui/react";
+import { Avatar, Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, addToast } from "@heroui/react";
 // import SwitchDarkLight from '../SwtichDarkLight/SwitchDarkLight';
 import { Input, Divider } from "@heroui/react";
 import FindIcon from '../icons/FindIcon';
 import sidebarSlide from '@/components/Sidebar/sidebarSlice';
+import authenSlice from '@/redux-toolkit/slices/authen.slice';
 import { useDispatch, useSelector } from 'react-redux';
 import { sidebarSelectorMode } from "@/redux-toolkit/selector";
 import { authenSelectorUser } from '@/redux-toolkit/selector';
 import Link from 'next/link';
 import routing from '@/utils/routing';
 import { useRouter } from "next/navigation";
+import { useMutation } from '@apollo/client';
+import { LOGOUT_USER } from '@/graphql/actions/authenActions/logout.action';
 const Header = () => {
   const headerRef = useRef<HTMLDivElement>(null);
   const sidebarMode = useSelector(sidebarSelectorMode);
@@ -20,6 +23,7 @@ const Header = () => {
   const [input, setInput] = useState("");
   const dispatch = useDispatch();
   const router = useRouter();
+  const [logoutUser, { data, loading, error }] = useMutation(LOGOUT_USER);
   const handleTongleSidebar = () => {
     dispatch(sidebarSlide.actions.changeMode(!sidebarMode));
   }
@@ -44,6 +48,26 @@ const Header = () => {
     if(input.trim() === "") return
     setInput("")
     router.push(`${routing.finding}?content=${input}`)
+  }
+
+  const handleLogOut = async () => {
+    try {
+      const result = await logoutUser();
+      localStorage.removeItem("access_token")
+      dispatch(authenSlice.actions.setUser(null))
+      addToast({
+        title:"Error",
+        description: "Đăng xuất thành công",
+        color:"success"
+      })
+      router.push("/")
+    }catch(err: any) {
+      addToast({
+        title:"Error",
+        description: `${err.message}`,
+        color:"danger"
+      })
+    }
   }
 
   return (
@@ -105,7 +129,7 @@ const Header = () => {
                 </DropdownTrigger>
                 <DropdownMenu disabledKeys={["edit", "delete"]}>
                   <DropdownItem key="new">Profile</DropdownItem>
-                  <DropdownItem key="copy">Log out</DropdownItem>
+                  <DropdownItem  onClick={handleLogOut} key="copy">Log out</DropdownItem>
                 </DropdownMenu>
               </Dropdown>
             )

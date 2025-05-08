@@ -33,7 +33,7 @@ type ChipColor = "success" | "primary" | "secondary" | "warning" | "danger"
 
 function UserTag({ userName, avatar, content, type, date }: UserTagType) {
     const getTypeChip = (type: string) => {
-        console.log("type: ", type)
+        // console.log("type: ", type)
         let color: ChipColor = "success"
         let label
         if (type === "perfect") {
@@ -96,7 +96,7 @@ function RatingMovie({ idMovie, nameMovie }: Props) {
     const [comments, setComments] = useState([]);
 
     useEffect(() => {
-        console.log(resultComments.data);
+        // console.log(resultComments.data);
         if (resultComments.data) {
             setComments(resultComments.data.getComments.comments)
         }

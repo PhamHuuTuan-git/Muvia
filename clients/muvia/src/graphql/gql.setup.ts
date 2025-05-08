@@ -1,8 +1,9 @@
-import { ApolloClient, InMemoryCache, HttpLink, ApolloLink, from, ServerError, gql } from "@apollo/client";
+import { ApolloClient, InMemoryCache, HttpLink, ApolloLink, from, ServerError, gql, Observable } from "@apollo/client";
 import { onError } from '@apollo/client/link/error';
 import { setContext } from '@apollo/client/link/context';
 import { RetryLink } from '@apollo/client/link/retry';
 import { fromPromise } from '@apollo/client/link/utils';
+import { of,EMPTY } from 'rxjs';
 import routing from "@/utils/routing";
 
 const backendUrl = process.env.NEXT_PUBLIC_SERVER_URI;
@@ -81,10 +82,11 @@ const errorLink = onError(({ graphQLErrors, networkError, operation, forward }) 
                                         // Chuyển hướng đến trang đăng nhập
                                         // window.location.href = `${routing.login}`;
 
-                                        throw new Error('Yêu cầu đăng nhập');
+                                        // throw new Error('Yêu cầu đăng nhập');
+                                        return EMPTY;
                                     });
                             })
-                    ).flatMap((result) => result);
+                    ).flatMap((result: any) => result );
                 }
             }
         }
