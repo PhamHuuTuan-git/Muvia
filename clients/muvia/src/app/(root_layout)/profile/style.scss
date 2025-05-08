@@ -1,0 +1,26 @@
+.tab-profile--container {
+    display: inline-flex;
+    align-items: center;
+    background-color: #f3f3f3;
+    padding: 12px 8px;
+    border-radius: 8px;
+    // box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+}
+
+// .link-profile--container {
+//     padding: 4px;
+// }
+
+.link-profile {
+    color: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    color: #000;
+}
+
+.link-profile.active {
+    background-color: #ffff;
+    
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+

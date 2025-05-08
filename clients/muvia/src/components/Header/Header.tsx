@@ -28,6 +28,7 @@ const Header = () => {
     dispatch(sidebarSlide.actions.changeMode(!sidebarMode));
   }
 
+  // console.log("user-header: ", userAuthen)
   useEffect(() => {
     const handleScroll = () => {
       if (!headerRef.current) return;
@@ -68,6 +69,17 @@ const Header = () => {
         color:"danger"
       })
     }
+  }
+
+  const handleGotoProfile = () => {
+    if(!userAuthen) {
+      addToast({
+        title:"Error",
+        description:"Đăng nhập để truy cập",
+        color:"danger"
+      })
+    }
+    router.push(`${routing.profile}/me`)
   }
 
   return (
@@ -128,7 +140,7 @@ const Header = () => {
                   <Avatar className='cursor-pointer' size="lg" src={`${userAuthen.avatar.url}`} />
                 </DropdownTrigger>
                 <DropdownMenu disabledKeys={["edit", "delete"]}>
-                  <DropdownItem key="new">Profile</DropdownItem>
+                  <DropdownItem onClick={handleGotoProfile} key="new">Profile</DropdownItem>
                   <DropdownItem  onClick={handleLogOut} key="copy">Log out</DropdownItem>
                 </DropdownMenu>
               </Dropdown>

@@ -1,8 +1,8 @@
 // app/components/ThemeSwitcher.tsx
-"use client";
+// "use client";
 import HomePage from "@/pages/HomePage/HomePage";
-import {useTheme} from "next-themes";
-import { useEffect, useState } from "react";
+// import {useTheme} from "next-themes";
+// import { useEffect, useState } from "react";
 
 export default function Home() {
 

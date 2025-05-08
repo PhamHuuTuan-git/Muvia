@@ -1,3 +1,4 @@
+
 const routing = {
     home: "/",
     movies: "/movies",
@@ -6,7 +7,8 @@ const routing = {
     register: "/register",
     login: "/login",
     activation: "/activation",
-    finding: "/finding"
+    finding: "/finding",
+    profile: "/profile"
 }
 
 export default routing;
