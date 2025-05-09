@@ -267,6 +267,55 @@ export class MoviesService {
     }
   }
 
+  // update liked movies
+  async updateLikedMovies(userId: string, movieId: string) {
+    try {
+      const refre = await this.prisma.reference.findFirst({
+        where: {
+          userId
+        }
+      })
+      if(!refre) {
+        
+        await this.prisma.reference.create({
+          data: {
+            userId,
+            likedMovies: [movieId],
+            recentWatching: []
+          }
+        })
+      } else {
+        const exist = refre.likedMovies.includes(movieId);
+        if(exist) {
+          const new_likedMovies = refre.likedMovies.filter((ele) => {
+            return ele !== movieId
+          })
+          await this.prisma.reference.update({
+            where: {
+              id: refre.id
+            },
+            data: {
+              likedMovies: new_likedMovies,
+            }
+          })
+        } else {
+          const new_likedMovies = [...refre.likedMovies, movieId]
+          await this.prisma.reference.update({
+            where: {
+              id: refre.id
+            },
+            data: {
+              likedMovies: new_likedMovies,
+            }
+          })
+        }
+      }
+      return true;
+    }catch(err) {
+      throw new BadRequestException(err.message);
+    }
+  }
+
   // default query
   getMovie(): string {
     return 'Hello Movie!';

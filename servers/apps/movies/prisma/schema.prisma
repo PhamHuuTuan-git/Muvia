@@ -68,3 +68,12 @@ model Comment {
   movieId   String
   @@map("comments")
 }
+
+model Reference {
+  id        String @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String
+  likedMovies   String[]
+  recentWatching String[]
+
+  @@map("references")
+}

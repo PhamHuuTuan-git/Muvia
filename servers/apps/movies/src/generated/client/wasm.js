@@ -168,6 +168,13 @@ exports.Prisma.CommentScalarFieldEnum = {
   movieId: 'movieId'
 };
 
+exports.Prisma.ReferenceScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  likedMovies: 'likedMovies',
+  recentWatching: 'recentWatching'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -183,7 +190,8 @@ exports.Prisma.ModelName = {
   Movie: 'Movie',
   Category: 'Category',
   Country: 'Country',
-  Comment: 'Comment'
+  Comment: 'Comment',
+  Reference: 'Reference'
 };
 
 /**

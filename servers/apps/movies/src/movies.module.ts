@@ -4,7 +4,7 @@ import { MoviesService } from './movies.service';
 import { ApolloFederationDriver, ApolloFederationDriverConfig } from '@nestjs/apollo';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { MovieResolver,CommentResolver } from './movies.resolver';
+import { MovieResolver,CommentResolver, ReferenceResolver } from './movies.resolver';
 import { PrismaMovieService } from '../prisma/prisma.service';
 
 @Module({
@@ -27,6 +27,6 @@ import { PrismaMovieService } from '../prisma/prisma.service';
         }),
   ],
   controllers: [],
-  providers: [MoviesService, MovieResolver, ConfigService, PrismaMovieService,CommentResolver],
+  providers: [MoviesService, MovieResolver, ConfigService, PrismaMovieService,CommentResolver, ReferenceResolver],
 })
 export class MoviesModule {}

@@ -7,6 +7,7 @@ import { UseGuards } from "@nestjs/common";
 import { AuthenGuardMovie } from "./guards/authen.guards";
 import { User, Comment } from "./entities/comment.entity";
 import { Movie } from "./entities/movie.entity";
+import { Reference } from "./entities/reference.entity";
 
 @Resolver(() => Movie)
 export class MovieResolver {
@@ -130,4 +131,27 @@ export class CommentResolver {
             id: comment.userId,
         } as any; // bypass TypeScript check
     }
+}
+
+@Resolver(() => Reference)
+export class ReferenceResolver {
+    constructor(
+        private readonly movieService: MoviesService
+    ) { }
+
+    @Mutation(() => Boolean)
+    @UseGuards(AuthenGuardMovie)
+    async updateLikedMovies(
+        @Args("id") userId: string,
+        @Args("movieId") movieId: string,
+    ): Promise<Boolean> {
+        return  await this.movieService.updateLikedMovies(userId, movieId)
+    }
+
+    @Query(() => Boolean)
+    @UseGuards(AuthenGuardMovie)
+    async getStatusLikedMovie(
+        @Args("id") userId: string,
+        @Args("movieId") movieId: string,
+    )
 }

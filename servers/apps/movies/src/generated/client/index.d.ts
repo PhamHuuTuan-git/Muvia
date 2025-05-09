@@ -33,6 +33,11 @@ export type Country = $Result.DefaultSelection<Prisma.$CountryPayload>
  * 
  */
 export type Comment = $Result.DefaultSelection<Prisma.$CommentPayload>
+/**
+ * Model Reference
+ * 
+ */
+export type Reference = $Result.DefaultSelection<Prisma.$ReferencePayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -165,6 +170,16 @@ export class PrismaClient<
     * ```
     */
   get comment(): Prisma.CommentDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.reference`: Exposes CRUD operations for the **Reference** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more References
+    * const references = await prisma.reference.findMany()
+    * ```
+    */
+  get reference(): Prisma.ReferenceDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -608,7 +623,8 @@ export namespace Prisma {
     Movie: 'Movie',
     Category: 'Category',
     Country: 'Country',
-    Comment: 'Comment'
+    Comment: 'Comment',
+    Reference: 'Reference'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -627,7 +643,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "movie" | "category" | "country" | "comment"
+      modelProps: "movie" | "category" | "country" | "comment" | "reference"
       txIsolationLevel: never
     }
     model: {
@@ -927,6 +943,80 @@ export namespace Prisma {
           }
         }
       }
+      Reference: {
+        payload: Prisma.$ReferencePayload<ExtArgs>
+        fields: Prisma.ReferenceFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ReferenceFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReferencePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ReferenceFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReferencePayload>
+          }
+          findFirst: {
+            args: Prisma.ReferenceFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReferencePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ReferenceFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReferencePayload>
+          }
+          findMany: {
+            args: Prisma.ReferenceFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReferencePayload>[]
+          }
+          create: {
+            args: Prisma.ReferenceCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReferencePayload>
+          }
+          createMany: {
+            args: Prisma.ReferenceCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.ReferenceDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReferencePayload>
+          }
+          update: {
+            args: Prisma.ReferenceUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReferencePayload>
+          }
+          deleteMany: {
+            args: Prisma.ReferenceDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ReferenceUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.ReferenceUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReferencePayload>
+          }
+          aggregate: {
+            args: Prisma.ReferenceAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateReference>
+          }
+          groupBy: {
+            args: Prisma.ReferenceGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ReferenceGroupByOutputType>[]
+          }
+          findRaw: {
+            args: Prisma.ReferenceFindRawArgs<ExtArgs>
+            result: JsonObject
+          }
+          aggregateRaw: {
+            args: Prisma.ReferenceAggregateRawArgs<ExtArgs>
+            result: JsonObject
+          }
+          count: {
+            args: Prisma.ReferenceCountArgs<ExtArgs>
+            result: $Utils.Optional<ReferenceCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1002,6 +1092,7 @@ export namespace Prisma {
     category?: CategoryOmit
     country?: CountryOmit
     comment?: CommentOmit
+    reference?: ReferenceOmit
   }
 
   /* Types for Logging */
@@ -5080,6 +5171,919 @@ export namespace Prisma {
 
 
   /**
+   * Model Reference
+   */
+
+  export type AggregateReference = {
+    _count: ReferenceCountAggregateOutputType | null
+    _min: ReferenceMinAggregateOutputType | null
+    _max: ReferenceMaxAggregateOutputType | null
+  }
+
+  export type ReferenceMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+  }
+
+  export type ReferenceMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+  }
+
+  export type ReferenceCountAggregateOutputType = {
+    id: number
+    userId: number
+    likedMovies: number
+    recentWatching: number
+    _all: number
+  }
+
+
+  export type ReferenceMinAggregateInputType = {
+    id?: true
+    userId?: true
+  }
+
+  export type ReferenceMaxAggregateInputType = {
+    id?: true
+    userId?: true
+  }
+
+  export type ReferenceCountAggregateInputType = {
+    id?: true
+    userId?: true
+    likedMovies?: true
+    recentWatching?: true
+    _all?: true
+  }
+
+  export type ReferenceAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Reference to aggregate.
+     */
+    where?: ReferenceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of References to fetch.
+     */
+    orderBy?: ReferenceOrderByWithRelationInput | ReferenceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ReferenceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` References from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` References.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned References
+    **/
+    _count?: true | ReferenceCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ReferenceMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ReferenceMaxAggregateInputType
+  }
+
+  export type GetReferenceAggregateType<T extends ReferenceAggregateArgs> = {
+        [P in keyof T & keyof AggregateReference]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateReference[P]>
+      : GetScalarType<T[P], AggregateReference[P]>
+  }
+
+
+
+
+  export type ReferenceGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ReferenceWhereInput
+    orderBy?: ReferenceOrderByWithAggregationInput | ReferenceOrderByWithAggregationInput[]
+    by: ReferenceScalarFieldEnum[] | ReferenceScalarFieldEnum
+    having?: ReferenceScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ReferenceCountAggregateInputType | true
+    _min?: ReferenceMinAggregateInputType
+    _max?: ReferenceMaxAggregateInputType
+  }
+
+  export type ReferenceGroupByOutputType = {
+    id: string
+    userId: string
+    likedMovies: string[]
+    recentWatching: string[]
+    _count: ReferenceCountAggregateOutputType | null
+    _min: ReferenceMinAggregateOutputType | null
+    _max: ReferenceMaxAggregateOutputType | null
+  }
+
+  type GetReferenceGroupByPayload<T extends ReferenceGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ReferenceGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ReferenceGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ReferenceGroupByOutputType[P]>
+            : GetScalarType<T[P], ReferenceGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ReferenceSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    likedMovies?: boolean
+    recentWatching?: boolean
+  }, ExtArgs["result"]["reference"]>
+
+
+
+  export type ReferenceSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    likedMovies?: boolean
+    recentWatching?: boolean
+  }
+
+  export type ReferenceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "likedMovies" | "recentWatching", ExtArgs["result"]["reference"]>
+
+  export type $ReferencePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Reference"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      likedMovies: string[]
+      recentWatching: string[]
+    }, ExtArgs["result"]["reference"]>
+    composites: {}
+  }
+
+  type ReferenceGetPayload<S extends boolean | null | undefined | ReferenceDefaultArgs> = $Result.GetResult<Prisma.$ReferencePayload, S>
+
+  type ReferenceCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ReferenceFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ReferenceCountAggregateInputType | true
+    }
+
+  export interface ReferenceDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Reference'], meta: { name: 'Reference' } }
+    /**
+     * Find zero or one Reference that matches the filter.
+     * @param {ReferenceFindUniqueArgs} args - Arguments to find a Reference
+     * @example
+     * // Get one Reference
+     * const reference = await prisma.reference.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ReferenceFindUniqueArgs>(args: SelectSubset<T, ReferenceFindUniqueArgs<ExtArgs>>): Prisma__ReferenceClient<$Result.GetResult<Prisma.$ReferencePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Reference that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ReferenceFindUniqueOrThrowArgs} args - Arguments to find a Reference
+     * @example
+     * // Get one Reference
+     * const reference = await prisma.reference.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ReferenceFindUniqueOrThrowArgs>(args: SelectSubset<T, ReferenceFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ReferenceClient<$Result.GetResult<Prisma.$ReferencePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Reference that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReferenceFindFirstArgs} args - Arguments to find a Reference
+     * @example
+     * // Get one Reference
+     * const reference = await prisma.reference.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ReferenceFindFirstArgs>(args?: SelectSubset<T, ReferenceFindFirstArgs<ExtArgs>>): Prisma__ReferenceClient<$Result.GetResult<Prisma.$ReferencePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Reference that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReferenceFindFirstOrThrowArgs} args - Arguments to find a Reference
+     * @example
+     * // Get one Reference
+     * const reference = await prisma.reference.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ReferenceFindFirstOrThrowArgs>(args?: SelectSubset<T, ReferenceFindFirstOrThrowArgs<ExtArgs>>): Prisma__ReferenceClient<$Result.GetResult<Prisma.$ReferencePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more References that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReferenceFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all References
+     * const references = await prisma.reference.findMany()
+     * 
+     * // Get first 10 References
+     * const references = await prisma.reference.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const referenceWithIdOnly = await prisma.reference.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ReferenceFindManyArgs>(args?: SelectSubset<T, ReferenceFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReferencePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Reference.
+     * @param {ReferenceCreateArgs} args - Arguments to create a Reference.
+     * @example
+     * // Create one Reference
+     * const Reference = await prisma.reference.create({
+     *   data: {
+     *     // ... data to create a Reference
+     *   }
+     * })
+     * 
+     */
+    create<T extends ReferenceCreateArgs>(args: SelectSubset<T, ReferenceCreateArgs<ExtArgs>>): Prisma__ReferenceClient<$Result.GetResult<Prisma.$ReferencePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many References.
+     * @param {ReferenceCreateManyArgs} args - Arguments to create many References.
+     * @example
+     * // Create many References
+     * const reference = await prisma.reference.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ReferenceCreateManyArgs>(args?: SelectSubset<T, ReferenceCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Reference.
+     * @param {ReferenceDeleteArgs} args - Arguments to delete one Reference.
+     * @example
+     * // Delete one Reference
+     * const Reference = await prisma.reference.delete({
+     *   where: {
+     *     // ... filter to delete one Reference
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ReferenceDeleteArgs>(args: SelectSubset<T, ReferenceDeleteArgs<ExtArgs>>): Prisma__ReferenceClient<$Result.GetResult<Prisma.$ReferencePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Reference.
+     * @param {ReferenceUpdateArgs} args - Arguments to update one Reference.
+     * @example
+     * // Update one Reference
+     * const reference = await prisma.reference.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ReferenceUpdateArgs>(args: SelectSubset<T, ReferenceUpdateArgs<ExtArgs>>): Prisma__ReferenceClient<$Result.GetResult<Prisma.$ReferencePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more References.
+     * @param {ReferenceDeleteManyArgs} args - Arguments to filter References to delete.
+     * @example
+     * // Delete a few References
+     * const { count } = await prisma.reference.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ReferenceDeleteManyArgs>(args?: SelectSubset<T, ReferenceDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more References.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReferenceUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many References
+     * const reference = await prisma.reference.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ReferenceUpdateManyArgs>(args: SelectSubset<T, ReferenceUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Reference.
+     * @param {ReferenceUpsertArgs} args - Arguments to update or create a Reference.
+     * @example
+     * // Update or create a Reference
+     * const reference = await prisma.reference.upsert({
+     *   create: {
+     *     // ... data to create a Reference
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Reference we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ReferenceUpsertArgs>(args: SelectSubset<T, ReferenceUpsertArgs<ExtArgs>>): Prisma__ReferenceClient<$Result.GetResult<Prisma.$ReferencePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more References that matches the filter.
+     * @param {ReferenceFindRawArgs} args - Select which filters you would like to apply.
+     * @example
+     * const reference = await prisma.reference.findRaw({
+     *   filter: { age: { $gt: 25 } }
+     * })
+     */
+    findRaw(args?: ReferenceFindRawArgs): Prisma.PrismaPromise<JsonObject>
+
+    /**
+     * Perform aggregation operations on a Reference.
+     * @param {ReferenceAggregateRawArgs} args - Select which aggregations you would like to apply.
+     * @example
+     * const reference = await prisma.reference.aggregateRaw({
+     *   pipeline: [
+     *     { $match: { status: "registered" } },
+     *     { $group: { _id: "$country", total: { $sum: 1 } } }
+     *   ]
+     * })
+     */
+    aggregateRaw(args?: ReferenceAggregateRawArgs): Prisma.PrismaPromise<JsonObject>
+
+
+    /**
+     * Count the number of References.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReferenceCountArgs} args - Arguments to filter References to count.
+     * @example
+     * // Count the number of References
+     * const count = await prisma.reference.count({
+     *   where: {
+     *     // ... the filter for the References we want to count
+     *   }
+     * })
+    **/
+    count<T extends ReferenceCountArgs>(
+      args?: Subset<T, ReferenceCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ReferenceCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Reference.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReferenceAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ReferenceAggregateArgs>(args: Subset<T, ReferenceAggregateArgs>): Prisma.PrismaPromise<GetReferenceAggregateType<T>>
+
+    /**
+     * Group by Reference.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReferenceGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ReferenceGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ReferenceGroupByArgs['orderBy'] }
+        : { orderBy?: ReferenceGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ReferenceGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetReferenceGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Reference model
+   */
+  readonly fields: ReferenceFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Reference.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ReferenceClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Reference model
+   */
+  interface ReferenceFieldRefs {
+    readonly id: FieldRef<"Reference", 'String'>
+    readonly userId: FieldRef<"Reference", 'String'>
+    readonly likedMovies: FieldRef<"Reference", 'String[]'>
+    readonly recentWatching: FieldRef<"Reference", 'String[]'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Reference findUnique
+   */
+  export type ReferenceFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Reference
+     */
+    select?: ReferenceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Reference
+     */
+    omit?: ReferenceOmit<ExtArgs> | null
+    /**
+     * Filter, which Reference to fetch.
+     */
+    where: ReferenceWhereUniqueInput
+  }
+
+  /**
+   * Reference findUniqueOrThrow
+   */
+  export type ReferenceFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Reference
+     */
+    select?: ReferenceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Reference
+     */
+    omit?: ReferenceOmit<ExtArgs> | null
+    /**
+     * Filter, which Reference to fetch.
+     */
+    where: ReferenceWhereUniqueInput
+  }
+
+  /**
+   * Reference findFirst
+   */
+  export type ReferenceFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Reference
+     */
+    select?: ReferenceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Reference
+     */
+    omit?: ReferenceOmit<ExtArgs> | null
+    /**
+     * Filter, which Reference to fetch.
+     */
+    where?: ReferenceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of References to fetch.
+     */
+    orderBy?: ReferenceOrderByWithRelationInput | ReferenceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for References.
+     */
+    cursor?: ReferenceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` References from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` References.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of References.
+     */
+    distinct?: ReferenceScalarFieldEnum | ReferenceScalarFieldEnum[]
+  }
+
+  /**
+   * Reference findFirstOrThrow
+   */
+  export type ReferenceFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Reference
+     */
+    select?: ReferenceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Reference
+     */
+    omit?: ReferenceOmit<ExtArgs> | null
+    /**
+     * Filter, which Reference to fetch.
+     */
+    where?: ReferenceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of References to fetch.
+     */
+    orderBy?: ReferenceOrderByWithRelationInput | ReferenceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for References.
+     */
+    cursor?: ReferenceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` References from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` References.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of References.
+     */
+    distinct?: ReferenceScalarFieldEnum | ReferenceScalarFieldEnum[]
+  }
+
+  /**
+   * Reference findMany
+   */
+  export type ReferenceFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Reference
+     */
+    select?: ReferenceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Reference
+     */
+    omit?: ReferenceOmit<ExtArgs> | null
+    /**
+     * Filter, which References to fetch.
+     */
+    where?: ReferenceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of References to fetch.
+     */
+    orderBy?: ReferenceOrderByWithRelationInput | ReferenceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing References.
+     */
+    cursor?: ReferenceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` References from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` References.
+     */
+    skip?: number
+    distinct?: ReferenceScalarFieldEnum | ReferenceScalarFieldEnum[]
+  }
+
+  /**
+   * Reference create
+   */
+  export type ReferenceCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Reference
+     */
+    select?: ReferenceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Reference
+     */
+    omit?: ReferenceOmit<ExtArgs> | null
+    /**
+     * The data needed to create a Reference.
+     */
+    data: XOR<ReferenceCreateInput, ReferenceUncheckedCreateInput>
+  }
+
+  /**
+   * Reference createMany
+   */
+  export type ReferenceCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many References.
+     */
+    data: ReferenceCreateManyInput | ReferenceCreateManyInput[]
+  }
+
+  /**
+   * Reference update
+   */
+  export type ReferenceUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Reference
+     */
+    select?: ReferenceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Reference
+     */
+    omit?: ReferenceOmit<ExtArgs> | null
+    /**
+     * The data needed to update a Reference.
+     */
+    data: XOR<ReferenceUpdateInput, ReferenceUncheckedUpdateInput>
+    /**
+     * Choose, which Reference to update.
+     */
+    where: ReferenceWhereUniqueInput
+  }
+
+  /**
+   * Reference updateMany
+   */
+  export type ReferenceUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update References.
+     */
+    data: XOR<ReferenceUpdateManyMutationInput, ReferenceUncheckedUpdateManyInput>
+    /**
+     * Filter which References to update
+     */
+    where?: ReferenceWhereInput
+    /**
+     * Limit how many References to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Reference upsert
+   */
+  export type ReferenceUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Reference
+     */
+    select?: ReferenceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Reference
+     */
+    omit?: ReferenceOmit<ExtArgs> | null
+    /**
+     * The filter to search for the Reference to update in case it exists.
+     */
+    where: ReferenceWhereUniqueInput
+    /**
+     * In case the Reference found by the `where` argument doesn't exist, create a new Reference with this data.
+     */
+    create: XOR<ReferenceCreateInput, ReferenceUncheckedCreateInput>
+    /**
+     * In case the Reference was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ReferenceUpdateInput, ReferenceUncheckedUpdateInput>
+  }
+
+  /**
+   * Reference delete
+   */
+  export type ReferenceDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Reference
+     */
+    select?: ReferenceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Reference
+     */
+    omit?: ReferenceOmit<ExtArgs> | null
+    /**
+     * Filter which Reference to delete.
+     */
+    where: ReferenceWhereUniqueInput
+  }
+
+  /**
+   * Reference deleteMany
+   */
+  export type ReferenceDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which References to delete
+     */
+    where?: ReferenceWhereInput
+    /**
+     * Limit how many References to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Reference findRaw
+   */
+  export type ReferenceFindRawArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The query predicate filter. If unspecified, then all documents in the collection will match the predicate. ${@link https://docs.mongodb.com/manual/reference/operator/query MongoDB Docs}.
+     */
+    filter?: InputJsonValue
+    /**
+     * Additional options to pass to the `find` command ${@link https://docs.mongodb.com/manual/reference/command/find/#command-fields MongoDB Docs}.
+     */
+    options?: InputJsonValue
+  }
+
+  /**
+   * Reference aggregateRaw
+   */
+  export type ReferenceAggregateRawArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * An array of aggregation stages to process and transform the document stream via the aggregation pipeline. ${@link https://docs.mongodb.com/manual/reference/operator/aggregation-pipeline MongoDB Docs}.
+     */
+    pipeline?: InputJsonValue[]
+    /**
+     * Additional options to pass to the `aggregate` command ${@link https://docs.mongodb.com/manual/reference/command/aggregate/#command-fields MongoDB Docs}.
+     */
+    options?: InputJsonValue
+  }
+
+  /**
+   * Reference without action
+   */
+  export type ReferenceDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Reference
+     */
+    select?: ReferenceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Reference
+     */
+    omit?: ReferenceOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -5148,6 +6152,16 @@ export namespace Prisma {
   };
 
   export type CommentScalarFieldEnum = (typeof CommentScalarFieldEnum)[keyof typeof CommentScalarFieldEnum]
+
+
+  export const ReferenceScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    likedMovies: 'likedMovies',
+    recentWatching: 'recentWatching'
+  };
+
+  export type ReferenceScalarFieldEnum = (typeof ReferenceScalarFieldEnum)[keyof typeof ReferenceScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -5569,6 +6583,53 @@ export namespace Prisma {
     movieId?: StringWithAggregatesFilter<"Comment"> | string
   }
 
+  export type ReferenceWhereInput = {
+    AND?: ReferenceWhereInput | ReferenceWhereInput[]
+    OR?: ReferenceWhereInput[]
+    NOT?: ReferenceWhereInput | ReferenceWhereInput[]
+    id?: StringFilter<"Reference"> | string
+    userId?: StringFilter<"Reference"> | string
+    likedMovies?: StringNullableListFilter<"Reference">
+    recentWatching?: StringNullableListFilter<"Reference">
+  }
+
+  export type ReferenceOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    likedMovies?: SortOrder
+    recentWatching?: SortOrder
+  }
+
+  export type ReferenceWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: ReferenceWhereInput | ReferenceWhereInput[]
+    OR?: ReferenceWhereInput[]
+    NOT?: ReferenceWhereInput | ReferenceWhereInput[]
+    userId?: StringFilter<"Reference"> | string
+    likedMovies?: StringNullableListFilter<"Reference">
+    recentWatching?: StringNullableListFilter<"Reference">
+  }, "id">
+
+  export type ReferenceOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    likedMovies?: SortOrder
+    recentWatching?: SortOrder
+    _count?: ReferenceCountOrderByAggregateInput
+    _max?: ReferenceMaxOrderByAggregateInput
+    _min?: ReferenceMinOrderByAggregateInput
+  }
+
+  export type ReferenceScalarWhereWithAggregatesInput = {
+    AND?: ReferenceScalarWhereWithAggregatesInput | ReferenceScalarWhereWithAggregatesInput[]
+    OR?: ReferenceScalarWhereWithAggregatesInput[]
+    NOT?: ReferenceScalarWhereWithAggregatesInput | ReferenceScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Reference"> | string
+    userId?: StringWithAggregatesFilter<"Reference"> | string
+    likedMovies?: StringNullableListFilter<"Reference">
+    recentWatching?: StringNullableListFilter<"Reference">
+  }
+
   export type MovieCreateInput = {
     id?: string
     episodes?: InputJsonValue | null
@@ -5938,6 +6999,51 @@ export namespace Prisma {
     movieId?: StringFieldUpdateOperationsInput | string
   }
 
+  export type ReferenceCreateInput = {
+    id?: string
+    userId: string
+    likedMovies?: ReferenceCreatelikedMoviesInput | string[]
+    recentWatching?: ReferenceCreaterecentWatchingInput | string[]
+  }
+
+  export type ReferenceUncheckedCreateInput = {
+    id?: string
+    userId: string
+    likedMovies?: ReferenceCreatelikedMoviesInput | string[]
+    recentWatching?: ReferenceCreaterecentWatchingInput | string[]
+  }
+
+  export type ReferenceUpdateInput = {
+    userId?: StringFieldUpdateOperationsInput | string
+    likedMovies?: ReferenceUpdatelikedMoviesInput | string[]
+    recentWatching?: ReferenceUpdaterecentWatchingInput | string[]
+  }
+
+  export type ReferenceUncheckedUpdateInput = {
+    userId?: StringFieldUpdateOperationsInput | string
+    likedMovies?: ReferenceUpdatelikedMoviesInput | string[]
+    recentWatching?: ReferenceUpdaterecentWatchingInput | string[]
+  }
+
+  export type ReferenceCreateManyInput = {
+    id?: string
+    userId: string
+    likedMovies?: ReferenceCreatelikedMoviesInput | string[]
+    recentWatching?: ReferenceCreaterecentWatchingInput | string[]
+  }
+
+  export type ReferenceUpdateManyMutationInput = {
+    userId?: StringFieldUpdateOperationsInput | string
+    likedMovies?: ReferenceUpdatelikedMoviesInput | string[]
+    recentWatching?: ReferenceUpdaterecentWatchingInput | string[]
+  }
+
+  export type ReferenceUncheckedUpdateManyInput = {
+    userId?: StringFieldUpdateOperationsInput | string
+    likedMovies?: ReferenceUpdatelikedMoviesInput | string[]
+    recentWatching?: ReferenceUpdaterecentWatchingInput | string[]
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -6253,6 +7359,23 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type ReferenceCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    likedMovies?: SortOrder
+    recentWatching?: SortOrder
+  }
+
+  export type ReferenceMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+  }
+
+  export type ReferenceMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+  }
+
   export type MovieCreateactorInput = {
     set: string[]
   }
@@ -6307,6 +7430,24 @@ export namespace Prisma {
 
   export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string
+  }
+
+  export type ReferenceCreatelikedMoviesInput = {
+    set: string[]
+  }
+
+  export type ReferenceCreaterecentWatchingInput = {
+    set: string[]
+  }
+
+  export type ReferenceUpdatelikedMoviesInput = {
+    set?: string[]
+    push?: string | string[]
+  }
+
+  export type ReferenceUpdaterecentWatchingInput = {
+    set?: string[]
+    push?: string | string[]
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
