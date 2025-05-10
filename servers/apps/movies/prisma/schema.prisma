@@ -73,7 +73,7 @@ model Reference {
   id        String @id @default(auto()) @map("_id") @db.ObjectId
   userId    String
   likedMovies   String[]
-  recentWatching String[]
+  recentWatching Json
 
   @@map("references")
 }

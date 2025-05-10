@@ -1,9 +1,9 @@
 import { Args, Mutation, Resolver, Query, Int, ResolveField, Parent } from "@nestjs/graphql";
 import { MoviesService } from "./movies.service";
-import { MoviesResposne, MovieResponse, MoviesResponseWithMetaData, CommentResponse, CommentsResponse } from "./types/movie.type";
-import { MovieSortDto, MoviesQueryDto, QueryPagingDto, CommentDto, QueryDto } from "./dto/movie.dto";
+import { MoviesResposne, MovieResponse, MoviesResponseWithMetaData, CommentResponse, CommentsResponse, LikedMoviesResponse, RecentMoviesResponse} from "./types/movie.type";
+import { MovieSortDto, MoviesQueryDto, QueryPagingDto, CommentDto, QueryDto, RecentMovieDto } from "./dto/movie.dto";
 import { GraphQLClient, gql } from 'graphql-request';
-import { UseGuards } from "@nestjs/common";
+import { BadRequestException, UseGuards } from "@nestjs/common";
 import { AuthenGuardMovie } from "./guards/authen.guards";
 import { User, Comment } from "./entities/comment.entity";
 import { Movie } from "./entities/movie.entity";
@@ -148,10 +148,31 @@ export class ReferenceResolver {
         return  await this.movieService.updateLikedMovies(userId, movieId)
     }
 
+    @Query(() => LikedMoviesResponse )
+    @UseGuards(AuthenGuardMovie)
+    async getLikedMovies(
+        @Args("id") userId: string
+    ): Promise<LikedMoviesResponse> {
+        if(!userId) throw new BadRequestException("Need login to access")
+        return await this.movieService.getLikedMovies(userId);
+    }
+
     @Query(() => Boolean)
     @UseGuards(AuthenGuardMovie)
     async getStatusLikedMovie(
         @Args("id") userId: string,
         @Args("movieId") movieId: string,
-    )
+    ): Promise<Boolean> {
+        return  await this.movieService.getStatusLikedMovie(userId, movieId)
+    }
+
+    @Mutation(() => Boolean)
+    @UseGuards(AuthenGuardMovie)
+    async addRecentMovie(
+        @Args("id") userId: string,
+        @Args("movieInfo") movieInfor: RecentMovieDto,
+    ): Promise<Boolean> {
+        return await this.movieService.addRecentMovie(userId, movieInfor)
+        
+    }
 }

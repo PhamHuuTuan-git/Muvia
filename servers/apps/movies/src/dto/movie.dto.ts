@@ -1,5 +1,5 @@
 import { InputType, Field, Int } from "@nestjs/graphql";
-import { IsNotEmpty, IsNumber, IsString } from "class-validator";
+import { isNotEmpty, IsNotEmpty, IsNumber, IsString } from "class-validator";
 
 @InputType()
 export class QueryPagingDto {
@@ -71,3 +71,23 @@ export class QueryDto {
     @IsNumber({}, { message: "Limit must be a number" })
     limit: number
 } 
+
+@InputType()
+export class RecentMovieDto {
+    @Field()
+    @IsNotEmpty({message: "Id is required"})
+    movieId: string
+
+    @Field()
+    @IsNotEmpty({message: "Name is required"})
+    name: string
+
+    @Field()
+    @IsNotEmpty({message: "Episode is required"})
+    episode: string
+
+    @Field()
+    @IsNotEmpty({message: "Time is required"})
+    time: string
+
+}

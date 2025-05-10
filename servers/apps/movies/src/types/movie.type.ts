@@ -81,3 +81,38 @@ export  class CommentsResponse {
     @Field(() => ErrorType, { nullable: true })
     error?: ErrorType;
 }
+
+@ObjectType()
+export class LikedMoviesResponse {
+    @Field(() => [Movie])
+    movies: Movie[] | any
+    @Field(() => ErrorType, { nullable: true })
+    error?: ErrorType;
+}
+
+@ObjectType()
+export class RecentMovie {
+
+    @Field()
+    slug: string;
+
+    @Field()
+    name: string;
+
+    @Field()
+    episode: string;
+
+    @Field()
+    time: string;
+    
+
+}
+
+@ObjectType()
+export class RecentMoviesResponse {
+    @Field(() => [RecentMovie])
+    movies: RecentMovie[] | any;
+
+    @Field(() => ErrorType, { nullable: true })
+    error?: ErrorType;
+}

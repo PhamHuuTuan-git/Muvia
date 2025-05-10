@@ -5293,7 +5293,7 @@ export namespace Prisma {
     id: string
     userId: string
     likedMovies: string[]
-    recentWatching: string[]
+    recentWatching: JsonValue
     _count: ReferenceCountAggregateOutputType | null
     _min: ReferenceMinAggregateOutputType | null
     _max: ReferenceMaxAggregateOutputType | null
@@ -5338,7 +5338,7 @@ export namespace Prisma {
       id: string
       userId: string
       likedMovies: string[]
-      recentWatching: string[]
+      recentWatching: Prisma.JsonValue
     }, ExtArgs["result"]["reference"]>
     composites: {}
   }
@@ -5734,7 +5734,7 @@ export namespace Prisma {
     readonly id: FieldRef<"Reference", 'String'>
     readonly userId: FieldRef<"Reference", 'String'>
     readonly likedMovies: FieldRef<"Reference", 'String[]'>
-    readonly recentWatching: FieldRef<"Reference", 'String[]'>
+    readonly recentWatching: FieldRef<"Reference", 'Json'>
   }
     
 
@@ -6590,7 +6590,7 @@ export namespace Prisma {
     id?: StringFilter<"Reference"> | string
     userId?: StringFilter<"Reference"> | string
     likedMovies?: StringNullableListFilter<"Reference">
-    recentWatching?: StringNullableListFilter<"Reference">
+    recentWatching?: JsonFilter<"Reference">
   }
 
   export type ReferenceOrderByWithRelationInput = {
@@ -6607,7 +6607,7 @@ export namespace Prisma {
     NOT?: ReferenceWhereInput | ReferenceWhereInput[]
     userId?: StringFilter<"Reference"> | string
     likedMovies?: StringNullableListFilter<"Reference">
-    recentWatching?: StringNullableListFilter<"Reference">
+    recentWatching?: JsonFilter<"Reference">
   }, "id">
 
   export type ReferenceOrderByWithAggregationInput = {
@@ -6627,7 +6627,7 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Reference"> | string
     userId?: StringWithAggregatesFilter<"Reference"> | string
     likedMovies?: StringNullableListFilter<"Reference">
-    recentWatching?: StringNullableListFilter<"Reference">
+    recentWatching?: JsonWithAggregatesFilter<"Reference">
   }
 
   export type MovieCreateInput = {
@@ -7003,45 +7003,45 @@ export namespace Prisma {
     id?: string
     userId: string
     likedMovies?: ReferenceCreatelikedMoviesInput | string[]
-    recentWatching?: ReferenceCreaterecentWatchingInput | string[]
+    recentWatching: InputJsonValue
   }
 
   export type ReferenceUncheckedCreateInput = {
     id?: string
     userId: string
     likedMovies?: ReferenceCreatelikedMoviesInput | string[]
-    recentWatching?: ReferenceCreaterecentWatchingInput | string[]
+    recentWatching: InputJsonValue
   }
 
   export type ReferenceUpdateInput = {
     userId?: StringFieldUpdateOperationsInput | string
     likedMovies?: ReferenceUpdatelikedMoviesInput | string[]
-    recentWatching?: ReferenceUpdaterecentWatchingInput | string[]
+    recentWatching?: InputJsonValue | InputJsonValue
   }
 
   export type ReferenceUncheckedUpdateInput = {
     userId?: StringFieldUpdateOperationsInput | string
     likedMovies?: ReferenceUpdatelikedMoviesInput | string[]
-    recentWatching?: ReferenceUpdaterecentWatchingInput | string[]
+    recentWatching?: InputJsonValue | InputJsonValue
   }
 
   export type ReferenceCreateManyInput = {
     id?: string
     userId: string
     likedMovies?: ReferenceCreatelikedMoviesInput | string[]
-    recentWatching?: ReferenceCreaterecentWatchingInput | string[]
+    recentWatching: InputJsonValue
   }
 
   export type ReferenceUpdateManyMutationInput = {
     userId?: StringFieldUpdateOperationsInput | string
     likedMovies?: ReferenceUpdatelikedMoviesInput | string[]
-    recentWatching?: ReferenceUpdaterecentWatchingInput | string[]
+    recentWatching?: InputJsonValue | InputJsonValue
   }
 
   export type ReferenceUncheckedUpdateManyInput = {
     userId?: StringFieldUpdateOperationsInput | string
     likedMovies?: ReferenceUpdatelikedMoviesInput | string[]
-    recentWatching?: ReferenceUpdaterecentWatchingInput | string[]
+    recentWatching?: InputJsonValue | InputJsonValue
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -7436,16 +7436,7 @@ export namespace Prisma {
     set: string[]
   }
 
-  export type ReferenceCreaterecentWatchingInput = {
-    set: string[]
-  }
-
   export type ReferenceUpdatelikedMoviesInput = {
-    set?: string[]
-    push?: string | string[]
-  }
-
-  export type ReferenceUpdaterecentWatchingInput = {
     set?: string[]
     push?: string | string[]
   }

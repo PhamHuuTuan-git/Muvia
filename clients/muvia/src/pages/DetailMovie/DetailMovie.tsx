@@ -3,28 +3,35 @@ import { addToast, Button } from "@heroui/react";
 import "./style.scss";
 import PlayIcon from "@/components/icons/PlayIcon";
 import LoveFillIcon from "@/components/icons/LoveFillIcon";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TabMovie from "./TabMovie";
 import RatingMovie from "@/components/RatingMovie/RatingMovie";
 import { useRouter } from "next/navigation"
 import { usePathname } from "next/navigation";
 import { GET_SPECIFIED_MOVIE } from "@/graphql/actions/movieActions/get_specified_movie.action";
-import { useQuery } from "@apollo/client";
 import Loading from "@/components/Loading/Loading";
-
+import { useMutation, useLazyQuery, useQuery } from "@apollo/client";
+import { UPDATE_LIKED_MOVIES } from "@/graphql/actions/movieActions/update_liked_movies.action";
+import { CHECK_IS_LIKE_MOVIE } from "@/graphql/actions/movieActions/check_is_like_movie.action";
+import { useSelector } from 'react-redux';
+import { authenSelectorUser } from '@/redux-toolkit/selector';
 type Props = {
     slug: string
 }
 
 function DetailMovie({ slug }: Props) {
     const [isLike, setIslike] = useState(false);
+    const [updateLikeMoviesMutation] = useMutation(UPDATE_LIKED_MOVIES);
+    const userAuthen = useSelector(authenSelectorUser);
     const pathname = usePathname();
     const router = useRouter();
     const { data, loading, error } = useQuery(GET_SPECIFIED_MOVIE, {
         variables: { slug: slug },
         fetchPolicy: "no-cache",
     })
-
+    const [checkIsLikeMovie, { data: likeData }] = useLazyQuery(CHECK_IS_LIKE_MOVIE, {
+        fetchPolicy: "no-cache",
+    });
     const redirectWatching = () => {
         const slug = data.getSpecifiedMovie.movie.episodes[0].server_data[0].slug;
         if (!slug || slug === "") {
@@ -38,13 +45,46 @@ function DetailMovie({ slug }: Props) {
         }
 
     }
+    useEffect(() => {
+        if (userAuthen && data) {
+            checkIsLikeMovie({
+                variables: {
+                    id: userAuthen.id,
+                    movieId: data.getSpecifiedMovie.movie.id,
+                },
+            });
+        }
+    }, [data])
+    useEffect(() => {
+        if (likeData) {
+            setIslike(likeData.getStatusLikedMovie)
+        }
+    }, [likeData]);
     if (data === undefined || data === null) {
         return (
-            <div style={{marginTop:"80px"}}>
+            <div style={{ marginTop: "80px" }}>
                 <Loading />
             </div>
         )
     }
+    const handleLikeStatus = async () => {
+        if(!userAuthen || !data) return;
+        try {
+            const result = await updateLikeMoviesMutation({
+                variables: {
+                    id: userAuthen.id,
+                    movieId: data.getSpecifiedMovie.movie.id
+                }
+            })
+            setIslike(!isLike)
+        } catch(err: any) {
+            addToast({
+                title: "Error",
+                description: `${err.message}`,
+                color:"danger"
+            })
+        }
+    } 
     return (
         <div className="detail--container">
             <div className="poster--container">
@@ -83,11 +123,11 @@ function DetailMovie({ slug }: Props) {
                     {/* the loai */}
                     <div className="mt-[20px] flex gap-2">
                         {
-                            data.getSpecifiedMovie.movie.category&&
-                            data.getSpecifiedMovie.movie.category.length > 0 && 
+                            data.getSpecifiedMovie.movie.category &&
+                            data.getSpecifiedMovie.movie.category.length > 0 &&
                             data.getSpecifiedMovie.movie.category.map((ele: any, index: number) => {
                                 return (
-                                    <div key={index}className="type-detail-movie--container">
+                                    <div key={index} className="type-detail-movie--container">
                                         <p className="text-white text-[0.6rem]">{ele.name}</p>
                                     </div>
                                 )
@@ -145,10 +185,15 @@ function DetailMovie({ slug }: Props) {
                     {/*  */}
                     <div className="flex gap-8">
                         <Button onClick={redirectWatching} className="watch-now--button"><PlayIcon /> Xem ngay</Button>
-                        <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-                            <LoveFillIcon onClick={() => setIslike(!isLike)} className={`${!isLike ? "movie-like" : "movie-liked"} size-6 cursor-pointer`} />
-                            <p className="select-none text-white">Yêu thích</p>
-                        </div>
+                        {
+                            userAuthen && data && (
+                                <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+                                    <LoveFillIcon onClick={() => handleLikeStatus()} className={`${!isLike ? "movie-like" : "movie-liked"} size-6 cursor-pointer`} />
+                                    <p className="select-none text-white">Yêu thích</p>
+                                </div>
+                            )
+                        }
+
                     </div>
                     {/* Tabs */}
                     <div className="tabs--container">
@@ -157,7 +202,7 @@ function DetailMovie({ slug }: Props) {
 
                     {/* Rating */}
                     <div style={{ marginTop: "80px", padding: "40px" }}>
-                        <RatingMovie idMovie={data.getSpecifiedMovie.movie.id} nameMovie={data.getSpecifiedMovie.movie.name}/>
+                        <RatingMovie idMovie={data.getSpecifiedMovie.movie.id} nameMovie={data.getSpecifiedMovie.movie.name} />
                     </div>
                 </div>
             </div>

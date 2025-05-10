@@ -2,7 +2,7 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 import { PrismaMovieService } from '../prisma/prisma.service';
 import { ConfigService } from '@nestjs/config';
 import { Movie } from './entities/movie.entity';
-import { MovieSortDto, MoviesQueryDto, QueryDto, QueryPagingDto } from './dto/movie.dto';
+import { MovieSortDto, MoviesQueryDto, QueryDto, QueryPagingDto, RecentMovieDto } from './dto/movie.dto';
 
 interface RunCommandResult {
   cursor?: {
@@ -275,8 +275,8 @@ export class MoviesService {
           userId
         }
       })
-      if(!refre) {
-        
+      if (!refre) {
+
         await this.prisma.reference.create({
           data: {
             userId,
@@ -286,7 +286,7 @@ export class MoviesService {
         })
       } else {
         const exist = refre.likedMovies.includes(movieId);
-        if(exist) {
+        if (exist) {
           const new_likedMovies = refre.likedMovies.filter((ele) => {
             return ele !== movieId
           })
@@ -311,11 +311,129 @@ export class MoviesService {
         }
       }
       return true;
-    }catch(err) {
+    } catch (err) {
       throw new BadRequestException(err.message);
     }
   }
 
+  async getStatusLikedMovie(userId: string, movieId: string) {
+    try {
+      const result = await this.prisma.reference.findFirst({
+        where: {
+          userId: userId
+        }
+      })
+      if (!result) return false;
+      const isLiked = result.likedMovies.includes(movieId)
+      if (isLiked) return true
+      return false
+    } catch (err) {
+      throw new BadRequestException(err.message);
+    }
+  }
+
+  async getLikedMovies(userId: string) {
+    if (!userId) throw new BadRequestException("Login to access")
+    try {
+      const reference = await this.prisma.reference.findFirst({
+        where: { userId: userId },
+        select: { likedMovies: true },
+      });
+      if (reference && reference.likedMovies.length > 0) {
+        const movies = await this.prisma.movie.findMany({
+          where: {
+            id: {
+              in: reference.likedMovies,
+            },
+          },
+        });
+        return {
+          movies: movies
+        };
+      } else {
+        return {
+          movies: []
+        };
+      }
+    } catch (err) {
+      throw new BadRequestException(err.message);
+    }
+  }
+
+  async addRecentMovie(userId: string, movieInfor: RecentMovieDto) {
+    try {
+      const reference = await this.prisma.reference.findFirst({
+        where: {
+          userId: userId
+        }
+      })
+      if (!reference) {
+        const { movieId, name, episode, time } = movieInfor
+        await this.prisma.reference.create({
+          data: {
+            userId,
+            likedMovies: [],
+            recentWatching: [
+              {
+                movieId: movieId,
+                name: name,
+                episode: episode,
+                time: time
+              }
+            ]
+          }
+        })
+      } else {
+        if (Array.isArray(reference.recentWatching) && reference.recentWatching.length > 0) {
+          const recent = reference.recentWatching as {
+            movieId: string;
+            name: string;
+            episode: string;
+            time: string;
+          }[];
+          const foundItem = recent.find(item => item.movieId === movieInfor.movieId);
+          if (foundItem) {
+            const updatedRecent = recent.map(item =>
+              item.movieId === movieInfor.movieId
+                ? {
+                  movieId: movieInfor.movieId,
+                  name: movieInfor.name,
+                  episode: movieInfor.episode,
+                  time: movieInfor.time,
+                }
+                : item
+            );
+            await this.prisma.reference.update({
+              where: {
+                id: reference.id,
+              },
+              data: {
+                recentWatching: updatedRecent,
+              },
+            });
+          } else {
+            recent.push({
+              movieId: movieInfor.movieId,
+              name: movieInfor.name,
+              episode: movieInfor.episode,
+              time: movieInfor.time,
+            });
+            await this.prisma.reference.update({
+              where: {
+                id: reference.id,
+              },
+              data: {
+                recentWatching: recent,
+              },
+            });
+          }
+        }
+      }
+      return true;
+    } catch (err) {
+      throw new BadRequestException(err.message);
+    }
+  }
   // default query
   getMovie(): string {
     return 'Hello Movie!';
