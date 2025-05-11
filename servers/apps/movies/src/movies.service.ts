@@ -4,6 +4,7 @@ import { ConfigService } from '@nestjs/config';
 import { Movie } from './entities/movie.entity';
 import { MovieSortDto, MoviesQueryDto, QueryDto, QueryPagingDto, RecentMovieDto } from './dto/movie.dto';
 
+
 interface RunCommandResult {
   cursor?: {
     firstBatch?: Movie[];
@@ -361,7 +362,7 @@ export class MoviesService {
   }
 
   async addRecentMovie(userId: string, movieInfor: RecentMovieDto) {
-    console.log("caching: ", movieInfor)
+    // console.log("caching: ", movieInfor)
     try {
       const reference = await this.prisma.reference.findFirst({
         where: {
@@ -369,7 +370,7 @@ export class MoviesService {
         }
       })
       if (!reference) {
-        const { movieId, episode, time,name, thumb_url } = movieInfor
+        const { movieId, episode, time, name, thumb_url, slug } = movieInfor
         await this.prisma.reference.create({
           data: {
             userId,
@@ -380,6 +381,7 @@ export class MoviesService {
                 episode: episode,
                 time: time,
                 name: name,
+                slug: slug,
                 thumb_url: thumb_url
               }
             ]
@@ -393,6 +395,7 @@ export class MoviesService {
             time: string;
             name: string;
             thumb_url: string;
+            slug: string;
           }[];
           const foundItem = recent.find(item => item.movieId === movieInfor.movieId);
           if (foundItem) {
@@ -403,7 +406,8 @@ export class MoviesService {
                   episode: movieInfor.episode,
                   time: movieInfor.time,
                   name: movieInfor.name,
-                  thumb_url: movieInfor.thumb_url
+                  thumb_url: movieInfor.thumb_url,
+                  slug: movieInfor.slug
                 }
                 : item
             );
@@ -420,8 +424,9 @@ export class MoviesService {
               movieId: movieInfor.movieId,
               episode: movieInfor.episode,
               time: movieInfor.time,
-              name:movieInfor.name,
-              thumb_url: movieInfor.thumb_url
+              name: movieInfor.name,
+              thumb_url: movieInfor.thumb_url,
+              slug: movieInfor.slug
             });
             await this.prisma.reference.update({
               where: {
@@ -432,9 +437,104 @@ export class MoviesService {
               },
             });
           }
+        } else {
+          const recent = reference.recentWatching as {
+            movieId: string;
+            episode: string;
+            time: string;
+            name: string;
+            thumb_url: string;
+            slug: string;
+          }[];
+          recent.push({
+            movieId: movieInfor.movieId,
+            episode: movieInfor.episode,
+            time: movieInfor.time,
+            name: movieInfor.name,
+            thumb_url: movieInfor.thumb_url,
+            slug: movieInfor.slug
+          });
+          await this.prisma.reference.update({
+            where: {
+              id: reference.id,
+            },
+            data: {
+              recentWatching: recent,
+            },
+          });
         }
       }
       return true;
+    } catch (err) {
+      throw new BadRequestException(err.message);
+    }
+  }
+
+  async getRecentMovies(userId: string) {
+    if (!userId) throw new BadRequestException("Login to access")
+    try {
+      const reference = await this.prisma.reference.findFirst({
+        where: {
+          userId: userId
+        },
+        select: { recentWatching: true },
+      })
+
+      if (reference && reference.recentWatching && Array.isArray(reference.recentWatching) && reference.recentWatching.length > 0) {
+        // console.log("recentwatching: ", reference)
+        return {
+          movies: reference.recentWatching
+        }
+      } else {
+        return {
+          movies: []
+        };
+      }
+
+    } catch (err) {
+      throw new BadRequestException(err.message);
+    }
+  }
+
+  async deleteRecentMovie(userId: string, movieId: string) {
+    if (!userId) throw new BadRequestException("Login to access")
+    try {
+      const reference = await this.prisma.reference.findFirst({
+        where: {
+          userId: userId
+        },
+        
+      })
+      if (reference && reference.recentWatching && Array.isArray(reference.recentWatching) && reference.recentWatching.length > 0) {
+        const recent = reference.recentWatching as {
+          movieId: string;
+          episode: string;
+          time: string;
+          name: string;
+          thumb_url: string;
+          slug: string;
+        }[];
+        const foundItem = recent.find(item => item.movieId === movieId);
+        if(foundItem) {
+          const final = recent.filter((ele: any) => {
+            return ele.movieId !== movieId
+          })
+          await this.prisma.reference.update({
+            where: {
+              id: reference.id
+            },
+            data: {
+              recentWatching: final
+            }
+          })
+          return true
+        }else {
+           throw new BadRequestException("Cannot find this movie")
+        }
+      } else {
+        throw new BadRequestException("Cannot find this item")
+      }
+
     } catch (err) {
       throw new BadRequestException(err.message);
     }

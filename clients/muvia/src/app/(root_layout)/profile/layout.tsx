@@ -15,9 +15,9 @@ function ProfileLayput({
     return (
         <div style={{ marginTop: "80px", padding: "40px" }}>
             <div className="tab-profile--container">
-                <div className="link-profile--container">
+                {/* <div className="link-profile--container">
                     <Link className={`link-profile ${realSlug === "me" ? "active": null}`} href={`${routing.profile}/me`}>My self</Link>
-                </div>
+                </div> */}
                 <div className="link-profile--container">
                     <Link className={`link-profile ${realSlug === "liked" ? "active": null}`}  href={`${routing.profile}/liked`}>Liked</Link>
                 </div>

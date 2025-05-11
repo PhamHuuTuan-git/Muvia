@@ -175,4 +175,21 @@ export class ReferenceResolver {
         return await this.movieService.addRecentMovie(userId, movieInfor)
         
     }
+
+    @Query(() => RecentMoviesResponse)
+    @UseGuards(AuthenGuardMovie)
+    async getRecentMovies(
+        @Args("id") userId: string
+    ): Promise<RecentMoviesResponse> {
+        return await this.movieService.getRecentMovies(userId);
+    }
+
+    @Mutation(() => Boolean)
+    @UseGuards(AuthenGuardMovie) 
+    async deleteRecentMovie(
+        @Args("id") userId: string,
+        @Args("movieId") movieId: string
+    ): Promise<Boolean> {
+        return await this.movieService.deleteRecentMovie(userId,movieId);
+    }
 }

@@ -91,6 +91,10 @@ export class RecentMovieDto {
     name: string
 
     @Field()
+    @IsNotEmpty({message: "Slug is required"})
+    slug: string
+
+    @Field()
     @IsNotEmpty({message: "Thumb image is required"})
     thumb_url: string
 

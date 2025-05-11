@@ -55,7 +55,7 @@ export class MoviesResponseWithMetaData {
 
     @Field(() => ErrorType, { nullable: true })
     error?: ErrorType;
-   
+
 }
 
 @ObjectType()
@@ -74,7 +74,7 @@ export class CommentResponse {
 }
 
 @ObjectType()
-export  class CommentsResponse {
+export class CommentsResponse {
     @Field(() => [Comment])
     comments: Comment[] | any
 
@@ -92,6 +92,8 @@ export class LikedMoviesResponse {
 
 @ObjectType()
 export class RecentMovie {
+    @Field()
+    movieId: string
 
     @Field()
     slug: string;
@@ -104,7 +106,9 @@ export class RecentMovie {
 
     @Field()
     time: string;
-    
+
+    @Field()
+    thumb_url: string
 
 }
 

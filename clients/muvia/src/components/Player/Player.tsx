@@ -82,7 +82,7 @@ function ControlSlider({ video, parentTime }: { video: HTMLVideoElement, parentT
   )
 }
 
-function Player({ src }: { src: string }) {
+function Player({ time, src }: { time: any, src: string }) {
   // console.log("src: ", src)
   const [isPlaying, setIsPlaying] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -195,10 +195,19 @@ function Player({ src }: { src: string }) {
     }
   }, [isLoading]);
 
-  
+
 
   useEffect(() => {
-    
+    const interval = setInterval(() => {
+      const video = videoRef.current;
+      if (video && !isNaN(video.currentTime)) {
+        time.current = video.currentTime;
+        // console.log("Time: ",currentTimeRef.current)
+        // console.log("Current video time:", video.currentTime);
+      }
+    }, 5000);
+
+    return () => clearInterval(interval);
   }, [])
 
   if (isLoading) {

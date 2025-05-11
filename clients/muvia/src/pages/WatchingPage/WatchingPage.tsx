@@ -30,6 +30,7 @@ function WatchingPage({ slug, episode }: Props) {
     variables: { limit: 10 },
     fetchPolicy: "no-cache",
   })
+  const current_Time = useRef(0);
   const [addRecentMovie, { error: mutationError }] = useMutation(ADD_RECENT_MOVIE);
   const router = useRouter();
   const pathname = usePathname();
@@ -49,10 +50,10 @@ function WatchingPage({ slug, episode }: Props) {
     }
   }, [data, resultRecommendedMovies.data])
   const handleRedirectMovie = (curr_episode: string) => {
-    
+
     if (episode === curr_episode) return;
     if (!episode || episode == "") {
-  
+
       addToast({
         title: "Cảnh báo",
         description: "Phim chưa sẵn sàng",
@@ -77,7 +78,8 @@ function WatchingPage({ slug, episode }: Props) {
       name: movie.current.name,
       thumb_url: movie.current.thumb_url,
       episode: episode,
-      time: "1p20"
+      slug: movie.current.slug,
+      time: current_Time.current.toString()
     };
 
     // Đã đăng nhập: Gửi mutation
@@ -95,13 +97,15 @@ function WatchingPage({ slug, episode }: Props) {
 
   useEffect(() => {
 
-    
-    window.addEventListener("beforeunload", saveRecentMovie);
+
+    // window.addEventListener("beforeunload", saveRecentMovie);
 
     return () => {
-      window.removeEventListener("beforeunload", saveRecentMovie);
+      // window.removeEventListener("beforeunload", saveRecentMovie);
+      saveRecentMovie()
     };
-  }, [ data, userAuthen]);
+  }, [data, userAuthen]);
+  
   // console.log("video current: ", getVideo())
   if (isloading) {
     return (
@@ -113,9 +117,11 @@ function WatchingPage({ slug, episode }: Props) {
   if (data) {
     movie.current = data.getSpecifiedMovie.movie
   }
+
   const handleRedirect = (slug: string) => {
     router.push(`${routing.movies}/${slug}`)
   }
+
   return (
     <div className='watching--container'>
       <div>
@@ -124,7 +130,7 @@ function WatchingPage({ slug, episode }: Props) {
         </span></h2>
       </div>
       <div style={{ marginTop: "20px" }}>
-        <Player src={`${getVideo().link_m3u8}`} />
+        <Player time={current_Time} src={`${getVideo().link_m3u8}`} />
       </div>
 
       <div className='flex mt-[40px] gap-8'>
