@@ -79,7 +79,7 @@ const Header = () => {
         color:"danger"
       })
     }
-    router.push(`${routing.profile}/me`)
+    router.push(`${routing.profile}/liked`)
   }
 
   return (
