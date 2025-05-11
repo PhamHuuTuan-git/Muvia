@@ -6,7 +6,7 @@ const Footer = () => {
       <div className='footer--container'>
         <div className="flex-2">
           <div className="logo-footer--container">
-            <img src="/white_on_black.png" />
+            <img src="/white_on_trans.png" />
           </div>
           <p style={{ color: "#fed875", fontWeight: "bold" }}>Địa chỉ: <span style={{ color: "#c0bcc0", fontWeight: "200" }}>Binh Thanh district, Ho Chi Minh City, Viet Nam</span></p>
           <p style={{ color: "#fed875", marginTop: "8px", fontWeight: "bold" }}>Liên hệ: <span style={{ color: "#c0bcc0", fontWeight: "200" }}>0928895717</span></p>

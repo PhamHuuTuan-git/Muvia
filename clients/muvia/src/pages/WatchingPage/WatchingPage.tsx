@@ -5,7 +5,7 @@ import LoveFillIcon from '@/components/icons/LoveFillIcon';
 import RatingMovie from '@/components/RatingMovie/RatingMovie';
 import PlayIcon from '@/components/icons/PlayIcon';
 import { GET_SPECIFIED_MOVIE } from "@/graphql/actions/movieActions/get_specified_movie.action";
-import { useMutation, useQuery } from "@apollo/client";
+import { useLazyQuery, useMutation, useQuery } from "@apollo/client";
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { addToast } from '@heroui/react';
 import { usePathname, useRouter } from 'next/navigation';
@@ -15,9 +15,57 @@ import routing from '@/utils/routing';
 import { useDispatch, useSelector } from 'react-redux';
 import { authenSelectorUser } from '@/redux-toolkit/selector';
 import { ADD_RECENT_MOVIE } from '@/graphql/actions/movieActions/add_recent_movie.action';
+import { UPDATE_LIKED_MOVIES } from '@/graphql/actions/movieActions/update_liked_movies.action';
+import { CHECK_IS_LIKE_MOVIE } from '@/graphql/actions/movieActions/check_is_like_movie.action';
 type Props = {
   slug: string,
   episode: string,
+}
+function LikeMovie({userAuthen, data}: {userAuthen: any, data: any}) {
+  const [isLike, setIslike] = useState(false);
+  const [updateLikeMoviesMutation] = useMutation(UPDATE_LIKED_MOVIES);
+  const [checkIsLikeMovie, { data: likeData }] = useLazyQuery(CHECK_IS_LIKE_MOVIE, {
+          fetchPolicy: "no-cache",
+      });
+  useEffect(() => {
+        if (userAuthen && data) {
+            checkIsLikeMovie({
+                variables: {
+                    id: userAuthen.id,
+                    movieId: data.getSpecifiedMovie.movie.id,
+                },
+            });
+        }
+    }, [data])
+    useEffect(() => {
+        if (likeData) {
+            setIslike(likeData.getStatusLikedMovie)
+        }
+    }, [likeData]);
+  const handleLikeStatus = async () => {
+    if (!userAuthen || !data) return;
+    try {
+      const result = await updateLikeMoviesMutation({
+        variables: {
+          id: userAuthen.id,
+          movieId: data.getSpecifiedMovie.movie.id
+        }
+      })
+      setIslike(!isLike)
+    } catch (err: any) {
+      addToast({
+        title: "Error",
+        description: `${err.message}`,
+        color: "danger"
+      })
+    }
+  }
+  return (
+    <div style={{ display: "flex", justifyContent: "flex-start", alignItems: "center", gap: 8, cursor: "pointer" }}>
+      <p className='text-white'>Yêu thích</p>
+      <LoveFillIcon onClick={() => handleLikeStatus()} className={`${!isLike ? "movie-like" : "movie-liked"} size-6 cursor-pointer`} />
+    </div>
+  )
 }
 function WatchingPage({ slug, episode }: Props) {
   const userAuthen = useSelector(authenSelectorUser);
@@ -105,7 +153,7 @@ function WatchingPage({ slug, episode }: Props) {
       saveRecentMovie()
     };
   }, [data, userAuthen]);
-  
+
   // console.log("video current: ", getVideo())
   if (isloading) {
     return (
@@ -136,10 +184,7 @@ function WatchingPage({ slug, episode }: Props) {
       <div className='flex mt-[40px] gap-8'>
         <div className='watching-left-part'>
           <div className=' flex gap-[32px]'>
-            <div style={{ display: "flex", justifyContent: "flex-start", alignItems: "center", gap: 8, cursor: "pointer" }}>
-              <p className='text-white'>Yêu thích</p>
-              <LoveFillIcon className='text-white size-6' />
-            </div>
+            <LikeMovie userAuthen={userAuthen} data={data}/>
           </div>
 
           {/* Information */}
