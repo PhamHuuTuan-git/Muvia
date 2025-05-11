@@ -83,7 +83,7 @@ function ControlSlider({ video, parentTime }: { video: HTMLVideoElement, parentT
 }
 
 function Player({ src }: { src: string }) {
-  console.log("src: ", src)
+  // console.log("src: ", src)
   const [isPlaying, setIsPlaying] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isMute, setIsMute] = useState(false);
@@ -195,19 +195,10 @@ function Player({ src }: { src: string }) {
     }
   }, [isLoading]);
 
+  
+
   useEffect(() => {
-    // let animationId: number;
-
-    // const update = () => {
-    //   if (videoRef.current) {
-    //     currentTimeRef.current = videoRef.current.currentTime;
-    //     // Không có setState ở đây => không gây re-render
-    //   }
-    //   animationId = requestAnimationFrame(update);
-    // };
-
-    // update(); // Start loop
-    // return () => cancelAnimationFrame(animationId);
+    
   }, [])
 
   if (isLoading) {

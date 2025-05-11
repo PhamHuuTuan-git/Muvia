@@ -60,6 +60,7 @@ function DetailMovie({ slug }: Props) {
             setIslike(likeData.getStatusLikedMovie)
         }
     }, [likeData]);
+   
     if (data === undefined || data === null) {
         return (
             <div style={{ marginTop: "80px" }}>

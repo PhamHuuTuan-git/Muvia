@@ -361,6 +361,7 @@ export class MoviesService {
   }
 
   async addRecentMovie(userId: string, movieInfor: RecentMovieDto) {
+    console.log("caching: ", movieInfor)
     try {
       const reference = await this.prisma.reference.findFirst({
         where: {
@@ -368,7 +369,7 @@ export class MoviesService {
         }
       })
       if (!reference) {
-        const { movieId, name, episode, time } = movieInfor
+        const { movieId, episode, time,name, thumb_url } = movieInfor
         await this.prisma.reference.create({
           data: {
             userId,
@@ -376,9 +377,10 @@ export class MoviesService {
             recentWatching: [
               {
                 movieId: movieId,
-                name: name,
                 episode: episode,
-                time: time
+                time: time,
+                name: name,
+                thumb_url: thumb_url
               }
             ]
           }
@@ -387,9 +389,10 @@ export class MoviesService {
         if (Array.isArray(reference.recentWatching) && reference.recentWatching.length > 0) {
           const recent = reference.recentWatching as {
             movieId: string;
-            name: string;
             episode: string;
             time: string;
+            name: string;
+            thumb_url: string;
           }[];
           const foundItem = recent.find(item => item.movieId === movieInfor.movieId);
           if (foundItem) {
@@ -397,9 +400,10 @@ export class MoviesService {
               item.movieId === movieInfor.movieId
                 ? {
                   movieId: movieInfor.movieId,
-                  name: movieInfor.name,
                   episode: movieInfor.episode,
                   time: movieInfor.time,
+                  name: movieInfor.name,
+                  thumb_url: movieInfor.thumb_url
                 }
                 : item
             );
@@ -414,9 +418,10 @@ export class MoviesService {
           } else {
             recent.push({
               movieId: movieInfor.movieId,
-              name: movieInfor.name,
               episode: movieInfor.episode,
               time: movieInfor.time,
+              name:movieInfor.name,
+              thumb_url: movieInfor.thumb_url
             });
             await this.prisma.reference.update({
               where: {

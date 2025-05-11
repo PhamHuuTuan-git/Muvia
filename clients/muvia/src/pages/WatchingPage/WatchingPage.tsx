@@ -5,18 +5,22 @@ import LoveFillIcon from '@/components/icons/LoveFillIcon';
 import RatingMovie from '@/components/RatingMovie/RatingMovie';
 import PlayIcon from '@/components/icons/PlayIcon';
 import { GET_SPECIFIED_MOVIE } from "@/graphql/actions/movieActions/get_specified_movie.action";
-import { useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { addToast } from '@heroui/react';
 import { usePathname, useRouter } from 'next/navigation';
 import Loading from '@/components/Loading/Loading';
 import { GET_RECOMMENDED_MOVIES } from "@/graphql/actions/movieActions/get_recommended_movies.action";
 import routing from '@/utils/routing';
+import { useDispatch, useSelector } from 'react-redux';
+import { authenSelectorUser } from '@/redux-toolkit/selector';
+import { ADD_RECENT_MOVIE } from '@/graphql/actions/movieActions/add_recent_movie.action';
 type Props = {
   slug: string,
-  episode: string
+  episode: string,
 }
 function WatchingPage({ slug, episode }: Props) {
+  const userAuthen = useSelector(authenSelectorUser);
   const { data, loading, error } = useQuery(GET_SPECIFIED_MOVIE, {
     variables: { slug: slug },
     fetchPolicy: "no-cache",
@@ -26,9 +30,10 @@ function WatchingPage({ slug, episode }: Props) {
     variables: { limit: 10 },
     fetchPolicy: "no-cache",
   })
+  const [addRecentMovie, { error: mutationError }] = useMutation(ADD_RECENT_MOVIE);
   const router = useRouter();
   const pathname = usePathname();
-  console.log("pahtname: ", pathname)
+  // console.log("pahtname: ", pathname)
   const movie = useRef<any>(null);
   const getVideo = () => {
     if (movie.current) {
@@ -44,8 +49,10 @@ function WatchingPage({ slug, episode }: Props) {
     }
   }, [data, resultRecommendedMovies.data])
   const handleRedirectMovie = (curr_episode: string) => {
+    
     if (episode === curr_episode) return;
     if (!episode || episode == "") {
+  
       addToast({
         title: "Cảnh báo",
         description: "Phim chưa sẵn sàng",
@@ -61,6 +68,40 @@ function WatchingPage({ slug, episode }: Props) {
 
     }
   }
+  const saveRecentMovie = () => {
+    console.log("sending but not true")
+    if (!userAuthen || !movie.current) return;
+    console.log("sending")
+    const movieInfo = {
+      movieId: movie.current.id,
+      name: movie.current.name,
+      thumb_url: movie.current.thumb_url,
+      episode: episode,
+      time: "1p20"
+    };
+
+    // Đã đăng nhập: Gửi mutation
+    addRecentMovie({
+      variables: {
+        id: userAuthen.id,
+        movieInfo: movieInfo
+      },
+    }).catch((err: any) => {
+      console.error("Error saving recent movie:", err.message);
+      // Lưu tạm vào localStorage nếu mutation thất bại
+    });
+
+  };
+
+  useEffect(() => {
+
+    
+    window.addEventListener("beforeunload", saveRecentMovie);
+
+    return () => {
+      window.removeEventListener("beforeunload", saveRecentMovie);
+    };
+  }, [ data, userAuthen]);
   // console.log("video current: ", getVideo())
   if (isloading) {
     return (

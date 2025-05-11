@@ -79,15 +79,19 @@ export class RecentMovieDto {
     movieId: string
 
     @Field()
-    @IsNotEmpty({message: "Name is required"})
-    name: string
-
-    @Field()
     @IsNotEmpty({message: "Episode is required"})
     episode: string
 
     @Field()
     @IsNotEmpty({message: "Time is required"})
     time: string
+
+    @Field()
+    @IsNotEmpty({message: "Name is required"})
+    name: string
+
+    @Field()
+    @IsNotEmpty({message: "Thumb image is required"})
+    thumb_url: string
 
 }
