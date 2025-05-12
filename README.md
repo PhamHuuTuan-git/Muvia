@@ -1,6 +1,9 @@
 # Muvia - Website Xem Phim Online
 
-**Muvia** là một nền tảng xem phim trực tuyến, cung cấp một thư viện phong phú các bộ phim, từ các bộ phim mới nhất, phim bom tấn, cho đến các thể loại đa dạng như hành động, khoa học viễn tưởng, tình cảm, và nhiều thể loại khác. Với giao diện thân thiện và dễ sử dụng, Muvia giúp người dùng dễ dàng tìm kiếm và thưởng thức những bộ phim yêu thích.
+**Muvia** là một nền tảng xem phim trực tuyến, cung cấp một thư viện phong phú với 2400 bộ phim, từ các bộ phim mới nhất, phim bom tấn, cho đến các thể loại đa dạng như hành động, khoa học viễn tưởng, tình cảm, và nhiều thể loại khác. Với giao diện thân thiện và dễ sử dụng, Muvia giúp người dùng dễ dàng tìm kiếm và thưởng thức những bộ phim yêu thích.
+
+## Tài khoản mẫu
+- phamhuutuan20031@gmail.com - 12345678
 
 ## Đăng ký
 ![Muvia Logo](clients/muvia/public/readme_07.png)
