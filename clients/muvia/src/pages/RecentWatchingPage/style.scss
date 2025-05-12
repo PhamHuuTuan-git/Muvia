@@ -19,7 +19,7 @@
     bottom: 0;
     left: 0;
     right: 0;
-    background: linear-gradient(to top , rgba(0,0,0,0.7), rgba(0,0,0,0.3));
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3));
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -40,7 +40,7 @@
 
 .movie-liked {
     color: var(--core-color);
-}   
+}
 
 .close-watching--button {
     padding: 4px;
@@ -49,4 +49,43 @@
     position: absolute;
     right: 4px;
     top: 4px;
+}
+
+.recent-watching--item {
+    display: inline-block;
+    width: 20%;
+    max-width: 20%;
+    margin-top: 20px;
+    padding: 0 4px;
+}
+
+@media (max-width: 1200px) {
+    .recent-watching--item {
+
+        width: 25%;
+        max-width: 25%;
+    }
+    .recent-watching--content {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 900px) {
+    .recent-watching--item {
+
+        width: 33.33333333%;
+        max-width: 33.33333333%;
+    }
+    .recent-watching--content {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 700px) {
+    .recent-watching--content {
+        font-size: 0.6rem;
+    }
+    .liked-movie-watch--button {
+        font-size: 0.6rem;
+    }
 }

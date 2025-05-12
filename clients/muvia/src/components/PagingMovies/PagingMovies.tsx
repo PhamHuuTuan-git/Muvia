@@ -61,7 +61,7 @@ function PagingMovies({ queryParams, movies, itemsPerRow, meta, isPaging }: Prop
                 {
                     movies.map((ele, index) => {
                         return (
-                            <div key={index} style={{ width: `${100 / itemsPerRow}%`, minWidth: `${100 / itemsPerRow}%` }}>
+                            <div key={index} className="item-per-page-paging">
                                 <MovieCard
                                     episode_total={ele.episode_total}
                                     episode_current={ele.episode_current}

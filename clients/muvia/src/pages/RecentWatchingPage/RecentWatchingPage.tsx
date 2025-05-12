@@ -48,7 +48,7 @@ export function ItemRecentMovie(
   }
 
   return (
-    <div style={{ display: "inline-block", width: "20%", maxWidth: "20%", marginTop: "20px", padding: "0 4px" }}>
+    <div className="recent-watching--item" >
       <div className='liked-movie-item--container'>
         <img className="liked-movie-item--image" src={`${thumb_url}`} />
         <div className="liked-movie-item-other--container">
@@ -70,11 +70,11 @@ export function ItemRecentMovie(
 
       </div>
       <div >
-        <p style={{ color: "#fed875", fontWeight: "bold" }}>{name}</p>
+        <p className="recent-watching--content" style={{ color: "#fed875", fontWeight: "bold" }}>{name}</p>
       </div>
       <div style={{ display: "inline-flex", gap: 4 }}>
-        <p style={{ color: "#fed875", fontStyle: "italic", fontWeight: "bold" }}>Tập {episode} </p>
-        <p style={{ color: "#fff", fontStyle: "italic" }}> - {formatTime(time)}</p>
+        <p className="recent-watching--content" style={{ color: "#fed875", fontStyle: "italic", fontWeight: "bold" }}>Tập {episode} </p>
+        <p className="recent-watching--content" style={{ color: "#fff", fontStyle: "italic" }}> - {formatTime(time)}</p>
       </div>
     </div>
   )

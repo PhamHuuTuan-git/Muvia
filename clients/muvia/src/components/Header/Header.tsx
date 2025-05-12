@@ -85,7 +85,7 @@ const Header = () => {
   return (
     <div ref={headerRef} className={`header-container non-active ${sidebarMode === true ? "on" : "off"}`}>
       {/* Left part */}
-      <div>
+      {/* <div>
         <div className='back-button--container' onClick={handleTongleSidebar}>
           {
             sidebarMode === true ? (
@@ -101,7 +101,7 @@ const Header = () => {
               )
           }
         </div>
-      </div>
+      </div> */}
 
       {/* Rigth part */}
       <div className='header-rigth-part'>

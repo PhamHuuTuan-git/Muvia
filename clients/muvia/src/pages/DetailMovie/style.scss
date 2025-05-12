@@ -122,3 +122,12 @@
     background-color: #181b24;
     color: #fff;
 }
+
+@media (max-width: 1000px) {
+    .detail-movie-content--container {
+        display: block;
+    }
+    .detail-movie-content-right {
+        margin-top: 40px;
+    }
+}

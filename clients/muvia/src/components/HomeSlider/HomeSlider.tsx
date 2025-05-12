@@ -215,11 +215,11 @@ function HomeSlider({ movies }: {movies: Movie}) {
 
                 {/* Arrow left*/}
                 <div className='arrow--container left' onClick={handlePrev}>
-                    <ChefronLeft className='text-white size-6' />
+                    <ChefronLeft className='text-white size-6 arrow-header' />
                 </div>
                 {/* Arrow Right*/}
                 <div className='arrow--container right' onClick={handleNext}>
-                    <ChefronRight className='text-white size-6' />
+                    <ChefronRight className='text-white size-6 arrow-header' />
                 </div>
             </div>
 

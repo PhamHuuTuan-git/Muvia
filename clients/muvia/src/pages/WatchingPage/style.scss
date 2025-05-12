@@ -9,6 +9,7 @@
     font-size: 1.6rem;
     font-weight: bold;
 }
+
 .watching-image--container {
     width: 150px;
     border-radius: 12px;
@@ -20,7 +21,7 @@
 }
 
 .watching-right-part {
-    flex:1;
+    flex: 1;
 }
 
 .movie-like {
@@ -29,4 +30,46 @@
 
 .movie-liked {
     color: var(--core-color);
+}
+.item-recommended-watching {
+    cursor: pointer;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background-color: #000;
+    border-radius: 12px;
+    overflow: hidden;
+    padding-right: 8px;
+}
+
+.recommended-watching {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    gap: 8px;
+}
+
+
+@media (max-width: 1200px) {
+    .sweeping-info--watching {
+        display: block;
+    }
+
+    .watching-right-part {
+        margin-top: 40px;
+    }
+    .watching-main--container {
+        display: block;
+    }
+
+    .recommended-watching {
+        margin-top: 40px;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    // .item-recommended-watching {
+    //     display: inline-flex;
+    // }
 }

@@ -3,3 +3,29 @@
     width: 100%;
     flex-wrap: wrap;
 }
+
+.item-per-page-paging {
+    width: 20%;
+    min-width: 20%;
+}
+
+@media (max-width: 1200px) {
+    .item-per-page-paging {
+        width: 25%;
+        min-width: 25%;
+    }
+}
+
+@media (max-width: 900px) {
+    .item-per-page-paging {
+        width: 33.3333333%;
+        min-width: 33.3333333%;
+    }
+}
+
+@media (max-width: 650px) {
+    .item-per-page-paging {
+        width: 50%;
+        min-width: 50%;
+    }
+}

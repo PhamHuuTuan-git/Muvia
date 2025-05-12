@@ -30,8 +30,8 @@ function MovieCard(props: Props) {
                     <img src={`${props.url}`} className="image-card" />
                 </div>
                 <div className="card-context--container">
-                    <p className="font-bold text-[1.2rem]">{props.name}</p>
-                    <div className='mt-[10px] flex gap-[32px] justify-center'>
+                    <p className="card-name-movie font-bold text-[1.2rem]">{props.name}</p>
+                    <div className='another-info--movie-card mt-[10px] flex gap-[32px] justify-center flex-wrap'>
                         <div className='flex gap-[8px]'>
                             <img src='/imdb-logo.png' className='w-[40px]' />
                             <p className='text-white'>7.2</p>

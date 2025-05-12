@@ -37,7 +37,7 @@ function Item({userId,movieId, name, slug, thumb_url }: {userId: string, movieId
     }
   }
   return (
-    <div style={{  width: "20%", maxWidth: "20%", marginTop: "20px", padding: "0 4px" }}>
+    <div className="liked-movie--item">
       <div className='liked-movie-item--container'>
         <img className="liked-movie-item--image" src={`${thumb_url}`} />
         <div className="liked-movie-item-other--container">

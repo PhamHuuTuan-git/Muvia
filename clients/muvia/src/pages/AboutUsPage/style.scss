@@ -1,5 +1,6 @@
 .wall-paper-about-us {
     position: relative;
+    
 }
 
 .wall-paper-about-us::after {
@@ -12,6 +13,18 @@
     background: linear-gradient(to right, rgba(0,0,0,1), rgba(0,0,0,0));
 }
 
+.brand-text {
+    color: #fff;
+    font-weight: bold;
+    font-size: 3rem
+}
+.detail-about-us {
+    width: 100%;
+    color: #fff;
+    font-size: 1.2rem;
+    text-align: center;
+}
+
 .text-about-us {
     position: absolute;
     top: 35%;
@@ -21,4 +34,28 @@
     display: flex;
     flex-direction: column;
     align-items: flex-end;
+}
+
+@media (max-width: 1200px) {
+    .detail-about-us {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 1000px) {
+    .detail-about-us {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 850px) {
+    .text-about-us {
+        top: 100px;
+        left: 50%;
+        transform: translateX(-50%);
+        text-align: center;
+    }
+    .brand-text {
+        font-size: 1.2rem;
+    }
 }

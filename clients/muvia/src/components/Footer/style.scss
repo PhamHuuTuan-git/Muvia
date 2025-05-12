@@ -16,3 +16,15 @@
     cursor: pointer;
     margin-top: 12px;
 }
+
+@media (max-width: 1200px) {
+    .footer-content {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 950px) {
+    .footer-content {
+        font-size: 0.6rem;
+    }
+}

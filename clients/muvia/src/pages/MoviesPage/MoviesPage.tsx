@@ -17,7 +17,7 @@ type QueryParams = {
 }
 
 function MoviesPage({ queryParams }: { queryParams: QueryParams }) {
-  console.log("query params: ", queryParams);
+  // console.log("query params: ", queryParams);
   const resultNewMovies = useQuery(GET_MOVIES_WITH_QUERY, {
     variables: {
       paging: {

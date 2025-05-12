@@ -6,13 +6,13 @@ import RatingMovie from '@/components/RatingMovie/RatingMovie';
 import PlayIcon from '@/components/icons/PlayIcon';
 import { GET_SPECIFIED_MOVIE } from "@/graphql/actions/movieActions/get_specified_movie.action";
 import { useLazyQuery, useMutation, useQuery } from "@apollo/client";
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { addToast } from '@heroui/react';
 import { usePathname, useRouter } from 'next/navigation';
 import Loading from '@/components/Loading/Loading';
 import { GET_RECOMMENDED_MOVIES } from "@/graphql/actions/movieActions/get_recommended_movies.action";
 import routing from '@/utils/routing';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { authenSelectorUser } from '@/redux-toolkit/selector';
 import { ADD_RECENT_MOVIE } from '@/graphql/actions/movieActions/add_recent_movie.action';
 import { UPDATE_LIKED_MOVIES } from '@/graphql/actions/movieActions/update_liked_movies.action';
@@ -181,14 +181,14 @@ function WatchingPage({ slug, episode }: Props) {
         <Player time={current_Time} src={`${getVideo().link_m3u8}`} />
       </div>
 
-      <div className='flex mt-[40px] gap-8'>
+      <div className='watching-main--container flex mt-[40px] gap-8'>
         <div className='watching-left-part'>
           <div className=' flex gap-[32px]'>
             <LikeMovie userAuthen={userAuthen} data={data}/>
           </div>
 
           {/* Information */}
-          <div className='mt-[40px] flex gap-8 items-center'>
+          <div className='sweeping-info--watching mt-[40px] flex gap-8 items-center'>
             <div className='flex gap-4'>
               {/* Image and IDMB */}
               <div className='watching-image--container'>
@@ -264,10 +264,10 @@ function WatchingPage({ slug, episode }: Props) {
 
         <div className='watching-right-part'>
           <p style={{ color: "#fff", fontWeight: "bold", fontSize: "1.4rem" }}>Đề xuất</p>
-          <div style={{ display: "flex", flexDirection: "column", marginTop: "20px", gap: 8 }}>
+          <div className='recommended-watching'>
             {
               resultRecommendedMovies.data.getRecommendedMovies.movies.map((movie: any, index: number) => {
-                return <div onClick={() => handleRedirect(movie.slug)} key={index} style={{ cursor: "pointer", height: "120px", display: "flex", alignItems: "center", gap: 12, backgroundColor: "#000", borderRadius: "12px", overflow: "hidden", paddingRight: "8px" }}>
+                return <div onClick={() => handleRedirect(movie.slug)} key={index} className='item-recommended-watching'>
                   <img style={{ height: "100%" }} src={`${movie.thumb_url}`} />
                   <div>
                     <p style={{ fontSize: "1rem", fontWeight: "bold", color: "#fff" }}>{movie.name}</p>

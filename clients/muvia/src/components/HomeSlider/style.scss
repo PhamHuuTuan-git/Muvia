@@ -207,3 +207,29 @@
     font-size: 2rem;
 
 }
+
+@media (max-width: 1200px) {
+    .sub-slider--container {
+        height: 120px;
+    }
+    .arrow-header {
+        width: 0.7rem;
+        height: 0.7rem;
+    }
+}
+
+@media (max-width: 850px) {
+    .sub-slider--container {
+        height: 100px;
+    }
+}
+
+@media (max-width: 650px) {
+    .sub-slider--container {
+        height: 80px;
+    }
+    .arrow-header {
+        width: 0.4rem;
+        height: 0.4rem;
+    }
+}

@@ -27,14 +27,14 @@ function AboutUsPage() {
           <img style={{ width: "100%", height: "auto" }} src="/aboutuswallpaper.jpeg" />
         </div>
         <div className="text-about-us">
-          <h2 style={{ color: "#fff", fontWeight: "bold", fontSize: "3rem" }}>TnN Movie</h2>
+          <h2 className="brand-text">TnN Movie</h2>
           <div style={{ width: "100%", paddingLeft: "20px",marginTop:"10px" }}>
-            <p style={{ width: "100%", color: "#fff", fontSize: "1.2rem", textAlign:"right" }}>
+            <p className="detail-about-us">
               TnN cung cấp tới 2400 bộ phim bao gồm các thể loại chương trình và thể loại phim, từ phim lẻ đến
               phim bộ, từ kinh dị đến hài hước, đặc biệt cung cấp các bộ phim trải dài trên nhiều quốc gia, đồng 
               thời các bộ phim, chương trình từ cổ xưa đến hiện đại, kéo dài từ 1981 - 2025.
             </p>
-            <p style={{ width: "100%", color: "#fff", fontSize: "1.2rem", textAlign:"right", marginTop:"8px"}}>
+            <p className="detail-about-us" style={{marginTop:"10px"}}>
               Lưu ý, TnN chỉ phục vụ mục đích nghiên cứu và học tập, tất cả nội dung phim, chương trình được cam kết 
               không sử dụng cho mục đích thương mại hoặc kiếm doanh thu từ các nội dung trong website.
             </p>

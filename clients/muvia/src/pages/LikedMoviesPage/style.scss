@@ -42,3 +42,32 @@
 .movie-liked {
     color: var(--core-color);
 }   
+
+.liked-movie--item {
+    width: 20%;
+    max-width: 20%;
+    margin-top: 20px;
+    padding: 0 4px;
+}
+
+@media (max-width: 1200px) {
+    .liked-movie--item {
+
+        width: 25%;
+        max-width: 25%;
+    }
+    .liked-movie--item {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 900px) {
+    .liked-movie--item {
+
+        width: 33.33333333%;
+        max-width: 33.33333333%;
+    }
+    .recent-watching--content {
+        font-size: 0.8rem;
+    }
+}
