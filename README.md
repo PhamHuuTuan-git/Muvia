@@ -26,6 +26,16 @@
 ## Xem gần đây
 ![Muvia Logo](clients/muvia/public/readme_06.png)
 
+## Công Nghệ Sử Dụng
+
+- **Muvia** được phát triển dựa theo kiến trúc Microservice Monorepo, phát triển Graphql API cung cấp dữ liệu cho phía Front-end sử dụng Apollo và Apollo Federation. Phía Back-end cung cấp 3 service chính.
+  - **gateway:** Dùng để tổng hợp các subgraph, giúp phía Front-end chỉ cần sử dụng 1 endpoint duy nhất.
+  - **user:** Xử lý các tác vụ xác thực cũng như xác nhận người dùng, xác nhận xem tài nguyên dữ liệu có được công khai hay riêng tư.
+  - **movie:** Xử lý các tác vụ chính, từ xem phim, yêu thích, quản lý phim cũng như gọi các tác vụ khác từ user service thông qua http.
+- **Frontend:** ReactJs, NextJs, Tailwind CSS, HeroUI, Redux-Toolkit, Apollo Client
+- **Backend:** NodeJs, NestJs, Apollo Gateway, Apollo Federation, Prisma ORM, Nodemailer.
+- **Database:** MongoDB
+
 ## Tính Năng Chính
 
 - **Đăng ký:** Người dùng đăng ký bằng tài khoản email, và phải xác nhận mã được gửi từ email nhằm đảm bảo tính xác thực.
@@ -37,16 +47,6 @@
 - **Quản lý phim đã xem:** Khi người dùng xem phim, hệ thống tự động ghi nhận lại tập phim, bộ phim, thời gian coi hiện tại, người dùng có thể xóa lịch sử trong trang cá nhân.
 - **Xem phim:** Người dùng có thể xem phim, điều chỉnh tốc độ, tua theo thời gian, play, pause,... 
 
-
-## Công Nghệ Sử Dụng
-
-- **Muvia** được phát triển dựa theo kiến trúc Microservice Monorepo, phát triển Graphql API cung cấp dữ liệu cho phía Front-end sử dụng Apollo và Apollo Federation. Phía Back-end cung cấp 3 service chính.
-  - **gateway:** Dùng để tổng hợp các subgraph, giúp phía Front-end chỉ cần sử dụng 1 endpoint duy nhất.
-  - **user:** Xử lý các tác vụ xác thực cũng như xác nhận người dùng, xác nhận xem tài nguyên dữ liệu có được công khai hay riêng tư.
-  - **movie:** Xử lý các tác vụ chính, từ xem phim, yêu thích, quản lý phim cũng như gọi các tác vụ khác từ user service thông qua http.
-- **Frontend:** ReactJs, NextJs, Tailwind CSS, HeroUI, Redux-Toolkit, Apollo Client
-- **Backend:** NodeJs, NestJs, Apollo Gateway, Apollo Federation, Prisma ORM, Nodemailer.
-- **Database:** MongoDB
 
 ## Liên Hệ
 
